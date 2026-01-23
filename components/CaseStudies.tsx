@@ -1,0 +1,414 @@
+"use client";
+
+import { useRef, useEffect, useState } from 'react';
+import SectionTitle from './SectionTitle';
+import CaseCard from './CaseStudiesCard';
+import { Container } from './Container';
+
+export default function CaseStudies() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const mobileSliderRef = useRef<HTMLDivElement>(null);
+
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlidePC, setCurrentSlidePC] = useState(0);
+
+  const cases = [
+    {
+      company: 'Medulla',
+      title: '日本語音声でも、"販売員レベルの接客"ができました。',
+      image: 'images/common/medulla.png',
+      reasons: [
+        '日本語での自然な受け答えの精度',
+        '販売員に近い相談体験を再現できること',
+        '商品理解・興味関心が高いユーザーとの相性'
+      ],
+      effects: [
+        '導入からわずか2週間で音声接客3,000件超',
+        '一次解決率 90.8% を達成',
+        '「販売員がいる感覚」の体験価値向上'
+      ]
+    },
+    {
+      company: 'NOVA',
+      title: '短期間でリリースでき、ユーザーの申し込みの"迷いを解消"できました。',
+      image: 'images/common/nova.png',
+      reasons: [
+        'ZEALSとしての信頼と継続的な実績',
+        '「任せられる」という安心感',
+        '導入工数の少なさとスピード感'
+      ],
+      effects: [
+        '数週間でローンチ完了、1人でも立ち上げ可能',
+        '複雑なサービス理解をAIがサポート',
+        '申し込み時の迷いを解消し、CVR約1.15倍に改善'
+      ]
+    },
+    {
+      company: 'シルクザリッチ',
+      title: '音声で、"ここまで人と対話できる時代が来た"と感じました。',
+      image: 'images/common/silktherich.png',
+      reasons: [
+        '音声で"人と対話している感覚"に衝撃を受けた',
+        'お客様が"聞きたい瞬間"にすぐ答えられる体験',
+        '導入を即決できるほどの体験価値'
+      ],
+      effects: [
+        '「ホリエモンAI」による没入型の接客体験',
+        '24時間365日の音声接客を実現',
+        'お客様の疑問・関心に即時対応が可能に'
+      ]
+    },
+    {
+      company: 'ギフトフル',
+      title: '"24時間365日"、関係性に寄り添った提案を実現しました。',
+      image: 'images/common/giftful.png',
+      reasons: [
+        '顧客ごとのコミュニケーションを深められる点',
+        'サービス拡大につながる接点を作れること',
+        '利用前ユーザーの悩みを拾える仕組み'
+      ],
+      effects: [
+        '24時間365日のカスタマーサポート体制を実現',
+        '関係性・シーンに応じた最適なギフト提案'
+      ]
+    },
+    {
+      company: 'はるやま',
+      title: 'WEBでの1回あたりの"購入金額を大きく伸ばすこと"ができました。',
+      image: 'images/common/haruyama.png',
+      reasons: [
+        'EC上でも接客による提案価値を高めたかった',
+        '買い回り・セット購入を後押しできる設計'
+      ],
+      effects: [
+        'Omakase.ai経由の平均購入金額が3.5倍を記録',
+        'セール・キャンペーン情報の訴求を自動化'
+      ]
+    }
+  ];
+
+  // 無限ループ用の配列（前後に追加）
+  const extendedCases = [...cases, ...cases, ...cases, ...cases, ...cases];
+
+  const checkScrollPosition = (element: HTMLDivElement, setLeft: (v: boolean) => void, setRight: (v: boolean) => void) => {
+    const { scrollLeft, scrollWidth, clientWidth } = element;
+    setLeft(scrollLeft > 0);
+    setRight(scrollLeft < scrollWidth - clientWidth - 1);
+  };
+
+  const updateCurrentSlide = () => {
+    if (!mobileSliderRef.current) return;
+    const scrollLeft = mobileSliderRef.current.scrollLeft;
+    const slideWidth = mobileSliderRef.current.offsetWidth;
+    const totalIndex = Math.round(scrollLeft / slideWidth);
+    const index = ((totalIndex % cases.length) + cases.length) % cases.length;
+    setCurrentSlide(index);
+
+    // 無限ループ：端に近づいたら中央にジャンプ
+    if (totalIndex <= 2) {
+      mobileSliderRef.current.style.scrollBehavior = 'auto';
+      mobileSliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + totalIndex);
+      setTimeout(() => {
+        if (mobileSliderRef.current) mobileSliderRef.current.style.scrollBehavior = 'smooth';
+      }, 50);
+    } else if (totalIndex >= extendedCases.length - 3) {
+      mobileSliderRef.current.style.scrollBehavior = 'auto';
+      mobileSliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + (totalIndex % cases.length));
+      setTimeout(() => {
+        if (mobileSliderRef.current) mobileSliderRef.current.style.scrollBehavior = 'smooth';
+      }, 50);
+    }
+  };
+
+  const updateCurrentSlidePC = () => {
+    if (!sliderRef.current) return;
+    const scrollLeft = sliderRef.current.scrollLeft;
+    const card = sliderRef.current.querySelector('.case-item') as HTMLElement;
+    if (!card) return;
+    const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
+    const slideWidth = card.offsetWidth + gap;
+    const totalIndex = Math.round(scrollLeft / slideWidth);
+    const index = ((totalIndex % cases.length) + cases.length) % cases.length;
+    setCurrentSlidePC(index);
+
+    // 無限ループ：端に近づいたら中央にジャンプ
+    if (totalIndex <= 2) {
+      sliderRef.current.style.scrollBehavior = 'auto';
+      sliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + totalIndex);
+      setTimeout(() => {
+        if (sliderRef.current) sliderRef.current.style.scrollBehavior = 'smooth';
+      }, 50);
+    } else if (totalIndex >= extendedCases.length - 3) {
+      sliderRef.current.style.scrollBehavior = 'auto';
+      sliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + (totalIndex % cases.length));
+      setTimeout(() => {
+        if (sliderRef.current) sliderRef.current.style.scrollBehavior = 'smooth';
+      }, 50);
+    }
+  };
+
+  const scrollToSlide = (index: number) => {
+    if (!mobileSliderRef.current) return;
+    const slideWidth = mobileSliderRef.current.offsetWidth;
+    const currentScrollLeft = mobileSliderRef.current.scrollLeft;
+    const currentTotalIndex = Math.round(currentScrollLeft / slideWidth);
+    
+    const currentModIndex = currentTotalIndex % cases.length;
+    let targetOffset = index - currentModIndex;
+    
+    if (targetOffset > cases.length / 2) {
+      targetOffset -= cases.length;
+    } else if (targetOffset < -cases.length / 2) {
+      targetOffset += cases.length;
+    }
+    
+    const targetIndex = currentTotalIndex + targetOffset;
+    mobileSliderRef.current.scrollTo({ left: slideWidth * targetIndex, behavior: 'smooth' });
+  };
+
+  const scrollToSlidePC = (index: number) => {
+    if (!sliderRef.current) return;
+    const card = sliderRef.current.querySelector('.case-item') as HTMLElement;
+    if (!card) return;
+    const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
+    const slideWidth = card.offsetWidth + gap;
+    const currentScrollLeft = sliderRef.current.scrollLeft;
+    const currentTotalIndex = Math.round(currentScrollLeft / slideWidth);
+    
+    const currentModIndex = currentTotalIndex % cases.length;
+    let targetOffset = index - currentModIndex;
+    
+    if (targetOffset > cases.length / 2) {
+      targetOffset -= cases.length;
+    } else if (targetOffset < -cases.length / 2) {
+      targetOffset += cases.length;
+    }
+    
+    const targetIndex = currentTotalIndex + targetOffset;
+    sliderRef.current.scrollTo({ left: slideWidth * targetIndex, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const handlePCScroll = () => {
+      if (sliderRef.current) {
+        checkScrollPosition(sliderRef.current, setCanScrollLeft, setCanScrollRight);
+        updateCurrentSlidePC();
+      }
+    };
+
+    const handleMobileScroll = () => {
+      updateCurrentSlide();
+    };
+
+    const pcSlider = sliderRef.current;
+    const mobileSlider = mobileSliderRef.current;
+
+    // requestAnimationFrameを使って確実にレンダリング後に処理
+    requestAnimationFrame(() => {
+      if (pcSlider) {
+        const card = pcSlider.querySelector('.case-item') as HTMLElement;
+        if (card) {
+          const gap = parseInt(window.getComputedStyle(pcSlider).gap) || 0;
+          const slideWidth = card.offsetWidth + gap;
+          pcSlider.scrollLeft = slideWidth * cases.length * 2;
+        }
+        setCurrentSlidePC(0);
+        requestAnimationFrame(() => {
+          pcSlider.addEventListener('scroll', handlePCScroll);
+        });
+      }
+
+      if (mobileSlider) {
+        // snapを一時的に無効化
+        mobileSlider.style.scrollSnapType = 'none';
+        
+        const slideWidth = mobileSlider.offsetWidth;
+        const targetScroll = slideWidth * cases.length * 2;
+        mobileSlider.scrollLeft = targetScroll;
+        
+        // インジケーターを0に設定
+        setCurrentSlide(0);
+        
+        // snapを再度有効化してからイベントリスナーを追加
+        requestAnimationFrame(() => {
+          if (mobileSlider) {
+            mobileSlider.style.scrollSnapType = 'x mandatory';
+            requestAnimationFrame(() => {
+              mobileSlider.addEventListener('scroll', handleMobileScroll);
+            });
+          }
+        });
+      }
+    });
+
+    return () => {
+      if (pcSlider) {
+        pcSlider.removeEventListener('scroll', handlePCScroll);
+      }
+      if (mobileSlider) {
+        mobileSlider.removeEventListener('scroll', handleMobileScroll);
+      }
+    };
+  }, []);
+
+  const getScrollStep = () => {
+    if (!sliderRef.current) return 0;
+    const card = sliderRef.current.querySelector('.case-item') as HTMLElement;
+    const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
+    return card ? card.offsetWidth + gap : 0;
+  };
+
+  const handlePrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    }
+  };
+  
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
+      {/* モバイル版 */}
+      <section className="w-full md:hidden bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
+        <Container>
+          {/* タイトル */}
+          <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
+            <SectionTitle title="導入事例" isMobile={false} />
+          </div>
+
+          {/* 横スクロールカルーセル（モバイル） */}
+          <div 
+            ref={mobileSliderRef}
+            className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
+            style={{ paddingLeft: '16px', paddingRight: '16px', scrollBehavior: 'smooth' }}
+          >
+            {extendedCases.map((caseItem, index) => (
+              <div key={index} className="snap-center flex-shrink-0" style={{ width: 'calc(100vw - 32px)' }}>
+                <CaseCard
+                  company={caseItem.company}
+                  title={caseItem.title}
+                  image={caseItem.image}
+                  reasons={caseItem.reasons}
+                  effects={caseItem.effects}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* スライドインジケーター */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '8px',
+            marginTop: '24px'
+          }}>
+            {cases.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToSlide(index)}
+                style={{
+                  width: currentSlide === index ? '32px' : '8px',
+                  height: '8px',
+                  borderRadius: '4px',
+                  background: currentSlide === index ? '#5004F5' : '#E5E5E5',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  padding: 0
+                }}
+              />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* PC版 */}
+      <section className="hidden md:block w-full bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
+        <Container>
+          {/* タイトル */}
+          <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
+            <SectionTitle title="導入事例" isMobile={false} />
+          </div>
+            <button 
+              onClick={handleNext}
+              style={{
+                position: 'absolute',
+                right: '40px',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                pointerEvents: 'auto',
+                background: 'transparent',
+                border: 'none'
+              }}
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M15 10L25 20L15 30" stroke="#272727" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          {/* 横スクロールカルーセル */}
+          <div 
+            ref={sliderRef}
+            className="flex gap-14 overflow-x-auto no-scrollbar snap-x snap-mandatory px-[112px] pb-10"
+            style={{ scrollBehavior: 'smooth' }}
+          >
+            {extendedCases.map((caseItem, index) => (
+              <div key={index} className="case-item flex-shrink-0">
+                <CaseCard
+                  company={caseItem.company}
+                  title={caseItem.title}
+                  image={caseItem.image}
+                  reasons={caseItem.reasons}
+                  effects={caseItem.effects}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* スライドインジケーター（PC版） */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '8px',
+            marginTop: '60px'
+          }}>
+            {cases.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToSlidePC(index)}
+                style={{
+                  width: currentSlidePC === index ? '32px' : '8px',
+                  height: '8px',
+                  borderRadius: '4px',
+                  background: currentSlidePC === index ? '#5004F5' : '#E5E5E5',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  padding: 0
+                }}
+              />
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}

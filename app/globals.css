@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --primary-color: #5004F5;
+  --gradient-primary: linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%);
+  --accent-yellow: #F8FF6C;
+  --primary-opacity: rgba(96, 23, 255, 0.20);
+  --container-max-width-desktop: 1280px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* フォントサイズユーティリティ */
+.text-70 { font-size: 70px; }
+.text-50 { font-size: 50px; }
+.text-36 { font-size: 36px; }
+.text-28 { font-size: 28px; }
+.text-24 { font-size: 24px; }
+.text-22 { font-size: 22px; }
+.text-20 { font-size: 20px; }
+.text-18 { font-size: 18px; }
+.text-16 { font-size: 16px; }
+.text-14 { font-size: 14px; }
+.text-12 { font-size: 12px; }
+.text-10 { font-size: 10px; }
+.text-80 { font-size: 80px; }
+.text-74 { font-size: 74px; }
