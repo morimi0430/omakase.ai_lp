@@ -103,7 +103,7 @@ export default function Hero() {
             margin: '0 auto'
           }}>
             <Link 
-              href="https://www.omakase.ai/jp" 
+              href="https://www.omakase.ai/jp/register" 
               target="_blank" 
               rel="noopener noreferrer"
               style={{
@@ -468,7 +468,7 @@ export default function Hero() {
 
           {/* CTAボタン */}
           <Link 
-            href="https://www.omakase.ai/jp" 
+            href="https://www.omakase.ai/jp/register" 
             target="_blank" 
             rel="noopener noreferrer"
             style={{

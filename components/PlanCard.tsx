@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 interface PlanCardProps {
   name: string;
   badge: string;
@@ -220,20 +222,22 @@ export default function PlanCard({
         </div>
       )}
 
-      <button 
-        className={buttonStyle}
-        style={{
-          width: '100%',
-          height: '48px',
-          padding: '10px 24px',
-          borderRadius: '300px',
-          fontWeight: 'bold',
-          fontSize: '14px',
-          cursor: 'pointer'
-        }}
-      >
-        {isEnterprise ? 'お問い合わせ' : '1週間無料トライアル'}
-      </button>
+      <Link href={isEnterprise ? 'https://go.zeals.ai/contact' : 'https://www.omakase.ai/jp/register'}>
+        <button 
+          className={buttonStyle}
+          style={{
+            width: '100%',
+            height: '48px',
+            padding: '10px 24px',
+            borderRadius: '300px',
+            fontWeight: 'bold',
+            fontSize: '14px',
+            cursor: 'pointer'
+          }}
+        >
+          {isEnterprise ? 'お問い合わせ' : '1週間無料トライアル'}
+        </button>
+      </Link>
 
       <ul style={{ width: '100%', gap: '16px', fontSize: '13px', color: '#374151', display: 'flex', flexDirection: 'column' }}>
         {features.map((feature, idx) => (

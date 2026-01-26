@@ -77,7 +77,7 @@ export default function Header() {
                 />
               </Link>
               
-              <Link href="https://www.omakase.ai/jp" target="_blank" rel="noopener noreferrer">
+              <Link href="https://www.omakase.ai/jp/register" target="_blank" rel="noopener noreferrer">
                 <CTAButton
                   text="無料で始める"
                   backgroundColor="transparent"
@@ -166,7 +166,7 @@ export default function Header() {
 
           <div style={{ flex: '1 0 0', minWidth: 0 }}>
             <Link
-              href="https://www.omakase.ai/jp"
+              href="https://www.omakase.ai/jp/register"
               target="_blank"
               rel="noopener noreferrer"
               style={{

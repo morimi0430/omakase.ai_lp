@@ -292,7 +292,7 @@ export default function Plan() {
             </div>
 
             {/* プランカード（横並び） */}
-            <div className="flex flex-wrap justify-center w-full gap-5">
+            <div className="grid grid-cols-2 xl:grid-cols-4 justify-items-center w-full gap-5">
               {plans.map((plan, index) => (
                 <PlanCard
                   key={index}

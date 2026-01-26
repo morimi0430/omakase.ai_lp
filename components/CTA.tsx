@@ -62,7 +62,7 @@ export default function CTA() {
                 style={{ width: '100%' }}
               />
             </Link>
-            <Link href="https://www.omakase.ai/jp">
+            <Link href="https://www.omakase.ai/jp/register">
               <CTAButton
                 text="トライアルはこちら"
                 highlightText="7日間無料"
@@ -142,7 +142,7 @@ export default function CTA() {
               />
             </Link>
             
-            <Link href="https://www.omakase.ai/jp">
+            <Link href="https://www.omakase.ai/jp/register">
               <CTAButton
                 text="トライアルはこちら"
                 highlightText="7日間無料"
