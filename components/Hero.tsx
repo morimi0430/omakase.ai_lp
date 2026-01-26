@@ -67,7 +67,7 @@ export default function Hero() {
           <div style={{ height: '24px' }} />
           
           {/* 実績画像 */}
-          <ThreeBadges mobileImage="/images/mobile/3_badges_hero.png" />
+          <ThreeBadges mobileImage="/images/mobile/3_badges_Hero.png" />
           
           {/* 18pxのスペース */}
           <div style={{ height: '18px' }} />

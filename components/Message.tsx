@@ -27,7 +27,7 @@ export default function Message() {
             </p>
 
             <div className="flex flex-col items-start">
-                <ThreeBadges mobileImage="/images/mobile/3_badges_message.png" />
+                <ThreeBadges mobileImage="/images/mobile/3_badges_Message.png" />
               
               {/* 注釈 */}
               <p style={{
