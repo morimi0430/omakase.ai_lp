@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ThreeBadges, { Badge } from "@/components/ThreeBadges";
 import LogoSlider from "@/components/LogoSlider";
 
@@ -101,27 +102,32 @@ export default function Hero() {
             alignItems: 'center',
             margin: '0 auto'
           }}>
-            {/* CTAボタン */}
-            <button style={{
-              display: 'flex',
-              padding: '16px 32px',
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'stretch',
-              borderRadius: '300px',
-              border: '1px solid #EF96FF',
-              background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-              boxShadow: '0 6px 14px 0 rgba(96, 23, 255, 0.20)',
-              color: '#FFF',
-              fontFamily: '"Noto Sans JP"',
-              fontSize: '16px',
-              fontStyle: 'normal',
-              fontWeight: 700,
-              lineHeight: 'normal',
-              cursor: 'pointer'
-            }}>
+            <Link 
+              href="https://www.omakase.ai/jp" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                padding: '16px 32px',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignSelf: 'stretch',
+                borderRadius: '300px',
+                border: '1px solid #EF96FF',
+                background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+                boxShadow: '0 6px 14px 0 rgba(96, 23, 255, 0.20)',
+                color: '#FFF',
+                fontFamily: '"Noto Sans JP"',
+                fontSize: '16px',
+                fontStyle: 'normal',
+                fontWeight: 700,
+                lineHeight: 'normal',
+                cursor: 'pointer',
+                textDecoration: 'none'
+              }}
+            >
               7日間無料トライアルはこちら
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -461,18 +467,24 @@ export default function Hero() {
           </ThreeBadges>
 
           {/* CTAボタン */}
-          <button style={{
-            display: 'flex',
-            padding: '20px 36px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '10px',
-            borderRadius: '300px',
-            border: '1px solid #EF96FF',
-            background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-            boxShadow: '0 6px 14px 0 rgba(96, 23, 255, 0.20)',
-            cursor: 'pointer'
-          }}>
+          <Link 
+            href="https://www.omakase.ai/jp" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{
+              display: 'flex',
+              padding: '20px 36px',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+              borderRadius: '300px',
+              border: '1px solid #EF96FF',
+              background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+              boxShadow: '0 6px 14px 0 rgba(96, 23, 255, 0.20)',
+              cursor: 'pointer',
+              textDecoration: 'none'
+            }}
+          >
             <span style={{
               color: '#F6FF51',
               fontFamily: '"Noto Sans JP"',
@@ -497,7 +509,7 @@ export default function Hero() {
             }}>
               ▶︎
             </div>
-          </button>
+          </Link>
 
           {/* 注釈テキスト */}
           <div style={{

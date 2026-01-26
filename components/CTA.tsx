@@ -62,16 +62,17 @@ export default function CTA() {
                 style={{ width: '100%' }}
               />
             </Link>
-            
-            <CTAButton
-              text="トライアルはこちら"
-              highlightText="7日間無料"
-              highlightColor="#FD3EA1"
-              backgroundColor="#F8FF6C"
-              iconSrc="/images/pc/arrow_white.png"
-              iconFixed={true}
-              style={{ width: '100%' }}
-            />
+            <Link href="https://www.omakase.ai/jp">
+              <CTAButton
+                text="トライアルはこちら"
+                highlightText="7日間無料"
+                highlightColor="#FD3EA1"
+                backgroundColor="#F8FF6C"
+                iconSrc="/images/pc/arrow_white.png"
+                iconFixed={true}
+                style={{ width: '100%' }}
+              />
+            </Link>
           </div>
         </div>
       </section>
@@ -141,13 +142,15 @@ export default function CTA() {
               />
             </Link>
             
-            <CTAButton
-              text="トライアルはこちら"
-              highlightText="7日間無料"
-              highlightColor="#FD3EA1"
-              backgroundColor="#F8FF6C"
-              iconSrc="/images/pc/arrow_white.png"
-            />
+            <Link href="https://www.omakase.ai/jp">
+              <CTAButton
+                text="トライアルはこちら"
+                highlightText="7日間無料"
+                highlightColor="#FD3EA1"
+                backgroundColor="#F8FF6C"
+                iconSrc="/images/pc/arrow_white.png"
+              />
+            </Link>
           </div>
         </div>
       </section>

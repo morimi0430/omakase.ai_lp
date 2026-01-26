@@ -9,7 +9,7 @@ export default function ThankYouPage() {
 
   const handleDownload = () => {
     // PDFのURLを指定してください
-    const pdfUrl = '/path/to/your/document.pdf'; // ここにPDFのURLを設定
+    const pdfUrl = '/document/Omakase.ai_service_info.pdf'; // ここにPDFのURLを設定
     
     // PDFをダウンロード
     const link = document.createElement('a');

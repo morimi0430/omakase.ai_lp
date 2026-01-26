@@ -77,22 +77,24 @@ export default function Header() {
                 />
               </Link>
               
-              <CTAButton
-                text="無料で始める"
-                backgroundColor="transparent"
-                textGradient={false}
-                textColor="#FFF"
-                iconSrc="/images/pc/arrow_purple.png"
-                style={{
-                  padding: '10px 24px',
-                  height: '48px',
-                  border: 'none',
-                  background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-                  boxShadow: 'none',
-                  fontSize: '14px'
-                }}
-                className="hover:opacity-90 transition-opacity"
-              />
+              <Link href="https://www.omakase.ai/jp" target="_blank" rel="noopener noreferrer">
+                <CTAButton
+                  text="無料で始める"
+                  backgroundColor="transparent"
+                  textGradient={false}
+                  textColor="#FFF"
+                  iconSrc="/images/pc/arrow_purple.png"
+                  style={{
+                    padding: '10px 24px',
+                    height: '48px',
+                    border: 'none',
+                    background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+                    boxShadow: 'none',
+                    fontSize: '14px'
+                  }}
+                  className="hover:opacity-90 transition-opacity"
+                />
+              </Link>
             </div>
           </div>
         </Container>
@@ -129,41 +131,44 @@ export default function Header() {
           }}
         >
           <div style={{ flex: '1 0 0', minWidth: 0 }}>
-            <Link href="/document-request" style={{ display: 'block', textDecoration: 'none' }}>
-              <button
-                style={{
-                  display: 'flex',
-                  height: '48px',
-                  padding: '10px 12px',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: '6px',
-                  borderRadius: '300px',
-                  border: '1px solid #5004F5',
-                  background: '#FFF',
-                  boxShadow: 'none',
-                  fontSize: '13px',
-                  fontFamily: '"Noto Sans JP"',
-                  fontWeight: 700,
-                  color: '#6017FF',
-                  width: '100%',
-                  boxSizing: 'border-box',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <span>資料請求はこちら</span>
-                <img 
-                  src="/images/pc/arrow_white.png" 
-                  alt="" 
-                  style={{ width: '20px', height: '20px', flexShrink: 0 }}
-                />
-              </button>
+            <Link 
+              href="/document-request"
+              style={{
+                display: 'flex',
+                height: '48px',
+                padding: '10px 12px',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '6px',
+                borderRadius: '300px',
+                border: '1px solid #5004F5',
+                background: '#FFF',
+                boxShadow: 'none',
+                fontSize: '13px',
+                fontFamily: '"Noto Sans JP"',
+                fontWeight: 700,
+                color: '#6017FF',
+                width: '100%',
+                boxSizing: 'border-box',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                textDecoration: 'none'
+              }}
+            >
+              <span>資料請求はこちら</span>
+              <img 
+                src="/images/pc/arrow_white.png" 
+                alt="" 
+                style={{ width: '20px', height: '20px', flexShrink: 0 }}
+              />
             </Link>
           </div>
 
           <div style={{ flex: '1 0 0', minWidth: 0 }}>
-            <button
+            <Link
+              href="https://www.omakase.ai/jp"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: 'flex',
                 height: '48px',
@@ -182,7 +187,8 @@ export default function Header() {
                 width: '100%',
                 boxSizing: 'border-box',
                 cursor: 'pointer',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                textDecoration: 'none'
               }}
             >
               <span>無料で始める</span>
@@ -191,7 +197,7 @@ export default function Header() {
                 alt="" 
                 style={{ width: '20px', height: '20px', flexShrink: 0 }}
               />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
