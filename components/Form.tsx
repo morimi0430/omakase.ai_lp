@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Container } from './Container';
 import { InquiryFormData } from '@/types/form';
 
 export default function Form() {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -66,18 +68,13 @@ export default function Form() {
       });
 
       if (response.ok) {
-        alert('お問い合わせを送信しました。');
-        setFormData({
-          lastName: '', firstName: '', company: '', department: '',
-          position: '', email: '', phone: '', inquiryType: '選択してください。',
-          inquiryDetail: '', agreedToTerms: false
-        });
+        // 送信成功したら thank you ページへリダイレクト
+        router.push('document-request/thank-you');
       } else {
         throw new Error();
       }
     } catch (error) {
       alert('送信に失敗しました。時間をおいて再度お試しください。');
-    } finally {
       setIsSubmitting(false);
     }
   };

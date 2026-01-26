@@ -1,24 +1,46 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import DocumentRequestHeader from '@/components/DocumentRequestHeader';
 import Footer from '@/components/Footer';
 
 export default function ThankYouPage() {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDownload = () => {
-    // PDFのURLを指定してください
-    const pdfUrl = '/document/Omakase.ai_service_info.pdf'; // ここにPDFのURLを設定
-    
-    // PDFをダウンロード
+    // PDFダウンロード
+    const pdfUrl = '/document/Omakase.ai_service_info.pdf';
     const link = document.createElement('a');
     link.href = pdfUrl;
     link.download = 'omakase_document.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // モーダルを開く
+    setIsModalOpen(true);
   };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      // HubSpotスクリプトを動的に読み込む
+      const script = document.createElement('script');
+      script.src = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
+      script.type = 'text/javascript';
+      script.async = true;
+      document.body.appendChild(script);
+
+      // bodyのスクロールを無効化
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.body.removeChild(script);
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [isModalOpen]);
 
   return (
     <>
@@ -161,6 +183,99 @@ export default function ThankYouPage() {
       </main>
 
       <Footer />
+
+      {/* HubSpot予約モーダル */}
+      {isModalOpen && (
+        <div
+          onClick={() => setIsModalOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+            padding: '20px'
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#FFF',
+              borderRadius: '16px',
+              maxWidth: '800px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflow: 'auto',
+              position: 'relative',
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)'
+            }}
+          >
+            {/* 閉じるボタン */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                background: 'rgba(0, 0, 0, 0.5)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                zIndex: 10,
+                color: '#FFF',
+                fontSize: '20px',
+                fontWeight: 'bold'
+              }}
+            >
+              ×
+            </button>
+
+            {/* モーダルヘッダー */}
+            <div style={{
+              padding: '32px 24px 24px',
+              borderBottom: '1px solid #E5E7EB'
+            }}>
+              <h2 style={{
+                fontFamily: '"Noto Sans JP"',
+                fontSize: '24px',
+                fontWeight: 700,
+                color: '#1F2937',
+                margin: 0,
+                textAlign: 'center'
+              }}>
+                ミーティングを予約
+              </h2>
+              <p style={{
+                fontFamily: '"Noto Sans JP"',
+                fontSize: '14px',
+                color: '#6B7280',
+                margin: '8px 0 0',
+                textAlign: 'center'
+              }}>
+                ご都合の良い日時をお選びください
+              </p>
+            </div>
+
+            {/* HubSpot埋め込みエリア */}
+            <div style={{ padding: '24px' }}>
+              <div 
+                className="meetings-iframe-container" 
+                data-src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
