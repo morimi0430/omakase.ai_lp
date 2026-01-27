@@ -394,7 +394,11 @@ export default function CaseStudies() {
               ref={sliderRef}
               className="flex gap-14 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
               style={{ 
-                scrollBehavior: 'smooth'
+                scrollBehavior: 'smooth',
+                paddingLeft: '3px',
+                paddingRight: '3px',
+                marginLeft: '-3px',
+                marginRight: '-3px'
               }}
               onMouseEnter={() => { isHoveringRef.current = true; }}
               onMouseLeave={() => { isHoveringRef.current = false; }}

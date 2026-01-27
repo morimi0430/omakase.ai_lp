@@ -1,13 +1,54 @@
 'use client';
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ThreeBadges, { Badge } from "@/components/ThreeBadges";
 import LogoSlider from "@/components/LogoSlider";
 
 export default function Hero() {
+  const [showBlur, setShowBlur] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // スクロール量が100px以上になったらぼかしを非表示
+      if (window.scrollY > 100) {
+        setShowBlur(false);
+      } else {
+        setShowBlur(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <section className="w-full relative md:mt-20">      
+    <section className="w-full relative md:mt-20">
+      {/* PC版ぼかしエフェクト */}
+      <>
+        {/* 右上のぼかし（fixed、ヘッダーより全面、スクロールで消える） */}
+        <div 
+          className="hidden md:block"
+          style={{
+            position: 'fixed',
+            top: '-80px',
+            right: '60px',
+            width: '200px',
+            height: '200px',
+            background: '#6017FF',
+            opacity: showBlur ? 0.4 : 0,
+            filter: 'blur(150px)',
+            pointerEvents: 'none',
+            zIndex: 51,
+            transition: 'opacity 0.3s ease'
+          }}
+        />
+      </>
+      
       {/* モバイル版 */}
       <div className="flex md:hidden flex-col relative z-10" style={{ paddingTop: '19px', paddingLeft: '16px', paddingRight: '16px', boxSizing: 'border-box', marginTop: '0' }}>
         {/* コンテンツエリア */}
@@ -568,7 +609,23 @@ export default function Hero() {
       </div>
 
       {/* ロゴスライダー（PC・モバイル共通） */}
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', position: 'relative' }}>
+        {/* 左下のぼかし（ロゴスライダーより上、PC版のみ） */}
+        <div 
+          className="hidden md:block"
+          style={{
+            position: 'absolute',
+            top: '-200px',
+            left: '-65px',
+            width: '150px',
+            height: '150px',
+            background: '#6017FF',
+            opacity: 0.4,
+            filter: 'blur(150px)',
+            pointerEvents: 'none',
+            zIndex: -1
+          }}
+        />
         <LogoSlider />
       </div>
     </section>

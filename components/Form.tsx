@@ -32,6 +32,18 @@ export default function Form() {
     'その他のご相談'
   ];
 
+  // バリデーション関数
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    // 日本の電話番号形式（ハイフンあり・なし両対応）
+    const phoneRegex = /^(0\d{1,4}-?\d{1,4}-?\d{4}|0\d{9,10})$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+  };
+
   // 外部クリックでドロップダウンを閉じる
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,10 +60,22 @@ export default function Form() {
   };
 
   const handleSubmit = async () => {
-    // バリデーション
+    // 必須項目チェック
     if (!formData.lastName || !formData.firstName || !formData.company || 
         !formData.email || !formData.phone || formData.inquiryType === '選択してください。' || !formData.agreedToTerms) {
       alert('必須項目をすべて入力し、規約に同意してください。');
+      return;
+    }
+
+    // メールアドレス形式チェック
+    if (!validateEmail(formData.email)) {
+      alert('メールアドレスの形式が正しくありません。');
+      return;
+    }
+
+    // 電話番号形式チェック
+    if (!validatePhone(formData.phone)) {
+      alert('電話番号の形式が正しくありません。\n例：03-1234-5678 または 0312345678');
       return;
     }
 
