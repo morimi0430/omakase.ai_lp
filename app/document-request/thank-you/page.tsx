@@ -25,10 +25,8 @@ export default function ThankYouPage() {
     link.click();
     document.body.removeChild(link);
 
-    // モバイルではモーダルを開かない
-    if (!isMobile) {
-      setIsModalOpen(true);
-    }
+    // 常にモーダルを開く（モバイルでも）
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -280,8 +278,8 @@ export default function ThankYouPage() {
 
       <Footer />
 
-      {/* HubSpot予約モーダル（PCのみ） */}
-      {isModalOpen && !isMobile && (
+      {/* HubSpot予約モーダル */}
+      {isModalOpen && (
         <div
           onClick={() => setIsModalOpen(false)}
           style={{
@@ -295,7 +293,7 @@ export default function ThankYouPage() {
             justifyContent: 'center',
             alignItems: 'center',
             zIndex: 9999,
-            padding: '20px'
+            padding: isMobile ? '10px' : '20px'
           }}
         >
           <div
@@ -303,9 +301,9 @@ export default function ThankYouPage() {
             style={{
               backgroundColor: '#FFF',
               borderRadius: '16px',
-              maxWidth: '800px',
+              maxWidth: isMobile ? '100%' : '800px',
               width: '100%',
-              maxHeight: '90vh',
+              maxHeight: isMobile ? '95vh' : '90vh',
               display: 'flex',
               flexDirection: 'column',
               position: 'relative',
@@ -340,13 +338,13 @@ export default function ThankYouPage() {
 
             {/* モーダルヘッダー */}
             <div style={{
-              padding: '32px 24px 24px',
+              padding: isMobile ? '32px 16px 16px' : '32px 24px 24px',
               borderBottom: '1px solid #E5E7EB',
               flexShrink: 0
             }}>
               <h2 style={{
                 fontFamily: '"Noto Sans JP"',
-                fontSize: '24px',
+                fontSize: isMobile ? '20px' : '24px',
                 fontWeight: 700,
                 color: '#1F2937',
                 margin: 0,
@@ -356,7 +354,7 @@ export default function ThankYouPage() {
               </h2>
               <p style={{
                 fontFamily: '"Noto Sans JP"',
-                fontSize: '14px',
+                fontSize: isMobile ? '12px' : '14px',
                 color: '#6B7280',
                 margin: '8px 0 0',
                 textAlign: 'center'
@@ -367,7 +365,7 @@ export default function ThankYouPage() {
 
             {/* HubSpot埋め込みエリア */}
             <div style={{ 
-              padding: '24px',
+              padding: isMobile ? '16px' : '24px',
               overflow: 'auto',
               flexGrow: 1,
               WebkitOverflowScrolling: 'touch'
@@ -376,7 +374,7 @@ export default function ThankYouPage() {
                 src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
                 style={{
                   width: '100%',
-                  minHeight: '500px',
+                  minHeight: isMobile ? '600px' : '500px',
                   height: '100%',
                   border: 'none'
                 }}
