@@ -7,6 +7,9 @@ import CaseCard from './CaseStudiesCard';
 export default function CaseStudies() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const mobileSliderRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isHoveringRef = useRef(false);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentSlidePC, setCurrentSlidePC] = useState(0);
@@ -86,8 +89,8 @@ export default function CaseStudies() {
     }
   ];
 
-  // 無限ループ用の配列（前後に追加）
-  const extendedCases = [...cases, ...cases, ...cases, ...cases, ...cases];
+  // 無限ループ用の配列（3セット: 前・中央・後）
+  const extendedCases = [...cases, ...cases, ...cases];
 
   const updateCurrentSlide = () => {
     if (!mobileSliderRef.current) return;
@@ -97,19 +100,36 @@ export default function CaseStudies() {
     const index = ((totalIndex % cases.length) + cases.length) % cases.length;
     setCurrentSlide(index);
 
-    // 無限ループ：端に近づいたら中央にジャンプ
-    if (totalIndex <= 2) {
-      mobileSliderRef.current.style.scrollBehavior = 'auto';
-      mobileSliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + totalIndex);
-      setTimeout(() => {
-        if (mobileSliderRef.current) mobileSliderRef.current.style.scrollBehavior = 'smooth';
-      }, 50);
-    } else if (totalIndex >= extendedCases.length - 3) {
-      mobileSliderRef.current.style.scrollBehavior = 'auto';
-      mobileSliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + (totalIndex % cases.length));
-      setTimeout(() => {
-        if (mobileSliderRef.current) mobileSliderRef.current.style.scrollBehavior = 'smooth';
-      }, 50);
+    // 無限ループ：最初のセットまたは最後のセットにいる場合、中央のセットにジャンプ
+    if (totalIndex < cases.length) {
+      // 最初のセット → 中央のセットの対応位置にジャンプ
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (!mobileSliderRef.current) return;
+        mobileSliderRef.current.style.scrollSnapType = 'none';
+        mobileSliderRef.current.style.scrollBehavior = 'auto';
+        mobileSliderRef.current.scrollLeft = slideWidth * (cases.length + totalIndex);
+        requestAnimationFrame(() => {
+          if (!mobileSliderRef.current) return;
+          mobileSliderRef.current.style.scrollBehavior = 'smooth';
+          mobileSliderRef.current.style.scrollSnapType = 'x mandatory';
+        });
+      }, 300);
+    } else if (totalIndex >= cases.length * 2) {
+      // 最後のセット → 中央のセットの対応位置にジャンプ
+      const positionInSet = totalIndex - cases.length * 2;
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (!mobileSliderRef.current) return;
+        mobileSliderRef.current.style.scrollSnapType = 'none';
+        mobileSliderRef.current.style.scrollBehavior = 'auto';
+        mobileSliderRef.current.scrollLeft = slideWidth * (cases.length + positionInSet);
+        requestAnimationFrame(() => {
+          if (!mobileSliderRef.current) return;
+          mobileSliderRef.current.style.scrollBehavior = 'smooth';
+          mobileSliderRef.current.style.scrollSnapType = 'x mandatory';
+        });
+      }, 300);
     }
   };
 
@@ -124,19 +144,36 @@ export default function CaseStudies() {
     const index = ((totalIndex % cases.length) + cases.length) % cases.length;
     setCurrentSlidePC(index);
 
-    // 無限ループ：端に近づいたら中央にジャンプ
-    if (totalIndex <= 2) {
-      sliderRef.current.style.scrollBehavior = 'auto';
-      sliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + totalIndex);
-      setTimeout(() => {
-        if (sliderRef.current) sliderRef.current.style.scrollBehavior = 'smooth';
-      }, 50);
-    } else if (totalIndex >= extendedCases.length - 3) {
-      sliderRef.current.style.scrollBehavior = 'auto';
-      sliderRef.current.scrollLeft = slideWidth * (cases.length * 2 + (totalIndex % cases.length));
-      setTimeout(() => {
-        if (sliderRef.current) sliderRef.current.style.scrollBehavior = 'smooth';
-      }, 50);
+    // 無限ループ：最初のセットまたは最後のセットにいる場合、中央のセットにジャンプ
+    if (totalIndex < cases.length) {
+      // 最初のセット → 中央のセットの対応位置にジャンプ
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (!sliderRef.current) return;
+        sliderRef.current.style.scrollSnapType = 'none';
+        sliderRef.current.style.scrollBehavior = 'auto';
+        sliderRef.current.scrollLeft = slideWidth * (cases.length + totalIndex);
+        requestAnimationFrame(() => {
+          if (!sliderRef.current) return;
+          sliderRef.current.style.scrollBehavior = 'smooth';
+          sliderRef.current.style.scrollSnapType = 'x mandatory';
+        });
+      }, 300);
+    } else if (totalIndex >= cases.length * 2) {
+      // 最後のセット → 中央のセットの対応位置にジャンプ
+      const positionInSet = totalIndex - cases.length * 2;
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (!sliderRef.current) return;
+        sliderRef.current.style.scrollSnapType = 'none';
+        sliderRef.current.style.scrollBehavior = 'auto';
+        sliderRef.current.scrollLeft = slideWidth * (cases.length + positionInSet);
+        requestAnimationFrame(() => {
+          if (!sliderRef.current) return;
+          sliderRef.current.style.scrollBehavior = 'smooth';
+          sliderRef.current.style.scrollSnapType = 'x mandatory';
+        });
+      }, 300);
     }
   };
 
@@ -181,6 +218,20 @@ export default function CaseStudies() {
     sliderRef.current.scrollTo({ left: slideWidth * targetIndex, behavior: 'smooth' });
   };
 
+  // PC用自動スクロール関数
+  const autoScrollPC = () => {
+    if (!sliderRef.current || isHoveringRef.current) return;
+    const card = sliderRef.current.querySelector('.case-item') as HTMLElement;
+    if (!card) return;
+    const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
+    const slideWidth = card.offsetWidth + gap;
+    const currentScrollLeft = sliderRef.current.scrollLeft;
+    const currentTotalIndex = Math.round(currentScrollLeft / slideWidth);
+    const nextIndex = currentTotalIndex + 1;
+    
+    sliderRef.current.scrollTo({ left: slideWidth * nextIndex, behavior: 'smooth' });
+  };
+
   useEffect(() => {
     const handlePCScroll = () => {
       if (sliderRef.current) {
@@ -202,7 +253,8 @@ export default function CaseStudies() {
         if (card) {
           const gap = parseInt(window.getComputedStyle(pcSlider).gap) || 0;
           const slideWidth = card.offsetWidth + gap;
-          pcSlider.scrollLeft = slideWidth * cases.length * 2;
+          // 中央のセット（2番目のセット）の最初にセット
+          pcSlider.scrollLeft = slideWidth * cases.length;
         }
         setCurrentSlidePC(0);
         requestAnimationFrame(() => {
@@ -215,7 +267,8 @@ export default function CaseStudies() {
         mobileSlider.style.scrollSnapType = 'none';
         
         const slideWidth = mobileSlider.offsetWidth;
-        const targetScroll = slideWidth * cases.length * 2;
+        // 中央のセット（2番目のセット）の最初にセット
+        const targetScroll = slideWidth * cases.length;
         mobileSlider.scrollLeft = targetScroll;
         
         // インジケーターを0に設定
@@ -234,11 +287,33 @@ export default function CaseStudies() {
     });
 
     return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      if (autoScrollIntervalRef.current) {
+        clearInterval(autoScrollIntervalRef.current);
+      }
       if (pcSlider) {
         pcSlider.removeEventListener('scroll', handlePCScroll);
       }
       if (mobileSlider) {
         mobileSlider.removeEventListener('scroll', handleMobileScroll);
+      }
+    };
+  }, []);
+
+  // PC自動スクロール開始
+  useEffect(() => {
+    if (!sliderRef.current) return;
+    
+    // 3秒ごとに自動スクロール
+    autoScrollIntervalRef.current = setInterval(() => {
+      autoScrollPC();
+    }, 3000);
+
+    return () => {
+      if (autoScrollIntervalRef.current) {
+        clearInterval(autoScrollIntervalRef.current);
       }
     };
   }, []);
@@ -306,56 +381,62 @@ export default function CaseStudies() {
       </section>
 
       {/* PC版 */}
-      <section className="hidden md:flex w-full bg-white justify-center" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
-        <div className="w-full md:max-w-[1440px]">
-          {/* タイトル */}
-          <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
-            <SectionTitle title="導入事例" isMobile={false} />
-          </div>
+      <section className="hidden md:block w-full bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
+        <div className="flex justify-center w-full">
+          <div style={{ width: '100%', maxWidth: '1440px', paddingLeft: '120px', paddingRight: '120px' }}>
+            {/* タイトル */}
+            <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
+              <SectionTitle title="導入事例" isMobile={false} />
+            </div>
 
-          {/* 横スクロールカルーセル */}
-          <div 
-            ref={sliderRef}
-            className="flex gap-14 overflow-x-auto no-scrollbar snap-x snap-mandatory px-[112px] pb-10"
-            style={{ scrollBehavior: 'smooth' }}
-          >
-            {extendedCases.map((caseItem, index) => (
-              <div key={index} className="case-item flex-shrink-0">
-                <CaseCard
-                  company={caseItem.company}
-                  title={caseItem.title}
-                  image={caseItem.image}
-                  reasons={caseItem.reasons}
-                  effects={caseItem.effects}
+            {/* 横スクロールカルーセル */}
+            <div 
+              ref={sliderRef}
+              className="flex gap-14 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
+              style={{ 
+                scrollBehavior: 'smooth'
+              }}
+              onMouseEnter={() => { isHoveringRef.current = true; }}
+              onMouseLeave={() => { isHoveringRef.current = false; }}
+            >
+              {extendedCases.map((caseItem, index) => (
+                <div key={index} className="case-item flex-shrink-0">
+                  <CaseCard
+                    company={caseItem.company}
+                    title={caseItem.title}
+                    image={caseItem.image}
+                    reasons={caseItem.reasons}
+                    effects={caseItem.effects}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* スライドインジケーター（PC版） */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '60px'
+            }}>
+              {cases.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollToSlidePC(index)}
+                  style={{
+                    width: currentSlidePC === index ? '32px' : '8px',
+                    height: '8px',
+                    borderRadius: '4px',
+                    background: currentSlidePC === index ? '#5004F5' : '#E5E5E5',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    padding: 0
+                  }}
                 />
-              </div>
-            ))}
-          </div>
-
-          {/* スライドインジケーター（PC版） */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '8px',
-            marginTop: '60px'
-          }}>
-            {cases.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToSlidePC(index)}
-                style={{
-                  width: currentSlidePC === index ? '32px' : '8px',
-                  height: '8px',
-                  borderRadius: '4px',
-                  background: currentSlidePC === index ? '#5004F5' : '#E5E5E5',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  padding: 0
-                }}
-              />
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

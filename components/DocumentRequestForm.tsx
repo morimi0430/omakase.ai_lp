@@ -67,6 +67,15 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
       });
 
       if (response.ok) {
+        // GA4イベント送信
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'form_submit_document_request', {
+            form_type: 'document_request',
+            company: formData.company,
+            department: formData.department
+          });
+        }
+        
         // サンクスページに遷移
         router.push('/document-request/thank-you');
       } else {

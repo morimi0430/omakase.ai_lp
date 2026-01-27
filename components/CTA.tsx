@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import CTAButton from './CTAButton';
 
@@ -53,7 +55,17 @@ export default function CTA() {
             gap: '24px',
             width: '100%'
           }}>
-            <Link href="/document-request">
+            <Link 
+              href="/document-request"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_document_request_cta', {
+                    button_location: 'cta_section_mobile',
+                    button_text: '資料請求はこちら'
+                  });
+                }
+              }}
+            >
               <CTAButton
                 text="資料請求はこちら"
                 backgroundColor="#FFF"
@@ -62,7 +74,17 @@ export default function CTA() {
                 style={{ width: '100%' }}
               />
             </Link>
-            <Link href="https://www.omakase.ai/jp/register">
+            <Link 
+              href="https://www.omakase.ai/jp/register"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_free_trial_cta', {
+                    button_location: 'cta_section_mobile',
+                    button_text: 'トライアルはこちら'
+                  });
+                }
+              }}
+            >
               <CTAButton
                 text="トライアルはこちら"
                 highlightText="7日間無料"
@@ -134,7 +156,17 @@ export default function CTA() {
             gap: '24px',
             alignItems: 'center'
           }}>
-            <Link href="/document-request">
+            <Link 
+              href="/document-request"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_document_request_cta', {
+                    button_location: 'cta_section_pc',
+                    button_text: '資料請求はこちら'
+                  });
+                }
+              }}
+            >
               <CTAButton
                 text="資料請求はこちら"
                 backgroundColor="#FFF"
@@ -142,7 +174,17 @@ export default function CTA() {
               />
             </Link>
             
-            <Link href="https://www.omakase.ai/jp/register">
+            <Link 
+              href="https://www.omakase.ai/jp/register"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_free_trial_cta', {
+                    button_location: 'cta_section_pc',
+                    button_text: 'トライアルはこちら'
+                  });
+                }
+              }}
+            >
               <CTAButton
                 text="トライアルはこちら"
                 highlightText="7日間無料"

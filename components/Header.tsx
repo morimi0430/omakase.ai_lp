@@ -72,7 +72,17 @@ export default function Header() {
 
             {/* ボタンエリア */}
             <div className="flex justify-end items-center gap-4 flex-shrink-0">
-              <Link href="/document-request">
+              <Link 
+                href="/document-request"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'button_click_document_request_header', {
+                      button_location: 'header',
+                      button_text: '資料請求はこちら'
+                    });
+                  }
+                }}
+              >
                 <CTAButton
                   text="資料請求はこちら"
                   backgroundColor="#FFF"
@@ -89,7 +99,19 @@ export default function Header() {
                 />
               </Link>
               
-              <Link href="https://www.omakase.ai/jp/register" target="_blank" rel="noopener noreferrer">
+              <Link 
+                href="https://www.omakase.ai/jp/register" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={() => {
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'button_click_free_trial_header', {
+                      button_location: 'header',
+                      button_text: '無料で始める'
+                    });
+                  }
+                }}
+              >
                 <CTAButton
                   text="無料で始める"
                   backgroundColor="transparent"
@@ -146,6 +168,14 @@ export default function Header() {
           <div style={{ flex: '1 0 0', minWidth: 0 }}>
             <Link 
               href="/document-request"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_document_request_fixed_cta', {
+                    button_location: 'fixed_header',
+                    button_text: '資料請求はこちら'
+                  });
+                }
+              }}
               style={{
                 display: 'flex',
                 height: '48px',
@@ -182,6 +212,14 @@ export default function Header() {
               href="https://www.omakase.ai/jp/register"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_free_trial_fixed_cta', {
+                    button_location: 'fixed_header',
+                    button_text: '無料で始める'
+                  });
+                }
+              }}
               style={{
                 display: 'flex',
                 height: '48px',

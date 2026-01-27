@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import ThreeBadges, { Badge } from "@/components/ThreeBadges";
@@ -106,6 +108,14 @@ export default function Hero() {
               href="https://www.omakase.ai/jp/register" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_free_trial_hero', {
+                    button_location: 'hero_mobile',
+                    button_text: '7日間無料トライアルはこちら'
+                  });
+                }
+              }}
               style={{
                 display: 'flex',
                 padding: '16px 32px',
@@ -469,6 +479,14 @@ export default function Hero() {
               href="https://www.omakase.ai/jp/register" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'button_click_free_trial_hero', {
+                    button_location: 'hero_pc',
+                    button_text: '7日間無料トライアルはこちら'
+                  });
+                }
+              }}
               style={{
                 display: 'flex',
                 padding: '20px 36px',

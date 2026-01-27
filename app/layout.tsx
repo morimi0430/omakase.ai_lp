@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <head>
+      <body className={`${notoSansJP.variable} ${inter.variable} ${notoSansJP.className}`}>
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
@@ -44,8 +44,7 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body className={`${notoSansJP.variable} ${inter.variable} ${notoSansJP.className}`}>
+        
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
