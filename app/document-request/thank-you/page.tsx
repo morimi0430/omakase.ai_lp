@@ -25,18 +25,37 @@ export default function ThankYouPage() {
 
   useEffect(() => {
     if (isModalOpen) {
+      // 既存のスクリプトがあれば削除
+      const existingScript = document.getElementById('hubspot-meetings-script');
+      if (existingScript) {
+        existingScript.remove();
+      }
+
       // HubSpotスクリプトを動的に読み込む
       const script = document.createElement('script');
+      script.id = 'hubspot-meetings-script';
       script.src = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
       script.type = 'text/javascript';
       script.async = true;
+      
+      script.onload = () => {
+        console.log('HubSpot script loaded');
+      };
+      
+      script.onerror = () => {
+        console.error('Failed to load HubSpot script');
+      };
+      
       document.body.appendChild(script);
 
       // bodyのスクロールを無効化
       document.body.style.overflow = 'hidden';
 
       return () => {
-        document.body.removeChild(script);
+        const scriptToRemove = document.getElementById('hubspot-meetings-script');
+        if (scriptToRemove) {
+          scriptToRemove.remove();
+        }
         document.body.style.overflow = 'unset';
       };
     }
