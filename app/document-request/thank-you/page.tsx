@@ -8,6 +8,12 @@ import Footer from '@/components/Footer';
 export default function ThankYouPage() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // モバイル判定
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   const handleDownload = () => {
     // PDFダウンロード
@@ -19,46 +25,21 @@ export default function ThankYouPage() {
     link.click();
     document.body.removeChild(link);
 
-    // モーダルを開く
-    setIsModalOpen(true);
+    // モバイルではモーダルを開かない
+    if (!isMobile) {
+      setIsModalOpen(true);
+    }
   };
 
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden';
-  
-      // モバイルブラウザのレンダリングを待つ
-      const initHubspot = () => {
-        const container = document.querySelector('.meetings-iframe-container');
-        if (container && container.getAttribute('data-src')) {
-          // 既存のiframeを削除（再初期化）
-          const existingIframe = container.querySelector('iframe');
-          if (existingIframe) {
-            existingIframe.remove();
-          }
-          
-          // data-srcを一度削除して再設定（強制再読み込み）
-          const src = container.getAttribute('data-src');
-          container.removeAttribute('data-src');
-          
-          setTimeout(() => {
-            if (src) {
-              container.setAttribute('data-src', src);
-            }
-          }, 100);
-        }
-      };
-  
-      // モバイルブラウザのために複数回試行
-      setTimeout(initHubspot, 300);
-      setTimeout(initHubspot, 600);
-      setTimeout(initHubspot, 1000);
-  
       return () => {
         document.body.style.overflow = 'unset';
       };
     }
   }, [isModalOpen]);
+
   return (
     <>
       {/* PC版 */}
@@ -299,8 +280,8 @@ export default function ThankYouPage() {
 
       <Footer />
 
-      {/* HubSpot予約モーダル */}
-      {isModalOpen && (
+      {/* HubSpot予約モーダル（PCのみ） */}
+      {isModalOpen && !isMobile && (
         <div
           onClick={() => setIsModalOpen(false)}
           style={{
@@ -391,13 +372,15 @@ export default function ThankYouPage() {
               flexGrow: 1,
               WebkitOverflowScrolling: 'touch'
             }}>
-              <div 
-                className="meetings-iframe-container" 
-                data-src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
+              <iframe
+                src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
                 style={{
-                  minHeight: '600px',
-                  width: '100%'
+                  width: '100%',
+                  minHeight: '500px',
+                  height: '100%',
+                  border: 'none'
                 }}
+                title="HubSpot Meeting Scheduler"
               />
             </div>
           </div>

@@ -44,13 +44,6 @@ export default function RootLayout({
             `,
           }}
         />
-        
-        {/* HubSpot Meetings Script */}
-        <Script
-          id="hubspot-meetings"
-          src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"
-          strategy="lazyOnload"
-        />
       </head>
       <body className={`${notoSansJP.variable} ${inter.variable} ${notoSansJP.className}`}>
         {/* Google Tag Manager (noscript) */}
