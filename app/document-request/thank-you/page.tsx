@@ -40,6 +40,22 @@ export default function ThankYouPage() {
       
       script.onload = () => {
         console.log('HubSpot script loaded');
+        
+        // DOMが完全に準備されるまで待つ
+        const checkAndInitialize = () => {
+          const container = document.querySelector('.meetings-iframe-container');
+          const dataSrc = container?.getAttribute('data-src');
+          
+          if (container && dataSrc) {
+            console.log('Container found, initializing...');
+            // 強制的に再スキャンさせる
+            container.setAttribute('data-src', dataSrc);
+          } else {
+            setTimeout(checkAndInitialize, 50);
+          }
+        };
+        
+        setTimeout(checkAndInitialize, 100);
       };
       
       script.onerror = () => {
