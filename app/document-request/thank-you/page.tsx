@@ -25,15 +25,40 @@ export default function ThankYouPage() {
 
   useEffect(() => {
     if (isModalOpen) {
-      // bodyのスクロールを無効化
       document.body.style.overflow = 'hidden';
-
+  
+      // モバイルブラウザのレンダリングを待つ
+      const initHubspot = () => {
+        const container = document.querySelector('.meetings-iframe-container');
+        if (container && container.getAttribute('data-src')) {
+          // 既存のiframeを削除（再初期化）
+          const existingIframe = container.querySelector('iframe');
+          if (existingIframe) {
+            existingIframe.remove();
+          }
+          
+          // data-srcを一度削除して再設定（強制再読み込み）
+          const src = container.getAttribute('data-src');
+          container.removeAttribute('data-src');
+          
+          setTimeout(() => {
+            if (src) {
+              container.setAttribute('data-src', src);
+            }
+          }, 100);
+        }
+      };
+  
+      // モバイルブラウザのために複数回試行
+      setTimeout(initHubspot, 300);
+      setTimeout(initHubspot, 600);
+      setTimeout(initHubspot, 1000);
+  
       return () => {
         document.body.style.overflow = 'unset';
       };
     }
   }, [isModalOpen]);
-
   return (
     <>
       {/* PC版 */}
@@ -366,19 +391,14 @@ export default function ThankYouPage() {
               flexGrow: 1,
               WebkitOverflowScrolling: 'touch'
             }}>
-              <iframe
-                src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
+              <div 
+                className="meetings-iframe-container" 
+                data-src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
                 style={{
-                  width: '100%',
-                  minHeight: '500px',
-                  height: '100%',
-                  border: 'none'
+                  minHeight: '600px',
+                  width: '100%'
                 }}
-                title="HubSpot Meeting Scheduler"
-                // モバイルブラウザ対応の重要な属性
-                allow="geolocation; microphone; camera"
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox"
-/>
+              />
             </div>
           </div>
         </div>
