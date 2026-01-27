@@ -375,7 +375,10 @@ export default function ThankYouPage() {
                   border: 'none'
                 }}
                 title="HubSpot Meeting Scheduler"
-              />
+                // モバイルブラウザ対応の重要な属性
+                allow="geolocation; microphone; camera"
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox"
+/>
             </div>
           </div>
         </div>
