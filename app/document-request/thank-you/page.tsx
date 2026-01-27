@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import DocumentRequestHeader from '@/components/DocumentRequestHeader';
+import Image from 'next/image';
 import Footer from '@/components/Footer';
 
 export default function ThankYouPage() {
@@ -58,7 +58,53 @@ export default function ThankYouPage() {
           gap: '32px',
           margin: '0 auto'
         }}>
-          <DocumentRequestHeader />
+          {/* ヘッダーエリア */}
+          <div style={{
+            display: 'flex',
+            width: '100%',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '24px'
+          }}>
+            <Image
+              src="/images/pc/header_logo.png"
+              alt="Omakase Logo"
+              width={160}
+              height={22}
+              style={{
+                width: '160px',
+                height: '22px',
+                aspectRatio: '80/11'
+              }}
+            />
+            
+            <h1 style={{
+              color: '#000',
+              textAlign: 'center',
+              fontFamily: '"Noto Sans JP"',
+              fontSize: '32px',
+              fontStyle: 'normal',
+              fontWeight: 700,
+              lineHeight: 'normal',
+              margin: 0
+            }}>
+              お問い合わせありがとうございます
+            </h1>
+            
+            <p style={{
+              color: '#000',
+              textAlign: 'center',
+              fontFamily: '"Noto Sans JP"',
+              fontSize: '14px',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: 'normal',
+              margin: 0
+            }}>
+              以下から資料をダウンロードいただけます。
+            </p>
+          </div>
 
           {/* ボタンエリア */}
           <div style={{
@@ -127,7 +173,59 @@ export default function ThankYouPage() {
           maxWidth: '343px',
           margin: '0 auto'
         }}>
-          <DocumentRequestHeader isMobile />
+          {/* ヘッダーエリア */}
+          <div style={{
+            display: 'flex',
+            width: '100%',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '24px'
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%'
+            }}>
+              <span style={{
+                fontFamily: '"Noto Sans JP"',
+                fontSize: '24px',
+                fontWeight: 700,
+                color: '#000',
+                textAlign: 'center'
+              }}>
+                Omakase.ai
+              </span>
+            </div>
+            
+            <h1 style={{
+              width: '100%',
+              color: '#000',
+              textAlign: 'center',
+              fontFamily: '"Noto Sans JP"',
+              fontSize: '24px',
+              fontStyle: 'normal',
+              fontWeight: 700,
+              lineHeight: 'normal',
+              margin: 0
+            }}>
+              お問い合わせ<br />ありがとうございます
+            </h1>
+            
+            <p style={{
+              color: '#000',
+              textAlign: 'center',
+              fontFamily: '"Noto Sans JP"',
+              fontSize: '12px',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: 'normal',
+              margin: 0
+            }}>
+              以下から資料をダウンロードいただけます。
+            </p>
+          </div>
 
           {/* ボタンエリア */}
           <div style={{
@@ -210,9 +308,11 @@ export default function ThankYouPage() {
               maxWidth: '800px',
               width: '100%',
               maxHeight: '90vh',
-              overflow: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
               position: 'relative',
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)'
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
+              overflow: 'hidden'
             }}
           >
             {/* 閉じるボタン */}
@@ -243,7 +343,8 @@ export default function ThankYouPage() {
             {/* モーダルヘッダー */}
             <div style={{
               padding: '32px 24px 24px',
-              borderBottom: '1px solid #E5E7EB'
+              borderBottom: '1px solid #E5E7EB',
+              flexShrink: 0
             }}>
               <h2 style={{
                 fontFamily: '"Noto Sans JP"',
@@ -267,10 +368,19 @@ export default function ThankYouPage() {
             </div>
 
             {/* HubSpot埋め込みエリア */}
-            <div style={{ padding: '24px' }}>
+            <div style={{ 
+              padding: '24px',
+              overflow: 'auto',
+              flexGrow: 1,
+              WebkitOverflowScrolling: 'touch'
+            }}>
               <div 
                 className="meetings-iframe-container" 
                 data-src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
+                style={{
+                  minHeight: '600px',
+                  width: '100%'
+                }}
               />
             </div>
           </div>

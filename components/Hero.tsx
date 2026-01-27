@@ -5,7 +5,7 @@ import LogoSlider from "@/components/LogoSlider";
 
 export default function Hero() {
   return (
-    <section className="w-full relative" style={{ marginTop: '80px' }}>      
+    <section className="w-full relative md:mt-20">      
       {/* モバイル版 */}
       <div className="flex md:hidden flex-col relative z-10" style={{ paddingTop: '19px', paddingLeft: '16px', paddingRight: '16px', boxSizing: 'border-box', marginTop: '0' }}>
         {/* コンテンツエリア */}

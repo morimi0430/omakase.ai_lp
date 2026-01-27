@@ -8,22 +8,34 @@ import CTAButton from "./CTAButton";
 
 export default function Header() {
   const [showMobileCTA, setShowMobileCTA] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerWidth < 768) {
-        setShowMobileCTA(window.scrollY > 100);
+        const currentScrollY = window.scrollY;
+        
+        // 下スクロール（増加）かつ100px以上スクロールしていたら表示
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          setShowMobileCTA(true);
+        }
+        // 上スクロール（減少）したら非表示
+        else if (currentScrollY < lastScrollY) {
+          setShowMobileCTA(false);
+        }
+        
+        setLastScrollY(currentScrollY);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <>
@@ -116,6 +128,7 @@ export default function Header() {
           justifyContent: 'center',
           alignItems: 'center',
           background: 'rgba(255, 255, 255, 0.40)',
+          backdropFilter: 'blur(10px)',
           boxSizing: 'border-box'
         }}
       >
