@@ -39,8 +39,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="md:fixed md:top-0 md:left-0 md:right-0 md:z-50 h-20 w-full bg-white">
-        <Container className="h-full flex items-center justify-center">
+      <header className="md:fixed md:top-0 md:left-0 md:right-0 md:z-50 h-20 w-full bg-white flex justify-center">
+        <Container className="h-full flex items-center justify-center w-full md:max-w-[1440px]">
           {/* モバイル版 */}
           <div className="flex md:hidden w-full">
             <img
@@ -51,7 +51,7 @@ export default function Header() {
           </div>
 
           {/* PC版 */}
-          <div className="hidden md:flex w-full max-w-[1440px] justify-between items-center">
+          <div className="hidden md:flex w-full justify-between items-center">
             {/* ロゴエリア */}
             <div className="flex items-center gap-2 flex-shrink-0">
               <Image

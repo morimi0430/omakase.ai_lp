@@ -3,14 +3,11 @@
 import { useRef, useEffect, useState } from 'react';
 import SectionTitle from './SectionTitle';
 import CaseCard from './CaseStudiesCard';
-import { Container } from './Container';
 
 export default function CaseStudies() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const mobileSliderRef = useRef<HTMLDivElement>(null);
 
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentSlidePC, setCurrentSlidePC] = useState(0);
 
@@ -91,12 +88,6 @@ export default function CaseStudies() {
 
   // 無限ループ用の配列（前後に追加）
   const extendedCases = [...cases, ...cases, ...cases, ...cases, ...cases];
-
-  const checkScrollPosition = (element: HTMLDivElement, setLeft: (v: boolean) => void, setRight: (v: boolean) => void) => {
-    const { scrollLeft, scrollWidth, clientWidth } = element;
-    setLeft(scrollLeft > 0);
-    setRight(scrollLeft < scrollWidth - clientWidth - 1);
-  };
 
   const updateCurrentSlide = () => {
     if (!mobileSliderRef.current) return;
@@ -193,7 +184,6 @@ export default function CaseStudies() {
   useEffect(() => {
     const handlePCScroll = () => {
       if (sliderRef.current) {
-        checkScrollPosition(sliderRef.current, setCanScrollLeft, setCanScrollRight);
         updateCurrentSlidePC();
       }
     };
@@ -252,25 +242,6 @@ export default function CaseStudies() {
       }
     };
   }, []);
-
-  const getScrollStep = () => {
-    if (!sliderRef.current) return 0;
-    const card = sliderRef.current.querySelector('.case-item') as HTMLElement;
-    const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
-    return card ? card.offsetWidth + gap : 0;
-  };
-
-  const handlePrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
-    }
-  };
-
-  const handleNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
-    }
-  };
   
   return (
     <>
@@ -282,87 +253,66 @@ export default function CaseStudies() {
       `}</style>
 
       {/* モバイル版 */}
-      <section className="w-full md:hidden bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
-        <Container>
-          {/* タイトル */}
-          <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
-            <SectionTitle title="導入事例" isMobile={false} />
-          </div>
+      <section className="w-full md:hidden bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative', paddingLeft: '16px', paddingRight: '16px' }}>
+        {/* タイトル */}
+        <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
+          <SectionTitle title="導入事例" isMobile={false} />
+        </div>
 
-          {/* 横スクロールカルーセル（モバイル） */}
-          <div 
-            ref={mobileSliderRef}
-            className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
-            style={{ paddingLeft: '16px', paddingRight: '16px', scrollBehavior: 'smooth' }}
-          >
-            {extendedCases.map((caseItem, index) => (
-              <div key={index} className="snap-center flex-shrink-0" style={{ width: 'calc(100vw - 32px)' }}>
-                <CaseCard
-                  company={caseItem.company}
-                  title={caseItem.title}
-                  image={caseItem.image}
-                  reasons={caseItem.reasons}
-                  effects={caseItem.effects}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* スライドインジケーター */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '8px',
-            marginTop: '24px'
-          }}>
-            {cases.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToSlide(index)}
-                style={{
-                  width: currentSlide === index ? '32px' : '8px',
-                  height: '8px',
-                  borderRadius: '4px',
-                  background: currentSlide === index ? '#5004F5' : '#E5E5E5',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  padding: 0
-                }}
+        {/* 横スクロールカルーセル（モバイル） */}
+        <div 
+          ref={mobileSliderRef}
+          className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
+          style={{ marginLeft: '-16px', marginRight: '-16px', paddingLeft: '16px', paddingRight: '16px', scrollBehavior: 'smooth' }}
+        >
+          {extendedCases.map((caseItem, index) => (
+            <div key={index} className="snap-center flex-shrink-0" style={{ width: 'calc(100vw - 32px)' }}>
+              <CaseCard
+                company={caseItem.company}
+                title={caseItem.title}
+                image={caseItem.image}
+                reasons={caseItem.reasons}
+                effects={caseItem.effects}
               />
-            ))}
-          </div>
-        </Container>
+            </div>
+          ))}
+        </div>
+
+        {/* スライドインジケーター */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '8px',
+          marginTop: '24px'
+        }}>
+          {cases.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToSlide(index)}
+              style={{
+                width: currentSlide === index ? '32px' : '8px',
+                height: '8px',
+                borderRadius: '4px',
+                background: currentSlide === index ? '#5004F5' : '#E5E5E5',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                padding: 0
+              }}
+            />
+          ))}
+        </div>
       </section>
 
       {/* PC版 */}
-      <section className="hidden md:block w-full bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
-        <Container>
+      <section className="hidden md:flex w-full bg-white justify-center" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
+        <div className="w-full md:max-w-[1440px]">
           {/* タイトル */}
           <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
             <SectionTitle title="導入事例" isMobile={false} />
           </div>
-            <button 
-              onClick={handleNext}
-              style={{
-                position: 'absolute',
-                right: '40px',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                pointerEvents: 'auto',
-                background: 'transparent',
-                border: 'none'
-              }}
-            >
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <path d="M15 10L25 20L15 30" stroke="#272727" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
+
           {/* 横スクロールカルーセル */}
           <div 
             ref={sliderRef}
@@ -407,7 +357,7 @@ export default function CaseStudies() {
               />
             ))}
           </div>
-        </Container>
+        </div>
       </section>
     </>
   );
