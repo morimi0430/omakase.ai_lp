@@ -40,8 +40,13 @@ export default function ThankYouPage() {
       });
     }
 
-    // モーダルを開く
-    setIsModalOpen(true);
+    // モバイルの場合は直接HubSpotページを開く
+    if (isMobile) {
+      window.open('https://meetings-na2.hubspot.com/misaki-mori?embed=false', '_blank');
+    } else {
+      // PCの場合はモーダルを開く
+      setIsModalOpen(true);
+    }
   };
 
   useEffect(() => {
