@@ -8,6 +8,19 @@ import Footer from '@/components/Footer';
 export default function ThankYouPage() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 画面幅を検出
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleDownload = () => {
     // PDFダウンロード
@@ -324,17 +337,17 @@ export default function ThankYouPage() {
             justifyContent: 'center',
             alignItems: 'center',
             zIndex: 9999,
-            padding: '20px'
+            padding: isMobile ? '16px' : '20px'
           }}
         >
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
               backgroundColor: '#FFF',
-              borderRadius: '16px',
+              borderRadius: isMobile ? '12px' : '16px',
               maxWidth: '800px',
               width: '100%',
-              maxHeight: '90vh',
+              maxHeight: isMobile ? '95vh' : '90vh',
               display: 'flex',
               flexDirection: 'column',
               position: 'relative',
@@ -347,20 +360,20 @@ export default function ThankYouPage() {
               onClick={() => setIsModalOpen(false)}
               style={{
                 position: 'absolute',
-                top: '16px',
-                right: '16px',
+                top: isMobile ? '12px' : '16px',
+                right: isMobile ? '12px' : '16px',
                 background: 'rgba(0, 0, 0, 0.5)',
                 border: 'none',
                 borderRadius: '50%',
-                width: '32px',
-                height: '32px',
+                width: isMobile ? '28px' : '32px',
+                height: isMobile ? '28px' : '32px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 zIndex: 10,
                 color: '#FFF',
-                fontSize: '20px',
+                fontSize: isMobile ? '18px' : '20px',
                 fontWeight: 'bold'
               }}
             >
@@ -369,13 +382,13 @@ export default function ThankYouPage() {
 
             {/* モーダルヘッダー */}
             <div style={{
-              padding: '32px 24px 24px',
+              padding: isMobile ? '40px 16px 20px' : '32px 24px 24px',
               borderBottom: '1px solid #E5E7EB',
               flexShrink: 0
             }}>
               <h2 style={{
                 fontFamily: '"Noto Sans JP"',
-                fontSize: '24px',
+                fontSize: isMobile ? '18px' : '24px',
                 fontWeight: 700,
                 color: '#1F2937',
                 margin: 0,
@@ -385,7 +398,7 @@ export default function ThankYouPage() {
               </h2>
               <p style={{
                 fontFamily: '"Noto Sans JP"',
-                fontSize: '14px',
+                fontSize: isMobile ? '12px' : '14px',
                 color: '#6B7280',
                 margin: '8px 0 0',
                 textAlign: 'center'
@@ -396,16 +409,18 @@ export default function ThankYouPage() {
 
             {/* HubSpot埋め込みエリア */}
             <div style={{ 
-              padding: '24px',
+              padding: isMobile ? '16px' : '24px',
               overflow: 'auto',
               flexGrow: 1,
-              WebkitOverflowScrolling: 'touch'
+              WebkitOverflowScrolling: 'touch',
+              minHeight: 0
             }}>
               <div 
                 className="meetings-iframe-container" 
                 data-src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
                 style={{
-                  minHeight: '600px',
+                  minHeight: isMobile ? '500px' : '600px',
+                  height: '100%',
                   width: '100%'
                 }}
               />
