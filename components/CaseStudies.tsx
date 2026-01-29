@@ -10,6 +10,7 @@ export default function CaseStudies() {
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const isHoveringRef = useRef(false);
+  const isInitializedRef = useRef(false);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentSlidePC, setCurrentSlidePC] = useState(0);
@@ -89,7 +90,6 @@ export default function CaseStudies() {
     }
   ];
 
-  // 無限ループ用の配列（3セット: 前・中央・後）
   const extendedCases = [...cases, ...cases, ...cases];
 
   const updateCurrentSlide = () => {
@@ -97,12 +97,11 @@ export default function CaseStudies() {
     const scrollLeft = mobileSliderRef.current.scrollLeft;
     const slideWidth = mobileSliderRef.current.offsetWidth;
     const totalIndex = Math.round(scrollLeft / slideWidth);
+    
     const index = ((totalIndex % cases.length) + cases.length) % cases.length;
     setCurrentSlide(index);
 
-    // 無限ループ：最初のセットまたは最後のセットにいる場合、中央のセットにジャンプ
     if (totalIndex < cases.length) {
-      // 最初のセット → 中央のセットの対応位置にジャンプ
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
         if (!mobileSliderRef.current) return;
@@ -116,7 +115,6 @@ export default function CaseStudies() {
         });
       }, 300);
     } else if (totalIndex >= cases.length * 2) {
-      // 最後のセット → 中央のセットの対応位置にジャンプ
       const positionInSet = totalIndex - cases.length * 2;
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
@@ -141,12 +139,11 @@ export default function CaseStudies() {
     const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
     const slideWidth = card.offsetWidth + gap;
     const totalIndex = Math.round(scrollLeft / slideWidth);
+    
     const index = ((totalIndex % cases.length) + cases.length) % cases.length;
     setCurrentSlidePC(index);
 
-    // 無限ループ：最初のセットまたは最後のセットにいる場合、中央のセットにジャンプ
     if (totalIndex < cases.length) {
-      // 最初のセット → 中央のセットの対応位置にジャンプ
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
         if (!sliderRef.current) return;
@@ -160,7 +157,6 @@ export default function CaseStudies() {
         });
       }, 300);
     } else if (totalIndex >= cases.length * 2) {
-      // 最後のセット → 中央のセットの対応位置にジャンプ
       const positionInSet = totalIndex - cases.length * 2;
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
       scrollTimeoutRef.current = setTimeout(() => {
@@ -218,9 +214,8 @@ export default function CaseStudies() {
     sliderRef.current.scrollTo({ left: slideWidth * targetIndex, behavior: 'smooth' });
   };
 
-  // PC用自動スクロール関数
   const autoScrollPC = () => {
-    if (!sliderRef.current || isHoveringRef.current) return;
+    if (!sliderRef.current || isHoveringRef.current || !isInitializedRef.current) return;
     const card = sliderRef.current.querySelector('.case-item') as HTMLElement;
     if (!card) return;
     const gap = parseInt(window.getComputedStyle(sliderRef.current).gap) || 0;
@@ -246,37 +241,41 @@ export default function CaseStudies() {
     const pcSlider = sliderRef.current;
     const mobileSlider = mobileSliderRef.current;
 
-    // requestAnimationFrameを使って確実にレンダリング後に処理
     requestAnimationFrame(() => {
       if (pcSlider) {
+        // scrollBehaviorを確実にautoに設定してから初期位置を設定
+        pcSlider.style.scrollBehavior = 'auto';
         const card = pcSlider.querySelector('.case-item') as HTMLElement;
         if (card) {
           const gap = parseInt(window.getComputedStyle(pcSlider).gap) || 0;
           const slideWidth = card.offsetWidth + gap;
-          // 中央のセット（2番目のセット）の最初にセット
           pcSlider.scrollLeft = slideWidth * cases.length;
         }
         setCurrentSlidePC(0);
+        
+        // smoothに戻してからイベントリスナーを追加
         requestAnimationFrame(() => {
-          pcSlider.addEventListener('scroll', handlePCScroll);
+          if (pcSlider) {
+            pcSlider.style.scrollBehavior = 'smooth';
+            pcSlider.addEventListener('scroll', handlePCScroll);
+            // 初期化完了フラグを立てる（少し遅延させる）
+            setTimeout(() => {
+              isInitializedRef.current = true;
+            }, 500);
+          }
         });
       }
 
       if (mobileSlider) {
-        // snapを一時的に無効化
         mobileSlider.style.scrollSnapType = 'none';
-        
+        mobileSlider.style.scrollBehavior = 'auto';
         const slideWidth = mobileSlider.offsetWidth;
-        // 中央のセット（2番目のセット）の最初にセット
-        const targetScroll = slideWidth * cases.length;
-        mobileSlider.scrollLeft = targetScroll;
-        
-        // インジケーターを0に設定
+        mobileSlider.scrollLeft = slideWidth * cases.length;
         setCurrentSlide(0);
         
-        // snapを再度有効化してからイベントリスナーを追加
         requestAnimationFrame(() => {
           if (mobileSlider) {
+            mobileSlider.style.scrollBehavior = 'smooth';
             mobileSlider.style.scrollSnapType = 'x mandatory';
             requestAnimationFrame(() => {
               mobileSlider.addEventListener('scroll', handleMobileScroll);
@@ -302,16 +301,19 @@ export default function CaseStudies() {
     };
   }, []);
 
-  // PC自動スクロール開始
+  // PC自動スクロール開始（初期化完了後に開始）
   useEffect(() => {
     if (!sliderRef.current) return;
     
-    // 3秒ごとに自動スクロール
-    autoScrollIntervalRef.current = setInterval(() => {
-      autoScrollPC();
-    }, 3000);
+    // 初期化が完了してから自動スクロールを開始
+    const startDelay = setTimeout(() => {
+      autoScrollIntervalRef.current = setInterval(() => {
+        autoScrollPC();
+      }, 3000);
+    }, 1000); // 1秒遅延させて確実に初期化完了を待つ
 
     return () => {
+      clearTimeout(startDelay);
       if (autoScrollIntervalRef.current) {
         clearInterval(autoScrollIntervalRef.current);
       }
@@ -329,16 +331,14 @@ export default function CaseStudies() {
 
       {/* モバイル版 */}
       <section className="w-full md:hidden bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative', paddingLeft: '16px', paddingRight: '16px' }}>
-        {/* タイトル */}
         <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
           <SectionTitle title="導入事例" isMobile={false} />
         </div>
 
-        {/* 横スクロールカルーセル（モバイル） */}
         <div 
           ref={mobileSliderRef}
           className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
-          style={{ marginLeft: '-16px', marginRight: '-16px', paddingLeft: '16px', paddingRight: '16px', scrollBehavior: 'smooth' }}
+          style={{ marginLeft: '-16px', marginRight: '-16px', paddingLeft: '16px', paddingRight: '16px' }}
         >
           {extendedCases.map((caseItem, index) => (
             <div key={index} className="snap-center flex-shrink-0" style={{ width: 'calc(100vw - 32px)' }}>
@@ -353,7 +353,6 @@ export default function CaseStudies() {
           ))}
         </div>
 
-        {/* スライドインジケーター */}
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -384,17 +383,14 @@ export default function CaseStudies() {
       <section className="hidden md:block w-full bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative' }}>
         <div className="flex justify-center w-full">
           <div style={{ width: '100%', maxWidth: '1440px', paddingLeft: '120px', paddingRight: '120px' }}>
-            {/* タイトル */}
             <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
               <SectionTitle title="導入事例" isMobile={false} />
             </div>
 
-            {/* 横スクロールカルーセル */}
             <div 
               ref={sliderRef}
               className="flex gap-14 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-10"
               style={{ 
-                scrollBehavior: 'smooth',
                 paddingLeft: '3px',
                 paddingRight: '3px',
                 marginLeft: '-3px',
@@ -416,7 +412,6 @@ export default function CaseStudies() {
               ))}
             </div>
 
-            {/* スライドインジケーター（PC版） */}
             <div style={{
               display: 'flex',
               justifyContent: 'center',
