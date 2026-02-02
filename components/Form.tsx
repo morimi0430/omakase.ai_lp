@@ -46,14 +46,26 @@ export default function Form() {
 
   // 外部クリックでドロップダウンを閉じる
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+
+    if (isDropdownOpen) {
+      // 次のイベントループで登録することで、開くクリックと分離
+      const timerId = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchend', handleClickOutside);
+      }, 10);
+
+      return () => {
+        clearTimeout(timerId);
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('touchend', handleClickOutside);
+      };
+    }
+  }, [isDropdownOpen]);
 
   const handleInputChange = (field: keyof InquiryFormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -157,7 +169,15 @@ export default function Form() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative' }} ref={dropdownRef}>
         <label style={labelStyle}>お問い合わせ内容<span style={requiredStyle}>（必須）</span></label>
         <div
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          onTouchEnd={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsDropdownOpen(!isDropdownOpen);
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsDropdownOpen(!isDropdownOpen);
+          }}
           style={{ ...inputStyle, border: '1px solid #4D9FFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
         >
           <span style={{ color: formData.inquiryType === '選択してください。' ? '#A0A0A0' : '#000' }}>{formData.inquiryType}</span>
@@ -168,7 +188,23 @@ export default function Form() {
         {isDropdownOpen && (
           <div style={{ position: 'absolute', left: 0, right: 0, top: '100%', marginTop: '4px', background: '#FFF', border: '1px solid #E5E5E5', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', zIndex: 50, padding: '8px' }}>
             {menuItems.map((item, index) => (
-              <div key={index} onClick={() => { handleInputChange('inquiryType', item); setIsDropdownOpen(false); }} style={{ padding: '12px', cursor: 'pointer', fontSize: '14px', fontFamily: '"Noto Sans JP"' }} onMouseEnter={(e) => e.currentTarget.style.background = '#F5F5F5'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+              <div 
+                key={index}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleInputChange('inquiryType', item); 
+                  setIsDropdownOpen(false);
+                }}
+                onClick={(e) => { 
+                  e.stopPropagation();
+                  handleInputChange('inquiryType', item); 
+                  setIsDropdownOpen(false); 
+                }} 
+                style={{ padding: '12px', cursor: 'pointer', fontSize: '14px', fontFamily: '"Noto Sans JP"' }} 
+                onMouseEnter={(e) => e.currentTarget.style.background = '#F5F5F5'} 
+                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+              >
                 {item}
               </div>
             ))}

@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="flex md:contents items-center gap-[24px] md:gap-[40px]">
               {/* プライバシーポリシー */}
               <a 
-                href="https://www.omakase.ai/jp/privacy" 
+                href="https://www.omakase.ai/jp/register/privacy" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 text-sm font-medium hover:text-white transition-colors duration-200"
@@ -32,7 +32,7 @@ export default function Footer() {
 
               {/* 利用規約 */}
               <a 
-                href="https://www.omakase.ai/jp/terms"
+                href="https://www.omakase.ai/jp/register/terms"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 text-sm font-medium hover:text-white transition-colors duration-200"
