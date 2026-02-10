@@ -77,6 +77,8 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    {/* モバイル: 固定CTAの下に隠れないよう、フッター直後のスクロール余白 */}
+    <div className="footer-mobile-spacer md:hidden" aria-hidden />
     </>
   );
 }
