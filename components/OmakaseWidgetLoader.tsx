@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const MAIN_WIDGET_LOADER =
@@ -22,10 +22,11 @@ function isKaigoPath(path: string): boolean {
  * パスに応じて Omakase AI ウィジェットを1つだけ読み込む。
  * - /industries/kaigo → 介護用ウィジェット
  * - その他 → メイン用ウィジェット
- * localhost では 403 のため読み込まない。
+ * loader の URL が変わったときだけ差し替え（再レンダーで削除しない）。
  */
 export function OmakaseWidgetLoader() {
   const pathname = usePathname();
+  const injectedUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -35,12 +36,16 @@ export function OmakaseWidgetLoader() {
       return;
     }
 
-    // パスは URL を優先（直リンク・初回で usePathname が遅れる場合に対応）
     const path = window.location.pathname || pathname || "";
     const useKaigo = isKaigoPath(path);
     const loaderUrl = useKaigo ? KAIGO_WIDGET_LOADER : MAIN_WIDGET_LOADER;
 
-    // 既存のウィジェット読み込み用を削除してから差し替え
+    // 同じ URL を既に注入済みなら何もしない（メインの再レンダーで消えないようにする）
+    if (injectedUrlRef.current === loaderUrl) {
+      return;
+    }
+    injectedUrlRef.current = loaderUrl;
+
     const existingLoader = document.getElementById(LOADER_SCRIPT_ID);
     if (existingLoader) existingLoader.remove();
     document.querySelectorAll(`script[src*="cdn.omakase.ai/loader.min.js"]`).forEach((s) => s.remove());
@@ -60,6 +65,8 @@ export function OmakaseWidgetLoader() {
     document.head.appendChild(script);
 
     return () => {
+      // アンマウント時のみクリーンアップ（ページ離脱時）。pathname 変更時は ref で次回に差し替える
+      injectedUrlRef.current = null;
       document.getElementById(LOADER_SCRIPT_ID)?.remove();
       document.querySelectorAll(`script[src*="cdn.omakase.ai/loader.min.js"]`).forEach((s) => s.remove());
       document.getElementById(OMAKASE_SCRIPT_ID)?.remove();
