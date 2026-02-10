@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Container } from './Container';
 import { InquiryFormData } from '@/types/form';
 
 export default function Form() {
@@ -52,19 +51,18 @@ export default function Form() {
       }
     };
 
-    if (isDropdownOpen) {
-      // 次のイベントループで登録することで、開くクリックと分離
-      const timerId = setTimeout(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        document.addEventListener('touchend', handleClickOutside);
-      }, 10);
+    if (!isDropdownOpen) return;
 
-      return () => {
-        clearTimeout(timerId);
-        document.removeEventListener('mousedown', handleClickOutside);
-        document.removeEventListener('touchend', handleClickOutside);
-      };
-    }
+    const timerId = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchend', handleClickOutside);
+    }, 10);
+
+    return () => {
+      clearTimeout(timerId);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchend', handleClickOutside);
+    };
   }, [isDropdownOpen]);
 
   const handleInputChange = (field: keyof InquiryFormData, value: string | boolean) => {
@@ -242,20 +240,20 @@ export default function Form() {
 
   return (
     <>
-      <section className="w-full md:hidden bg-[#5004F5]" style={{ paddingTop: '60px', paddingBottom: '60px' }}>
-        <Container>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2 style={{ color: '#FFF', fontSize: '24px', fontWeight: 700 }}>お問い合わせ</h2>
-            <div style={{ height: '24px' }} /><div style={{ width: '44px', height: '4px', background: '#FFF' }} />
-            <div style={{ height: '60px' }} />
-            {renderFormFields(true)}
-          </div>
-        </Container>
+      {/* モバイル：About と同じく padding のみ、中身は中央 */}
+      <section className="w-full md:hidden bg-[#5004F5]" style={{ paddingTop: '60px', paddingBottom: '60px', paddingLeft: '16px', paddingRight: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+          <h2 style={{ color: '#FFF', fontSize: '24px', fontWeight: 700 }}>お問い合わせ</h2>
+          <div style={{ height: '24px' }} /><div style={{ width: '44px', height: '4px', background: '#FFF' }} />
+          <div style={{ height: '60px' }} />
+          {renderFormFields(true)}
+        </div>
       </section>
 
-      <section className="hidden md:block w-full bg-[#5004F5]" style={{ paddingTop: '66px', paddingBottom: '66px' }}>
-        <Container>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      {/* PC：About と同じ構造（flex + justify-center + max-w で中央配置） */}
+      <section className="hidden md:flex w-full justify-center bg-[#5004F5]" style={{ paddingTop: '66px', paddingBottom: '66px' }}>
+        <div className="w-full md:max-w-[1440px]" style={{ paddingLeft: '120px', paddingRight: '120px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             <h2 style={{ color: '#FFF', fontSize: '36px', fontWeight: 700 }}>お問い合わせ</h2>
             <div style={{ height: '24px' }} /><div style={{ width: '44px', height: '4px', background: '#FFF' }} />
             <div style={{ height: '80px' }} />
@@ -263,8 +261,19 @@ export default function Form() {
               {renderFormFields(false)}
             </div>
           </div>
-        </Container>
+        </div>
       </section>
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+

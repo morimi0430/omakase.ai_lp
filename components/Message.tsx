@@ -7,9 +7,9 @@ import ThreeBadges, { Badge } from "./ThreeBadges";
 export default function Message() {
   return (
     <section className="w-full bg-[linear-gradient(82deg,#f5f3ff_0%,#ddd6fe_100%)]">
-
+      <Container className="pb-0">
       {/* モバイル版 */}
-      <Container className="block md:hidden pb-0">
+      <div className="block md:hidden">
         {/* 60pxのスペース */}
         <div style={{ height: '60px' }} />
         <div className="flex flex-col items-center">
@@ -57,13 +57,12 @@ export default function Message() {
             />
           </div>
         </div>
-      </Container>
+      </div>
 
       {/* PC版 */}
       <div className="hidden md:block">
-        <div style={{ paddingTop: '60px' }}>
-          <div className="w-full flex justify-center">
-            <div className="w-full max-w-[1440px] px-8">
+        <div style={{ paddingTop: '60px' }} className="w-full flex justify-center">
+            <div className="w-full max-w-[1440px]">
               <div className="flex items-start gap-[41px] justify-center">
                 <div className="w-[619px] flex flex-col gap-10">
                   <div className="w-full">
@@ -279,9 +278,9 @@ export default function Message() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
+      </Container>
     </section>
   );
 }

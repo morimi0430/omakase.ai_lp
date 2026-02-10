@@ -9,7 +9,12 @@ interface UseCaseCardProps {
   profileTitle?: string;
   profileDescription?: string;
   isPC?: boolean;
+  /** カードの枠・背景のアクセント色。未指定時は紫系 */
+  accentColor?: string;
 }
+
+const DEFAULT_BORDER = '#C9B1FF';
+const DEFAULT_BG = '#FAF8FF';
 
 export default function UseCaseCard({
   icon,
@@ -18,8 +23,12 @@ export default function UseCaseCard({
   profileImage,
   profileTitle,
   profileDescription,
-  isPC = false
+  isPC = false,
+  accentColor
 }: UseCaseCardProps) {
+  const borderColor = accentColor ?? DEFAULT_BORDER;
+  const backgroundColor = accentColor ? '#ecfdf5' : DEFAULT_BG; // 緑時は薄い緑、未指定時は紫系
+
   if (isPC) {
     return (
       <div style={{
@@ -32,8 +41,8 @@ export default function UseCaseCard({
         flex: '1 0 0',
         alignSelf: 'stretch',
         borderRadius: '16px',
-        border: '1px solid #C9B1FF',
-        background: '#FAF8FF',
+        border: `1px solid ${borderColor}`,
+        background: backgroundColor,
         boxSizing: 'border-box'
       }}>
         {/* アイコン */}
@@ -180,8 +189,8 @@ export default function UseCaseCard({
       alignItems: 'center',
       alignSelf: 'stretch',
       borderRadius: '16px',
-      border: '1px solid #C9B1FF',
-      background: '#FAF8FF',
+      border: `1px solid ${borderColor}`,
+      background: backgroundColor,
       boxSizing: 'border-box',
       overflow: 'hidden',
       width: '100%',

@@ -4,18 +4,15 @@ import { useRef, useEffect, useState } from 'react';
 import SectionTitle from './SectionTitle';
 import CaseCard from './CaseStudiesCard';
 
-export default function CaseStudies() {
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const mobileSliderRef = useRef<HTMLDivElement>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const isHoveringRef = useRef(false);
-  const isInitializedRef = useRef(false);
+export type CaseStudyItem = {
+  company: string;
+  title: string;
+  image: string;
+  reasons: string[];
+  effects: string[];
+};
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentSlidePC, setCurrentSlidePC] = useState(0);
-
-  const cases = [
+const DEFAULT_CASES: CaseStudyItem[] = [
     {
       company: 'Medulla',
       title: '日本語音声でも、"販売員レベルの接客"ができました。',
@@ -90,6 +87,32 @@ export default function CaseStudies() {
     }
   ];
 
+interface CaseStudiesProps {
+  /** セクションタイトル。未指定時は「導入事例」 */
+  sectionTitle?: string;
+  /** 事例データ。未指定時はメインLP用デフォルト */
+  cases?: CaseStudyItem[];
+  /** カード内「理由」ブロックの見出し。未指定時は「導入の決め手」 */
+  reasonsLabel?: string;
+  /** カード内「効果」ブロックの見出し。未指定時は「導入効果」 */
+  effectsLabel?: string;
+  /** アクセント色（バッジ・ラベル・ドット）。未指定時は紫 */
+  accentColor?: string;
+}
+
+export default function CaseStudies(props?: CaseStudiesProps) {
+  const { sectionTitle = '導入事例', cases: casesProp, reasonsLabel, effectsLabel, accentColor } = props ?? {};
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const mobileSliderRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isHoveringRef = useRef(false);
+  const isInitializedRef = useRef(false);
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlidePC, setCurrentSlidePC] = useState(0);
+
+  const cases = casesProp ?? DEFAULT_CASES;
   const extendedCases = [...cases, ...cases, ...cases];
 
   const updateCurrentSlide = () => {
@@ -332,7 +355,7 @@ export default function CaseStudies() {
       {/* モバイル版 */}
       <section className="w-full md:hidden bg-white" style={{ paddingTop: '60px', paddingBottom: '60px', position: 'relative', paddingLeft: '16px', paddingRight: '16px' }}>
         <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
-          <SectionTitle title="導入事例" isMobile={false} />
+          <SectionTitle title={sectionTitle} isMobile={false} accentColor={accentColor} />
         </div>
 
         <div 
@@ -348,6 +371,9 @@ export default function CaseStudies() {
                 image={caseItem.image}
                 reasons={caseItem.reasons}
                 effects={caseItem.effects}
+                reasonsLabel={reasonsLabel}
+                effectsLabel={effectsLabel}
+                color={accentColor}
               />
             </div>
           ))}
@@ -368,7 +394,7 @@ export default function CaseStudies() {
                 width: currentSlide === index ? '32px' : '8px',
                 height: '8px',
                 borderRadius: '4px',
-                background: currentSlide === index ? '#5004F5' : '#E5E5E5',
+                background: currentSlide === index ? (accentColor ?? '#5004F5') : '#E5E5E5',
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
@@ -384,7 +410,7 @@ export default function CaseStudies() {
         <div className="flex justify-center w-full">
           <div style={{ width: '100%', maxWidth: '1440px', paddingLeft: '120px', paddingRight: '120px' }}>
             <div className="flex flex-col items-center" style={{ marginBottom: '80px' }}>
-              <SectionTitle title="導入事例" isMobile={false} />
+              <SectionTitle title={sectionTitle} isMobile={false} accentColor={accentColor} />
             </div>
 
             <div 
@@ -407,6 +433,9 @@ export default function CaseStudies() {
                     image={caseItem.image}
                     reasons={caseItem.reasons}
                     effects={caseItem.effects}
+                    reasonsLabel={reasonsLabel}
+                    effectsLabel={effectsLabel}
+                    color={accentColor}
                   />
                 </div>
               ))}
@@ -427,7 +456,7 @@ export default function CaseStudies() {
                     width: currentSlidePC === index ? '32px' : '8px',
                     height: '8px',
                     borderRadius: '4px',
-                    background: currentSlidePC === index ? '#5004F5' : '#E5E5E5',
+                    background: currentSlidePC === index ? (accentColor ?? '#5004F5') : '#E5E5E5',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease',

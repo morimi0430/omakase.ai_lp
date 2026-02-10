@@ -1,9 +1,35 @@
+"use client";
+
 import UseCaseCard from "./UseCaseCard";
 import Image from "next/image";
 
-export default function UseCases() {
-  // アイコンコンポーネント
-  const IconWrapper = ({ src, alt }: { src: string; alt: string }) => (
+export type UseCaseItem = {
+  icon?: React.ReactNode;
+  title: string;
+  description: string;
+  profileImage?: { src: string; alt: string };
+  profileTitle?: string;
+  profileDescription?: string;
+};
+
+interface UseCasesProps {
+  /** セクションタイトル。未指定時は「Omakase.ai活用例」。children 使用時は表示しない */
+  sectionTitle?: string;
+  /** カードデータ。未指定時はメインLP用デフォルト4件。children がある場合は未使用 */
+  items?: UseCaseItem[];
+  /** カードの枠・背景のアクセント色 */
+  accentColor?: string;
+  /** 中身を独自コンポーネントで渡す場合。指定時はタイトル＋カードの代わりにこれのみ表示（レイアウト・余白は活用例と同じ） */
+  children?: React.ReactNode;
+  /** children 使用時のセクションに渡す className（例: 余白・背景） */
+  sectionClassName?: string;
+  /** children 使用時のセクションに渡す style */
+  sectionStyle?: React.CSSProperties;
+}
+
+// アイコン用ラッパー（メインLP用）
+function IconWrapper({ src, alt }: { src: string; alt: string }) {
+  return (
     <div style={{
       width: '64px',
       height: '64px',
@@ -25,10 +51,127 @@ export default function UseCases() {
           width: '100%',
           height: '100%',
           objectFit: 'contain'
-        }}
-      />
+      }}
+    />
     </div>
   );
+}
+
+export default function UseCases(props?: UseCasesProps) {
+  const { sectionTitle = "Omakase.ai活用例", items: itemsProp, accentColor, children, sectionClassName, sectionStyle } = props ?? {};
+  const useChildren = Boolean(children);
+  const useCustomContent = !useChildren && Boolean(itemsProp && itemsProp.length > 0);
+  const items = itemsProp ?? [];
+
+  const titleStyle = {
+    alignSelf: 'stretch' as const,
+    color: '#000',
+    textAlign: 'center' as const,
+    fontFamily: '"Noto Sans JP"',
+    fontSize: '24px',
+    fontStyle: 'normal' as const,
+    fontWeight: 700,
+    lineHeight: 'normal' as const,
+    margin: 0,
+    marginBottom: '40px'
+  };
+
+  const defaultSectionStyle: React.CSSProperties = {
+    paddingTop: '24px',
+    paddingBottom: '24px',
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    boxSizing: 'border-box'
+  };
+
+  /* 中身を独自（children）で渡す場合：レイアウトだけ活用例のセクションを流用（PCはメインLPと同じ幅・余白） */
+  if (useChildren) {
+    const resolvedStyle = sectionStyle ?? defaultSectionStyle;
+    const desktopSectionStyle: React.CSSProperties = {
+      paddingBottom: '120px',
+      paddingTop: resolvedStyle.paddingTop ?? '24px',
+      paddingLeft: 0,
+      paddingRight: 0,
+      background: resolvedStyle.background,
+      boxSizing: 'border-box'
+    };
+    return (
+      <>
+        <section className={`w-full md:hidden ${sectionClassName ?? ''}`.trim()} style={resolvedStyle}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {children}
+          </div>
+          <div style={{ height: '60px' }} />
+        </section>
+        <section className={`hidden md:flex w-full justify-center ${sectionClassName ?? ''}`.trim()} style={desktopSectionStyle}>
+          <div className="w-full md:max-w-[1440px]" style={{ paddingRight: '120px', paddingLeft: '120px' }}>
+            <div style={{ display: 'flex', paddingTop: '20px', flexDirection: 'column', alignItems: 'flex-start', gap: '60px', alignSelf: 'stretch' }}>
+              {children}
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  if (useCustomContent) {
+    const chunk = <T,>(arr: T[], size: number): T[][] => {
+      const out: T[][] = [];
+      for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+      return out;
+    };
+    const rows = chunk(items, 2);
+    return (
+      <>
+        {/* モバイル版（カスタム） */}
+        <section className="w-full md:hidden" style={defaultSectionStyle}>
+          <h2 style={titleStyle}>{sectionTitle}</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {items.map((item, i) => (
+              <UseCaseCard
+                key={i}
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+                profileImage={item.profileImage}
+                profileTitle={item.profileTitle}
+                profileDescription={item.profileDescription}
+                accentColor={accentColor}
+              />
+            ))}
+          </div>
+          <div style={{ height: '60px' }} />
+        </section>
+        {/* PC版（カスタム） */}
+        <section className="hidden md:flex w-full justify-center" style={{ paddingBottom: '120px' }}>
+          <div className="w-full md:max-w-[1440px]" style={{ paddingRight: '120px', paddingLeft: '120px' }}>
+            <div style={{ display: 'flex', paddingTop: '20px', flexDirection: 'column', alignItems: 'flex-start', gap: '60px', alignSelf: 'stretch' }}>
+              <h2 style={{ ...titleStyle, marginBottom: 0, padding: 0 }}>{sectionTitle}</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', alignSelf: 'stretch' }}>
+                {rows.map((row, ri) => (
+                  <div key={ri} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', alignSelf: 'stretch' }}>
+                    {row.map((item, i) => (
+                      <UseCaseCard
+                        key={i}
+                        isPC={true}
+                        icon={item.icon}
+                        title={item.title}
+                        description={item.description}
+                        profileImage={item.profileImage}
+                        profileTitle={item.profileTitle}
+                        profileDescription={item.profileDescription}
+                        accentColor={accentColor}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
 
   return (
     <>

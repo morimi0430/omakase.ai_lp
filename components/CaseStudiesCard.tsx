@@ -4,26 +4,37 @@ interface CaseCardProps {
     image: string;
     reasons: string[];
     effects: string[];
+    /** 理由ブロックの見出し。未指定時は「導入の決め手」 */
+    reasonsLabel?: string;
+    /** 効果ブロックの見出し。未指定時は「導入効果」 */
+    effectsLabel?: string;
     color?: string;
     isInitialTarget?: boolean;
     targetRef?: React.RefObject<HTMLDivElement | null>;
   }
   
-  export default function CaseCard({ 
-    company, 
-    title, 
-    image, 
-    reasons, 
+  const ACCENT_DEFAULT = '#6017FF';
+
+  export default function CaseCard({
+    company,
+    title,
+    image,
+    reasons,
     effects,
+    reasonsLabel = '導入の決め手',
+    effectsLabel = '導入効果',
+    color = ACCENT_DEFAULT,
     isInitialTarget,
-    targetRef 
+    targetRef
   }: CaseCardProps) {
+    const accent = color ?? ACCENT_DEFAULT;
+
     const renderTitle = () => {
       const regex = /"([^"]+)"/g;
       const parts = [];
       let lastIndex = 0;
       let match;
-  
+
       while ((match = regex.exec(title)) !== null) {
         if (match.index > lastIndex) {
           parts.push(
@@ -33,13 +44,13 @@ interface CaseCardProps {
           );
         }
         parts.push(
-          <span key={`quote-${match.index}`} style={{ color: '#6017FF' }}>
-            "{match[1]}"
+          <span key={`quote-${match.index}`} style={{ color: accent }}>
+            &quot;{match[1]}&quot;
           </span>
         );
         lastIndex = regex.lastIndex;
       }
-  
+
       if (lastIndex < title.length) {
         parts.push(
           <span key={`text-${lastIndex}`}>
@@ -47,12 +58,12 @@ interface CaseCardProps {
           </span>
         );
       }
-  
+
       return parts;
     };
-  
+
     return (
-      <div 
+      <div
         ref={isInitialTarget ? targetRef : null}
         className="case-item snap-center w-full md:min-w-[363.67px] md:w-[363.67px]"
         style={{
@@ -76,7 +87,7 @@ interface CaseCardProps {
             paddingBottom: '4px',
             paddingLeft: '12px',
             borderRadius: '300px',
-            background: '#6017FF',
+            background: accent,
             color: '#FFF',
             fontFamily: '"Noto Sans JP"',
             fontSize: '12px',
@@ -87,8 +98,8 @@ interface CaseCardProps {
           }}>
             {company}
           </span>
-          
-          <h3 
+
+          <h3
             className="w-full px-2"
             style={{
               fontFamily: '"Noto Sans JP"',
@@ -102,9 +113,9 @@ interface CaseCardProps {
             {renderTitle()}
           </h3>
         </div>
-  
+
         {/* 写真 */}
-        <img 
+        <img
           src={image}
           className="w-full"
           style={{
@@ -114,26 +125,26 @@ interface CaseCardProps {
           }}
           alt={company}
         />
-  
-        {/* 下部（導入の決め手・効果） */}
+
+        {/* 下部（理由・効果ブロック） */}
         <div className="w-full" style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '16px'
         }}>
-          {/* 導入の決め手 */}
+          {/* 理由ブロック */}
           <div className="w-full px-3" style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '12px'
           }}>
             <p style={{
-              color: '#6017FF',
+              color: accent,
               fontFamily: '"Noto Sans JP"',
               fontSize: '12px',
               fontWeight: 700
             }}>
-              導入の決め手
+              {reasonsLabel}
             </p>
             <ul style={{
               display: 'flex',
@@ -156,7 +167,7 @@ interface CaseCardProps {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#6017FF',
+                    background: accent,
                     marginTop: '6px',
                     flexShrink: 0
                   }} />
@@ -165,20 +176,20 @@ interface CaseCardProps {
               ))}
             </ul>
           </div>
-  
-          {/* 導入効果 */}
+
+          {/* 効果ブロック */}
           <div className="w-full px-3" style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '12px'
           }}>
             <p style={{
-              color: '#6017FF',
+              color: accent,
               fontFamily: '"Noto Sans JP"',
               fontSize: '12px',
               fontWeight: 700
             }}>
-              導入効果
+              {effectsLabel}
             </p>
             <ul style={{
               display: 'flex',
@@ -201,7 +212,7 @@ interface CaseCardProps {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#6017FF',
+                    background: accent,
                     marginTop: '6px',
                     flexShrink: 0
                   }} />

@@ -22,7 +22,7 @@ function MobileCTA() {
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
       <Hero />
       <About />

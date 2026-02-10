@@ -5,10 +5,14 @@ import React, { useState } from 'react';
 interface FAQItemProps {
   question: string;
   answer: string;
+  /** Qラベル・枠のアクセント色。未指定時は紫 */
+  accentColor?: string;
 }
 
-export default function FAQItem({ question, answer }: FAQItemProps) {
+export default function FAQItem({ question, answer, accentColor }: FAQItemProps) {
   const [isActive, setIsActive] = useState(false);
+  const borderColor = accentColor ?? '#c4b5fd'; // violet-200
+  const labelColor = accentColor ?? '#6d28d9'; // violet-700
 
   const handleToggle = () => {
     setIsActive(!isActive);
@@ -16,22 +20,25 @@ export default function FAQItem({ question, answer }: FAQItemProps) {
 
   return (
     <div 
-      className={`bg-white cursor-pointer border transition-all w-full md:w-[1000px] ${
-        isActive ? 'border-violet-200' : 'border-white hover:border-violet-200'
-      }`}
+      className="bg-white cursor-pointer border transition-all w-full md:w-[1000px]"
       style={{ 
         minHeight: '62px',
         paddingTop: '16px',
         paddingRight: '20px',
         paddingBottom: '16px',
         paddingLeft: '20px',
-        borderRadius: '16px'
+        borderRadius: '16px',
+        borderWidth: '1px',
+        borderColor: isActive ? borderColor : 'transparent',
+        borderStyle: 'solid'
       }}
+      onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.borderColor = borderColor; }}
+      onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.borderColor = 'transparent'; }}
       onClick={handleToggle}
     >
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4 flex-1">
-          <div className="text-violet-700 text-xl font-bold leading-loose">Q</div>
+          <div className="text-xl font-bold leading-loose" style={{ color: labelColor }}>Q</div>
           <div className="text-black text-base font-medium flex-1">{question || '質問がありません'}</div>
         </div>
         <div className="relative w-6 h-6 flex items-center justify-center flex-shrink-0 ml-4">

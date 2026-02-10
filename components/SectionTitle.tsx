@@ -1,9 +1,15 @@
 interface SectionTitleProps {
   title: string;
   isMobile?: boolean;
+  /** タイトル下の線の色。未指定時は紫グラデーション */
+  accentColor?: string;
 }
 
-export default function SectionTitle({ title, isMobile = true }: SectionTitleProps) {
+export default function SectionTitle({ title, isMobile = true, accentColor }: SectionTitleProps) {
+  const lineStyle = accentColor
+    ? { width: '44px' as const, height: '4px' as const, background: accentColor }
+    : { width: '44px' as const, height: '4px' as const, background: 'linear-gradient(103deg, #735AFF 8.54%, #BA78FB 90.69%)' as const };
+
   return (
     <>
       {/* タイトル */}
@@ -28,11 +34,7 @@ export default function SectionTitle({ title, isMobile = true }: SectionTitlePro
         justifyContent: 'center',
         width: '100%'
       }}>
-        <div style={{
-          width: '44px',
-          height: '4px',
-          background: 'linear-gradient(103deg, #735AFF 8.54%, #BA78FB 90.69%)'
-        }} />
+        <div style={lineStyle} />
       </div>
     </>
   );

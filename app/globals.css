@@ -14,6 +14,40 @@
   box-sizing: border-box;
 }
 
+/* html/body に overflow-x: hidden を付けない（iOS 等で縦スクロールが止まることがある） */
+html {
+  min-height: 100%;
+}
+
+/* ヘッダー用 padding（* のリセットより後に定義して確実に効かせる） */
+.lp-header {
+  padding: 16px;
+}
+@media (min-width: 768px) {
+  .lp-header {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
+/* フッター内余白（* のリセットより後に定義）。左右は .lp-container でヘッダーに合わせる。下は1.5remとsafe-areaの大きい方 */
+.footer-inner {
+  padding-top: 2rem;
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+}
+
+/* Container 用 左右余白（* のリセットより後に定義）モバイル 16px / PC 120px */
+.lp-container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media (min-width: 768px) {
+  .lp-container {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
 body {
   font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;

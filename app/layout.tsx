@@ -57,22 +57,24 @@ export default function RootLayout({
         
         {children}
         
-        {/* Omakase.ai チャットウィジェット */}
-        <Script
-          id="omakase-widget"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,o,f,js,fjs){
-                w['OmakaseAIWidget']=o;w[o]=w[o]||function(){(w[o].q=w[o].q||[]).push(arguments)};
-                js=d.createElement(s),fjs=d.getElementsByTagName(s)[0];
-                js.id=o;js.src=f;js.async=1;
-                if(fjs){fjs.parentNode.insertBefore(js,fjs);}
-                else{d.head.appendChild(js);}
-              }(window,document,'script','OmakaseAI','https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_-LH8h-LAMmQrbZC02FkjeBkFlVXMSMbfz2xXGAbQewylhLITikHOxV4AcpYd9vNB&_=1769417340779'));
-            `,
-          }}
-        />
+        {/* Omakase.ai チャットウィジェット（本番のみ読み込み。開発時はドメイン未許可で403になるため省略） */}
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            id="omakase-widget"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,o,f,js,fjs){
+                  w['OmakaseAIWidget']=o;w[o]=w[o]||function(){(w[o].q=w[o].q||[]).push(arguments)};
+                  js=d.createElement(s),fjs=d.getElementsByTagName(s)[0];
+                  js.id=o;js.src=f;js.async=1;
+                  if(fjs){fjs.parentNode.insertBefore(js,fjs);}
+                  else{d.head.appendChild(js);}
+                }(window,document,'script','OmakaseAI','https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_-LH8h-LAMmQrbZC02FkjeBkFlVXMSMbfz2xXGAbQewylhLITikHOxV4AcpYd9vNB&_=1769417340779'));
+              `,
+            }}
+          />
+        )}
       </body>
     </html>
   );

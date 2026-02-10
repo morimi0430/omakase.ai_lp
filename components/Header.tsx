@@ -3,12 +3,43 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Container } from "./Container";
+import { usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
+import type { IndustryHeaderImages } from "@/lib/industries";
+import { KAIGO_COLORS, KAIGO_CTA_ARROWS } from "./industries/kaigo/constants";
 
-export default function Header() {
+type ButtonTheme = "default" | "green";
+
+interface HeaderProps {
+  /** 業界LP用ロゴ・ファビコン差し替え */
+  imageOverrides?: IndustryHeaderImages;
+  /** 業界LP用ヘッダー右側テキスト（例: カイゴテンショク） */
+  rightTitle?: string;
+  /** 介護LPのとき "green" を指定。未指定は紫のメインLP */
+  buttonTheme?: ButtonTheme;
+}
+
+const DEFAULT_LOGO_PC = "/images/pc/header_logo.png";
+const DEFAULT_LOGO_MOBILE = "/images/mobile/header_logo_mobile.png";
+const DEFAULT_FAVICON = "/images/pc/fabicon.png";
+
+export default function Header({
+  imageOverrides,
+  rightTitle,
+  buttonTheme = "default",
+}: HeaderProps) {
   const [showMobileCTA, setShowMobileCTA] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+  const showNotice = pathname !== "/" && pathname;
+
+  const isGreen = buttonTheme === "green";
+  const arrowOutline = isGreen ? KAIGO_CTA_ARROWS.outline : "/images/pc/arrow_white.png";
+  const arrowFilled = isGreen ? KAIGO_CTA_ARROWS.filled : "/images/pc/arrow_purple.png";
+  const primaryColor = isGreen ? KAIGO_COLORS.primary : "#5004F5";
+  const primaryGradient = isGreen
+    ? `linear-gradient(310deg, ${KAIGO_COLORS.primary} 44.35%, ${KAIGO_COLORS.primaryLight} 86.86%)`
+    : "linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,12 +70,13 @@ export default function Header() {
 
   return (
     <>
-      <header className="md:fixed md:top-0 md:left-0 md:right-0 md:z-50 h-20 w-full bg-white flex justify-center">
-        <Container className="h-full flex items-center justify-center w-full md:max-w-[1440px]">
+      <div className="md:fixed md:top-0 md:left-0 md:right-0 md:z-50 w-full bg-white">
+        <header className="h-20 w-full flex justify-center lp-header">
+          <div className="h-full flex items-center justify-center w-full md:max-w-[1440px]">
           {/* モバイル版 */}
           <div className="flex md:hidden w-full">
             <img
-              src="/images/mobile/header_logo_mobile.png"
+              src={imageOverrides?.logoMobile ?? DEFAULT_LOGO_MOBILE}
               alt="Omakase Logo"
               style={{ width: '300px', height: 'auto', flexShrink: 0 }}
             />
@@ -54,20 +86,27 @@ export default function Header() {
           <div className="hidden md:flex w-full justify-between items-center">
             {/* ロゴエリア */}
             <div className="flex items-center gap-2 flex-shrink-0">
+              {!imageOverrides?.hideFavicon && (
+                <Image
+                  src={imageOverrides?.faviconPc ?? DEFAULT_FAVICON}
+                  alt="Omakase Icon"
+                  width={32}
+                  height={32}
+                  className="flex-shrink-0 aspect-square"
+                />
+              )}
               <Image
-                src="/images/pc/fabicon.png"
-                alt="Omakase Icon"
-                width={32}
-                height={32}
-                className="flex-shrink-0 aspect-square"
-              />
-              <Image
-                src="/images/pc/header_logo.png"
+                src={imageOverrides?.logoPc ?? DEFAULT_LOGO_PC}
                 alt="Omakase Logo"
                 width={160}
                 height={22}
                 className="flex-shrink-0 aspect-[80/11]"
               />
+              {rightTitle && (
+                <span className="text-base font-bold text-neutral-800 ml-2">
+                  {rightTitle}
+                </span>
+              )}
             </div>
 
             {/* ボタンエリア */}
@@ -86,12 +125,13 @@ export default function Header() {
                 <CTAButton
                   text="資料請求はこちら"
                   backgroundColor="#FFF"
-                  textGradient={true}
-                  iconSrc="/images/pc/arrow_white.png"
+                  textGradient={!isGreen}
+                  textColor={isGreen ? primaryColor : undefined}
+                  iconSrc={arrowOutline}
                   style={{
                     padding: '10px 24px',
                     height: '48px',
-                    border: '1px solid #5004F5',
+                    border: `1px solid ${primaryColor}`,
                     boxShadow: 'none',
                     fontSize: '14px'
                   }}
@@ -117,12 +157,12 @@ export default function Header() {
                   backgroundColor="transparent"
                   textGradient={false}
                   textColor="#FFF"
-                  iconSrc="/images/pc/arrow_purple.png"
+                  iconSrc={arrowFilled}
                   style={{
                     padding: '10px 24px',
                     height: '48px',
                     border: 'none',
-                    background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+                    background: primaryGradient,
                     boxShadow: 'none',
                     fontSize: '14px'
                   }}
@@ -131,29 +171,50 @@ export default function Header() {
               </Link>
             </div>
           </div>
-        </Container>
-      </header>
+        </div>
+        </header>
+        {/* 導入紹介サイト告知（メイン以外）：PCはヘッダーと一体。モバイルでは非表示（スクロール時は下の固定告知のみ表示） */}
+        {showNotice && (
+          <div
+            className="hidden md:block w-full text-center py-2 text-sm font-medium text-neutral-600 bg-amber-50 border-b border-amber-200/80"
+            role="status"
+            aria-label="導入紹介サイトである旨の告知"
+          >
+            ここはOmakase.aiの導入紹介サイトです
+          </div>
+        )}
+      </div>
+      {/* PC用：固定ヘッダー＋告知分のスペーサー（告知あり 120px / なし 80px） */}
+      <div className={showNotice ? "h-0 md:h-[7.5rem]" : "h-0 md:h-20"} aria-hidden />
 
-      {/* モバイル専用：スクロール時のCTA */}
+      {/* モバイル専用：スクロール時のCTA ＋ 告知をひと塊でスライド */}
       <div 
         className={`
           fixed top-0 left-0 right-0 z-50 
           md:hidden
           transition-transform duration-300
+          flex flex-col
           ${showMobileCTA ? 'translate-y-0' : '-translate-y-full'}
         `}
         style={{
-          display: 'flex',
           width: '100%',
-          height: '72px',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          background: 'rgba(255, 255, 255, 0.40)',
-          backdropFilter: 'blur(10px)',
           boxSizing: 'border-box'
         }}
       >
+        {/* CTAボタンエリア */}
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+            height: '72px',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            background: 'rgba(255, 255, 255, 0.40)',
+            backdropFilter: 'blur(10px)',
+            boxSizing: 'border-box'
+          }}
+        >
         <div
           style={{
             display: 'flex',
@@ -184,13 +245,13 @@ export default function Header() {
                 alignItems: 'center',
                 gap: '6px',
                 borderRadius: '300px',
-                border: '1px solid #5004F5',
+                border: `1px solid ${primaryColor}`,
                 background: '#FFF',
                 boxShadow: 'none',
                 fontSize: '13px',
                 fontFamily: '"Noto Sans JP"',
                 fontWeight: 700,
-                color: '#6017FF',
+                color: primaryColor,
                 width: '100%',
                 boxSizing: 'border-box',
                 cursor: 'pointer',
@@ -200,7 +261,7 @@ export default function Header() {
             >
               <span>資料請求はこちら</span>
               <img 
-                src="/images/pc/arrow_white.png" 
+                src={arrowOutline} 
                 alt="" 
                 style={{ width: '20px', height: '20px', flexShrink: 0 }}
               />
@@ -229,7 +290,7 @@ export default function Header() {
                 gap: '10px',
                 borderRadius: '300px',
                 border: 'none',
-                background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+                background: primaryGradient,
                 boxShadow: 'none',
                 fontSize: '14px',
                 fontFamily: '"Noto Sans JP"',
@@ -244,13 +305,24 @@ export default function Header() {
             >
               <span>無料で始める</span>
               <img 
-                src="/images/pc/arrow_purple.png" 
+                src={arrowFilled} 
                 alt="" 
                 style={{ width: '20px', height: '20px', flexShrink: 0 }}
               />
             </Link>
           </div>
         </div>
+        </div>
+        {/* 告知：CTAに隙間なくくっつける（メイン以外のみ） */}
+        {showNotice && (
+          <div
+            className="w-full text-center py-2 text-sm font-medium text-neutral-600 bg-amber-50 border-b border-amber-200/80 shrink-0"
+            role="status"
+            aria-label="導入紹介サイトである旨の告知"
+          >
+            ここはOmakase.aiの導入紹介サイトです
+          </div>
+        )}
       </div>
     </>
   );

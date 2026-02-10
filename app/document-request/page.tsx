@@ -20,7 +20,6 @@ export default function DocumentRequestPage() {
           margin: '0 auto'
         }}>
           <DocumentRequestHeader />
-
           {/* フォーム */}
           <div style={{
             width: '100%',
@@ -49,7 +48,6 @@ export default function DocumentRequestPage() {
           margin: '0 auto'
         }}>
           <DocumentRequestHeader isMobile />
-
           {/* フォーム */}
           <DocumentRequestForm isMobile />
         </div>
