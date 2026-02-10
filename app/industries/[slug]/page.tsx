@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Container } from "@/components/Container";
+import { OmakaseWidgetScript } from "@/components/OmakaseWidgetScript";
 import { getIndustryBySlug, getAllIndustrySlugs } from "@/lib/industries";
 import { getIndustryLP } from "@/components/industries";
 
@@ -31,7 +32,12 @@ export default async function IndustryPage({ params }: Props) {
 
   const IndustryLP = getIndustryLP(slug);
   if (IndustryLP) {
-    return <IndustryLP industry={industry} />;
+    return (
+      <>
+        {slug === "kaigo" && <OmakaseWidgetScript />}
+        <IndustryLP industry={industry} />
+      </>
+    );
   }
 
   return (

@@ -42,7 +42,7 @@ export default function ThankYouPage() {
 
     // モバイルの場合は直接HubSpotページを開く
     if (isMobile) {
-      window.open('https://meetings-na2.hubspot.com/misaki-mori?embed=false', '_blank');
+      window.open('https://meetings-na2.hubspot.com/marino-kozaka?embed=false', '_blank');
     } else {
       // PCの場合はモーダルを開く
       setIsModalOpen(true);
@@ -422,7 +422,7 @@ export default function ThankYouPage() {
             }}>
               <div 
                 className="meetings-iframe-container" 
-                data-src="https://meetings-na2.hubspot.com/misaki-mori?embed=true"
+                data-src="https://meetings-na2.hubspot.com/marino-kozaka?embed=true"
                 style={{
                   minHeight: isMobile ? '500px' : '600px',
                   height: '100%',
