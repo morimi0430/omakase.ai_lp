@@ -176,7 +176,7 @@ export default function Form() {
             e.stopPropagation();
             setIsDropdownOpen(!isDropdownOpen);
           }}
-          style={{ ...inputStyle, border: '1px solid #4D9FFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+          style={{ ...inputStyle, border: isDropdownOpen ? '1px solid #4D9FFF' : '1px solid #E5E5E5', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
         >
           <span style={{ color: formData.inquiryType === '選択してください。' ? '#A0A0A0' : '#000' }}>{formData.inquiryType}</span>
           <svg style={{ width: '24px', height: '24px', transition: 'transform 0.3s', transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} viewBox="0 0 24 24" fill="none" stroke="#6C6C6C" strokeWidth="2">
