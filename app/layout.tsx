@@ -4,9 +4,6 @@ import Script from "next/script";
 import { OmakaseWidgetLoader } from "@/components/OmakaseWidgetLoader";
 import "./globals.css";
 
-const MAIN_WIDGET_LOADER_URL =
-  "https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_-LH8h-LAMmQrbZC02FkjeBkFlVXMSMbfz2xXGAbQewylhLITikHOxV4AcpYd9vNB&_=1769417340779";
-
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -61,14 +58,7 @@ export default function RootLayout({
         
         {children}
         
-        {/* メイン用ウィジェットはレイアウトで読み込み（階層と同じ扱い）。介護時だけクライアントで差し替え。localhostでは403のため本番のみ */}
-        {process.env.NODE_ENV === "production" && (
-          <Script
-            id="omakase-main-widget"
-            src={MAIN_WIDGET_LOADER_URL}
-            strategy="afterInteractive"
-          />
-        )}
+        {/* Omakase.ai ウィジェット（パスでメイン/介護を切り替え。localhostでは403のため読み込まない） */}
         <OmakaseWidgetLoader />
       </body>
     </html>
