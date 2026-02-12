@@ -91,6 +91,16 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
       });
 
       if (response.ok) {
+        // GTM dataLayer に送信（トリガー名 'form_submit_document_request' と一致）
+        if (typeof window !== 'undefined') {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'form_submit_document_request',
+            form_type: 'document_request',
+            company: formData.company,
+            department: formData.department,
+          });
+        }
         // GA4イベント送信
         if (typeof window !== 'undefined' && window.gtag) {
           window.gtag('event', 'form_submit_document_request', {
@@ -99,7 +109,7 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
             department: formData.department
           });
         }
-        
+
         // サンクスページに遷移
         router.push('/document-request/thank-you');
       } else {
