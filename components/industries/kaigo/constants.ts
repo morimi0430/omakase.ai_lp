@@ -11,6 +11,9 @@ export const KAIGO_COLORS = {
   textMuted: "#666",
 } as const;
 
+/** 「相談する」ボタンの遷移先（資料請求・相談フォーム） */
+export const KAIGO_LISTEN_URL = "/document-request";
+
 /** 介護LP用 CTA 矢印画像（資料請求＝アウトライン用・無料で始める＝塗り用） */
 export const KAIGO_CTA_ARROWS = {
   /** 白背景ボタン用（資料請求はこちら） */

@@ -27,12 +27,17 @@ const KAIGO_CASE_STUDIES: CaseStudyItem[] = CASE_VOICE_ITEMS.map(toCaseStudyItem
 
 export function KaigoCaseVoiceSection() {
   return (
-    <CaseStudies
-      sectionTitle="転職者の声"
-      cases={KAIGO_CASE_STUDIES}
-      reasonsLabel="選んだ理由"
-      effectsLabel="成果"
-      accentColor={KAIGO_COLORS.primary}
-    />
+    <>
+      <CaseStudies
+        sectionTitle="転職者の声"
+        cases={KAIGO_CASE_STUDIES}
+        reasonsLabel="選んだ理由"
+        effectsLabel="成果"
+        accentColor={KAIGO_COLORS.primary}
+      />
+      <p className="text-sm text-center text-gray-600 mt-2" style={{ maxWidth: "720px", marginLeft: "auto", marginRight: "auto" }}>
+        ※転職者の声はOmakase.ai導入エージェントの事例イメージです。当サイトでは求人紹介は行っておりません。
+      </p>
+    </>
   );
 }

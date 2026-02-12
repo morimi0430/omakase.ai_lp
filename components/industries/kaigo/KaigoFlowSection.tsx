@@ -16,7 +16,7 @@ const FLOW_STEPS = [
   {
     step: "2",
     title: "ヒアリング・紹介",
-    body: "希望エリア・働き方・給与をヒアリングし、条件に合う求人を紹介。非公開求人もあり。",
+    body: "希望エリア・働き方・給与をヒアリングし、条件に合う求人を紹介する流れ（Omakase.ai導入エージェントの事例）。当サイトでは求人紹介は行っておりません。",
     image: "/images/industries/kaigo/flow_hearing.jpg",
     imageAlt: "希望に合わせた紹介",
   },

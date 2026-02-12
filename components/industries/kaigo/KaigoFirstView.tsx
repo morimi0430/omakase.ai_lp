@@ -6,7 +6,7 @@ import { KAIGO_COLORS } from "./constants";
 const FV_BENEFIT_ITEMS = [
   { text: "未経験・無資格でもOK", accent: "OK" },
   { text: "面接対策・同行フォロー", accent: "フォロー" },
-  { text: "月給33万円以上の求人多数", accent: "33万円以上" },
+  { text: "事例として求人イメージを掲載", accent: "求人イメージ" },
   { text: "週休2日・残業少なめ", accent: "週休2日" },
 ] as const;
 
