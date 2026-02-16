@@ -21,7 +21,7 @@ interface HeaderProps {
 
 const DEFAULT_LOGO_PC = "/images/pc/header_logo.png";
 const DEFAULT_LOGO_MOBILE = "/images/mobile/header_logo_mobile.png";
-const DEFAULT_FAVICON = "/images/pc/fabicon.png";
+const DEFAULT_FAVICON = "/images/pc/favicon.png";
 
 export default function Header({
   imageOverrides,
