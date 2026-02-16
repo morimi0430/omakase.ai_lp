@@ -94,7 +94,6 @@ interface CTAButtonProps {
           borderRadius: '300px',
           border: '1px solid #EF96FF',
           background: backgroundColor,
-          boxShadow: '0 6px 14px 0 rgba(96, 23, 255, 0.20)',
           cursor: 'pointer',
           boxSizing: 'border-box',
           whiteSpace: 'nowrap',

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
 import type { IndustryHeaderImages } from "@/lib/industries";
 import { KAIGO_COLORS, KAIGO_CTA_ARROWS } from "./industries/kaigo/constants";
@@ -30,9 +29,6 @@ export default function Header({
 }: HeaderProps) {
   const [showMobileCTA, setShowMobileCTA] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const pathname = usePathname();
-  const showNotice = pathname !== "/" && pathname;
-
   const isGreen = buttonTheme === "green";
   const arrowOutline = isGreen ? KAIGO_CTA_ARROWS.outline : "/images/pc/arrow_white.png";
   const arrowFilled = isGreen ? KAIGO_CTA_ARROWS.filled : "/images/pc/arrow_purple.png";
@@ -173,19 +169,9 @@ export default function Header({
           </div>
         </div>
         </header>
-        {/* 導入紹介サイト告知（メイン以外）：PCはヘッダーと一体。モバイルでは非表示（スクロール時は下の固定告知のみ表示） */}
-        {showNotice && (
-          <div
-            className="hidden md:block w-full text-center py-2 text-sm font-medium text-neutral-600 bg-amber-50 border-b border-amber-200/80"
-            role="status"
-            aria-label="導入紹介サイトである旨の告知"
-          >
-            ここはOmakase.aiの導入紹介サイトです
-          </div>
-        )}
       </div>
-      {/* PC用：固定ヘッダー＋告知分のスペーサー（告知あり 120px / なし 80px） */}
-      <div className={showNotice ? "h-0 md:h-[7.5rem]" : "h-0 md:h-20"} aria-hidden />
+      {/* PC用：固定ヘッダー分のスペーサー */}
+      <div className="h-0 md:h-20" aria-hidden />
 
       {/* モバイル専用：スクロール時のCTA ＋ 告知をひと塊でスライド */}
       <div 
@@ -313,16 +299,6 @@ export default function Header({
           </div>
         </div>
         </div>
-        {/* 告知：CTAに隙間なくくっつける（メイン以外のみ） */}
-        {showNotice && (
-          <div
-            className="w-full text-center py-2 text-sm font-medium text-neutral-600 bg-amber-50 border-b border-amber-200/80 shrink-0"
-            role="status"
-            aria-label="導入紹介サイトである旨の告知"
-          >
-            ここはOmakase.aiの導入紹介サイトです
-          </div>
-        )}
       </div>
     </>
   );

@@ -31,7 +31,7 @@ export interface IndustryMeta {
 export const INDUSTRIES: IndustryMeta[] = [
   {
     slug: "kaigo",
-    name: "・人材エージェント",
+    name: "人材エージェント",
     title: "Omakase.ai 事例｜介護業界のAI音声・チャット接客",
     description:
       "介護・障がい福祉の施設向けに、Omakase.aiで問い合わせを24時間対応。営業時間外の相談、よくある質問、入居検討の不安解消をAIがサポートします。",

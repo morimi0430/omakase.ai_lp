@@ -8,7 +8,7 @@ import CaseStudies from "@/components/CaseStudies";
 import Message from "@/components/Message";
 import Plan from "@/components/Plan";
 import FAQ from "@/components/FAQ";
-import Form from "@/components/Form";
+import InterviewSection from "@/components/InterviewSection";
 import Footer from "@/components/Footer";
 
 // モバイル専用CTAコンポーネント
@@ -37,7 +37,7 @@ export default function Home() {
       <Plan />
       <MobileCTA />
       <FAQ />
-      <Form />
+      <InterviewSection />
       <Footer/>
     </main>
   );

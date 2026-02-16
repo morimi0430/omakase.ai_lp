@@ -23,7 +23,7 @@
 
 /* html/body に overflow-x: hidden を付けない（iOS 等で縦スクロールが止まることがある） */
 html {
-  min-height: 100%;
+  height: auto;
 }
 
 /* ヘッダー用 padding（* のリセットより後に定義して確実に効かせる） */
@@ -51,7 +51,7 @@ html {
 
 /* モバイルのみ: フッター直後のスクロール余白。--mobile-bottom-reserved と safe-area で領域を合わせる */
 .footer-mobile-spacer {
-  min-height: calc(var(--mobile-bottom-reserved) + env(safe-area-inset-bottom, 0px));
+  height: calc(var(--mobile-bottom-reserved) + env(safe-area-inset-bottom, 0px));
   flex-shrink: 0;
 }
 @media (min-width: 768px) {
@@ -76,6 +76,8 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: auto;
+  height: auto;
 }
 
 /* フォントサイズユーティリティ */

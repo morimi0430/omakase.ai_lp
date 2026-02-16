@@ -3,7 +3,71 @@
 import Link from 'next/link';
 import CTAButton from './CTAButton';
 
-export default function CTA() {
+interface CTAProps {
+  /** true のとき背景・見出しなしでボタンのみ表示（記事内CTA用） */
+  buttonsOnly?: boolean;
+}
+
+function CTAButtons({ isMobile }: { isMobile: boolean }) {
+  return (
+    <>
+      <Link
+        href="/document-request"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'button_click_document_request_cta', {
+              button_location: isMobile ? 'cta_buttons_only_mobile' : 'cta_buttons_only_pc',
+              button_text: '資料請求はこちら',
+            });
+          }
+        }}
+      >
+        <CTAButton
+          text="資料請求はこちら"
+          backgroundColor="#FFF"
+          iconSrc="/images/pc/arrow_white.png"
+          iconFixed={isMobile}
+          style={isMobile ? { width: '100%' } : undefined}
+        />
+      </Link>
+      <Link
+        href="https://www.omakase.ai/jp/register"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'button_click_free_trial_cta', {
+              button_location: isMobile ? 'cta_buttons_only_mobile' : 'cta_buttons_only_pc',
+              button_text: 'トライアルはこちら',
+            });
+          }
+        }}
+      >
+        <CTAButton
+          text="トライアルはこちら"
+          highlightText="7日間無料"
+          highlightColor="#FD3EA1"
+          backgroundColor="#F8FF6C"
+          iconSrc="/images/pc/arrow_white.png"
+          iconFixed={isMobile}
+          style={isMobile ? { width: '100%' } : undefined}
+        />
+      </Link>
+    </>
+  );
+}
+
+export default function CTA({ buttonsOnly = false }: CTAProps) {
+  if (buttonsOnly) {
+    return (
+      <>
+        <div className="w-full flex flex-col gap-6 md:hidden" style={{ maxWidth: '343px', margin: '0 auto' }}>
+          <CTAButtons isMobile={true} />
+        </div>
+        <div className="w-full hidden md:flex justify-center gap-6 flex-wrap">
+          <CTAButtons isMobile={false} />
+        </div>
+      </>
+    );
+  }
   return (
     <>
       {/* モバイル版 */}
