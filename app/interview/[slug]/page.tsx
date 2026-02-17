@@ -17,6 +17,8 @@ export async function generateStaticParams() {
   return getInterviewSlugs().map((slug) => ({ slug }));
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://omakase-voice-ai.com";
+
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
@@ -26,22 +28,25 @@ export async function generateMetadata({
     return { title: "インタビューが見つかりません | Omakase.ai" };
   const title = `${interview.companyName} 導入インタビュー | Omakase.ai`;
   const description = interview.title.replace(/\n/g, " ");
-  // OGP・Twitter Card 用画像（相対パス → metadataBase で絶対URLになる）
-  const ogImage = interview.image;
+  // OGP・Twitter Card 用：絶対URL必須（相対のままだとクローラーが取得できないことがある）
+  const ogImagePath = interview.image.startsWith("/") ? interview.image : `/${interview.image}`;
+  const ogImageUrl = `${siteUrl}${ogImagePath}`;
+  const pageUrl = `${siteUrl}/interview/${slug}`;
   return {
     title,
     description,
     openGraph: {
+      url: pageUrl,
       title,
       description,
-      images: ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: interview.companyName }] : undefined,
       type: "article",
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: interview.companyName }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ogImage ? [ogImage] : undefined,
+      images: [ogImageUrl],
     },
   };
 }
