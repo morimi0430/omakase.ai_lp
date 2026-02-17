@@ -18,9 +18,19 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.omakase.ai";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Omakase.com",
   description: "Omakase LP",
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

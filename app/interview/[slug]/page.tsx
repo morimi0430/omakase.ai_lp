@@ -24,9 +24,25 @@ export async function generateMetadata({
   const interview = getInterviewBySlug(slug);
   if (!interview)
     return { title: "インタビューが見つかりません | Omakase.ai" };
+  const title = `${interview.companyName} 導入インタビュー | Omakase.ai`;
+  const description = interview.title.replace(/\n/g, " ");
+  // OGP・Twitter Card 用画像（相対パス → metadataBase で絶対URLになる）
+  const ogImage = interview.image;
   return {
-    title: `${interview.companyName} 導入インタビュー | Omakase.ai`,
-    description: interview.title,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630, alt: interview.companyName }] : undefined,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
   };
 }
 
