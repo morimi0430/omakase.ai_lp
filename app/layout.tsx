@@ -18,7 +18,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://omakase-voice-ai.com";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://omakase-voice-ai.com").replace(/\/$/, "");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

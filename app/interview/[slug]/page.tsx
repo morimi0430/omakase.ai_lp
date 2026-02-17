@@ -17,7 +17,8 @@ export async function generateStaticParams() {
   return getInterviewSlugs().map((slug) => ({ slug }));
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://omakase-voice-ai.com";
+// 本番・OG/Twitter用の絶対URL（末尾スラッシュなしに正規化）
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://omakase-voice-ai.com").replace(/\/$/, "");
 
 export async function generateMetadata({
   params,
@@ -28,25 +29,27 @@ export async function generateMetadata({
     return { title: "インタビューが見つかりません | Omakase.ai" };
   const title = `${interview.companyName} 導入インタビュー | Omakase.ai`;
   const description = interview.title.replace(/\n/g, " ");
-  // OGP・Twitter Card 用：絶対URL必須（相対のままだとクローラーが取得できないことがある）
+  // OGP・Twitter Card 用：絶対URL必須（SNSクローラーは相対URLを解決しないことがある）
   const ogImagePath = interview.image.startsWith("/") ? interview.image : `/${interview.image}`;
   const ogImageUrl = `${siteUrl}${ogImagePath}`;
   const pageUrl = `${siteUrl}/interview/${slug}`;
   return {
     title,
     description,
+    alternates: { canonical: pageUrl },
     openGraph: {
       url: pageUrl,
       title,
       description,
       type: "article",
-      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: interview.companyName }],
+      siteName: "Omakase.ai",
+      images: [{ url: ogImageUrl, alt: interview.companyName }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImageUrl],
+      images: [{ url: ogImageUrl }],
     },
   };
 }
