@@ -2,16 +2,26 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormData } from '@/types/form';
 
 interface DocumentRequestFormProps {
   isMobile?: boolean;
 }
 
+type DocumentFormData = {
+  lastName: string;
+  firstName: string;
+  company: string;
+  department: string;
+  position: string;
+  email: string;
+  phone: string;
+  agreedToTerms: boolean;
+};
+
 export default function DocumentRequestForm({ isMobile = false }: DocumentRequestFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<DocumentFormData>({
     lastName: '',
     firstName: '',
     company: '',
@@ -22,27 +32,21 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
     agreedToTerms: false
   });
 
-  // ZapierのWebhook URL（API Route経由）
-  const ZAPIER_WEBHOOK_URL = '/api/webhook/document';
-
-  // バリデーション関数
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const validatePhone = (phone: string): boolean => {
-    // 日本の電話番号形式（ハイフンあり・なし両対応）
     const phoneRegex = /^(0\d{1,4}-?\d{1,4}-?\d{4}|0\d{9,10})$/;
     return phoneRegex.test(phone.replace(/\s/g, ''));
   };
 
-  const handleInputChange = (field: keyof FormData, value: string | boolean) => {
+  const handleInputChange = (field: keyof DocumentFormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async () => {
-    // 必須項目チェック
     if (!formData.lastName || !formData.firstName || !formData.company || 
         !formData.department || !formData.position || !formData.email || 
         !formData.phone || !formData.agreedToTerms) {
@@ -50,13 +54,11 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
       return;
     }
 
-    // メールアドレス形式チェック
     if (!validateEmail(formData.email)) {
       alert('メールアドレスの形式が正しくありません。');
       return;
     }
 
-    // 電話番号形式チェック
     if (!validatePhone(formData.phone)) {
       alert('電話番号の形式が正しくありません。\n例：03-1234-5678 または 0312345678');
       return;
@@ -65,33 +67,21 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(ZAPIER_WEBHOOK_URL, {
+      const response = await fetch('/api/document-request', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          timestamp: new Date().toLocaleString('ja-JP', { 
-            timeZone: 'Asia/Tokyo',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-          }),
           lastName: formData.lastName,
           firstName: formData.firstName,
           company: formData.company,
           department: formData.department,
           position: formData.position,
           email: formData.email,
-          phone: formData.phone
+          phone: formData.phone,
         }),
       });
 
       if (response.ok) {
-        // GTM dataLayer に送信（トリガー名 'form_submit_document_request' と一致）
         if (typeof window !== 'undefined') {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -101,7 +91,6 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
             department: formData.department,
           });
         }
-        // GA4イベント送信
         if (typeof window !== 'undefined' && window.gtag) {
           window.gtag('event', 'form_submit_document_request', {
             form_type: 'document_request',
@@ -110,16 +99,21 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
           });
         }
 
-        // サンクスページに遷移
         router.push('/document-request/thank-you');
       } else {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('送信エラーレスポンス:', errorData);
-        throw new Error('送信に失敗しました。');
+        const text = await response.text();
+        let errorData: { error?: string; details?: string } = {};
+        try {
+          errorData = JSON.parse(text);
+        } catch {
+          errorData = { error: '送信に失敗しました', details: text.slice(0, 200) };
+        }
+        throw new Error((errorData.error || '送信に失敗しました。') + (errorData.details ? `\n${errorData.details}` : ''));
       }
     } catch (error) {
       console.error('送信エラー:', error);
-      alert('送信に失敗しました。もう一度お試しください。');
+      const message = error instanceof Error ? error.message : '送信に失敗しました。もう一度お試しください。';
+      alert(message);
       setIsSubmitting(false);
     }
   };
@@ -329,12 +323,12 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
           required 
         />
       </div>
-  
+
       {/* 同意チェック */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '8px 0' }}>
         <input
           type="checkbox"
-          id={isMobile ? "check-mobile" : "check-pc"}
+          id={isMobile ? "doc-check-mobile" : "doc-check-pc"}
           checked={formData.agreedToTerms}
           onChange={(e) => handleInputChange('agreedToTerms', e.target.checked)}
           style={{
@@ -346,7 +340,7 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
             accentColor: '#6017FF'
           }}
         />
-        <label htmlFor={isMobile ? "check-mobile" : "check-pc"} style={{
+        <label htmlFor={isMobile ? "doc-check-mobile" : "doc-check-pc"} style={{
           fontSize: '11px',
           fontFamily: '"Noto Sans JP"',
           color: '#666',

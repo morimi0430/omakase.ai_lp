@@ -6,6 +6,9 @@ export interface FormData {
     position: string;
     email: string;
     phone: string;
+    website: string;
+    /** 希望日時（一択）(YYYY-MM-DDTHH:mm)。HubSpot 裏送り用 */
+    preferredDate?: string;
     agreedToTerms: boolean;
   }
 

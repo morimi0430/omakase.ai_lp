@@ -1,12 +1,23 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 
-/** デモリクエスト送信後のサンクスページ（資料ダウンロードは行わない） */
-export default function ThankYouPage() {
+export default function DemoThankYouPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // ① デモリクエスト thank-you ページ到達
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'page_view_demo_request_thankyou',
+        page_path: '/demo-request/thank-you',
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -24,7 +35,6 @@ export default function ThankYouPage() {
           gap: '32px',
           margin: '0 auto'
         }}>
-          {/* ヘッダーエリア */}
           <div style={{
             display: 'flex',
             width: '100%',
@@ -72,7 +82,6 @@ export default function ThankYouPage() {
             </p>
           </div>
 
-          {/* ボタンエリア（資料DLなし） */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -114,7 +123,6 @@ export default function ThankYouPage() {
           maxWidth: '343px',
           margin: '0 auto'
         }}>
-          {/* ヘッダーエリア */}
           <div style={{
             display: 'flex',
             width: '100%',
@@ -168,7 +176,6 @@ export default function ThankYouPage() {
             </p>
           </div>
 
-          {/* ボタンエリア（資料DLなし） */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',

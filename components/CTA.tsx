@@ -11,19 +11,20 @@ interface CTAProps {
 function CTAButtons({ isMobile }: { isMobile: boolean }) {
   return (
     <>
+      {/* デモをリクエスト */}
       <Link
-        href="/document-request"
+        href="/demo-request"
         onClick={() => {
           if (typeof window !== 'undefined' && window.gtag) {
-            window.gtag('event', 'button_click_document_request_cta', {
+            window.gtag('event', 'button_click_demo_request_cta', {
               button_location: isMobile ? 'cta_buttons_only_mobile' : 'cta_buttons_only_pc',
-              button_text: '資料請求はこちら',
+              button_text: 'デモをリクエスト',
             });
           }
         }}
       >
         <CTAButton
-          text="資料請求はこちら"
+          text="デモをリクエスト"
           backgroundColor="#FFF"
           iconSrc="/images/pc/arrow_white.png"
           iconFixed={isMobile}
@@ -119,19 +120,20 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             gap: '24px',
             width: '100%'
           }}>
+            {/* デモをリクエスト */}
             <Link 
-              href="/document-request"
+              href="/demo-request"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'button_click_document_request_cta', {
+                  window.gtag('event', 'button_click_demo_request_cta', {
                     button_location: 'cta_section_mobile',
-                    button_text: '資料請求はこちら'
+                    button_text: 'デモをリクエスト'
                   });
                 }
               }}
             >
               <CTAButton
-                text="資料請求はこちら"
+                text="デモをリクエスト"
                 backgroundColor="#FFF"
                 iconSrc="/images/pc/arrow_white.png"
                 iconFixed={true}
@@ -220,19 +222,20 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             gap: '24px',
             alignItems: 'center'
           }}>
+            {/* デモをリクエスト */}
             <Link 
-              href="/document-request"
+              href="/demo-request"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'button_click_document_request_cta', {
+                  window.gtag('event', 'button_click_demo_request_cta', {
                     button_location: 'cta_section_pc',
-                    button_text: '資料請求はこちら'
+                    button_text: 'デモをリクエスト'
                   });
                 }
               }}
             >
               <CTAButton
-                text="資料請求はこちら"
+                text="デモをリクエスト"
                 backgroundColor="#FFF"
                 iconSrc="/images/pc/arrow_white.png"
               />

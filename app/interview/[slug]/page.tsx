@@ -386,7 +386,7 @@ export default async function InterviewPage({ params }: Props) {
                     color: "#6017FF",
                   }}
                 >
-                  資料請求
+                  デモをリクエスト
                 </Link>
                 <Link
                   href="https://www.omakase.ai/jp/register"

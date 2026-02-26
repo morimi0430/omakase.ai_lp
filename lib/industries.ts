@@ -4,7 +4,7 @@
  * @see docs/IMAGE_DIRECTORY_STRATEGY.md
  */
 
-export type IndustrySlug = "kaigo";
+export type IndustrySlug = "kaigo" | "tob";
 
 /** 業界LP用ヘッダー画像の上書き（未指定のキーはメインLPのデフォルトを使用） */
 export interface IndustryHeaderImages {
@@ -26,6 +26,8 @@ export interface IndustryMeta {
   headerTitle?: string;
   /** ヘッダーの2ボタン（資料請求・無料で始める）の色テーマ。'green' は緑基調（介護LPなど） */
   headerButtonTheme?: "default" | "green";
+  /** true のとき「資料請求はこちら」を primary ボタン（左）、「デモをリクエスト」を secondary（右）に表示 */
+  headerDocumentRequestFirst?: boolean;
 }
 
 export const INDUSTRIES: IndustryMeta[] = [
@@ -40,6 +42,14 @@ export const INDUSTRIES: IndustryMeta[] = [
       hideFavicon: true,
     },
     headerButtonTheme: "green",
+  },
+  {
+    slug: "tob",
+    name: "法人・BtoB向け",
+    title: "Omakase.ai｜法人向けAI音声・チャット接客ソリューション",
+    description:
+      "顧客対応を24時間AIが自動化。開発不要で最短5分導入、人手不足・コスト課題を解決するBtoB向けAI接客ツール。導入企業15,000社以上の実績。",
+    headerDocumentRequestFirst: false,
   },
 ];
 

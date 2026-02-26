@@ -26,8 +26,21 @@ export default function Footer() {
               <p className="text-white text-sm font-bold m-0">
                 事例紹介
               </p>
-              <ul className="flex flex-wrap gap-x-4 gap-y-1 md:flex-col md:flex-nowrap md:gap-y-1 list-none m-0 p-0">
+              {/* PC: INDUSTRIES の順番どおり / モバイル: 逆順（BtoB上・人材下） */}
+              <ul className="hidden md:flex flex-col gap-y-1 list-none m-0 p-0">
                 {INDUSTRIES.map((industry) => (
+                  <li key={industry.slug}>
+                    <a
+                      href={`/industries/${industry.slug}`}
+                      className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
+                    >
+                      {industry.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex md:hidden flex-col gap-y-1 list-none m-0 p-0">
+                {[...INDUSTRIES].reverse().map((industry) => (
                   <li key={industry.slug}>
                     <a
                       href={`/industries/${industry.slug}`}

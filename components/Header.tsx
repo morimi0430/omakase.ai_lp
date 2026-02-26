@@ -16,6 +16,8 @@ interface HeaderProps {
   rightTitle?: string;
   /** 介護LPのとき "green" を指定。未指定は紫のメインLP */
   buttonTheme?: ButtonTheme;
+  /** true のとき「資料請求はこちら」(filled)を左、「デモをリクエスト」(outline)を右に表示 */
+  documentRequestFirst?: boolean;
 }
 
 const DEFAULT_LOGO_PC = "/images/pc/header_logo.png";
@@ -26,6 +28,7 @@ export default function Header({
   imageOverrides,
   rightTitle,
   buttonTheme = "default",
+  documentRequestFirst = false,
 }: HeaderProps) {
   const [showMobileCTA, setShowMobileCTA] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -107,64 +110,100 @@ export default function Header({
 
             {/* ボタンエリア */}
             <div className="flex justify-end items-center gap-4 flex-shrink-0">
-              <Link 
-                href="/document-request"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && window.gtag) {
-                    window.gtag('event', 'button_click_document_request_header', {
-                      button_location: 'header',
-                      button_text: '資料請求はこちら'
-                    });
-                  }
-                }}
-              >
-                <CTAButton
-                  text="資料請求はこちら"
-                  backgroundColor="#FFF"
-                  textGradient={!isGreen}
-                  textColor={isGreen ? primaryColor : undefined}
-                  iconSrc={arrowOutline}
-                  style={{
-                    padding: '10px 24px',
-                    height: '48px',
-                    border: `1px solid ${primaryColor}`,
-                    boxShadow: 'none',
-                    fontSize: '14px'
-                  }}
-                  className="hover:bg-gray-50 transition-colors"
-                />
-              </Link>
-              
-              <Link 
-                href="https://www.omakase.ai/jp/register" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && window.gtag) {
-                    window.gtag('event', 'button_click_free_trial_header', {
-                      button_location: 'header',
-                      button_text: '無料で始める'
-                    });
-                  }
-                }}
-              >
-                <CTAButton
-                  text="無料で始める"
-                  backgroundColor="transparent"
-                  textGradient={false}
-                  textColor="#FFF"
-                  iconSrc={arrowFilled}
-                  style={{
-                    padding: '10px 24px',
-                    height: '48px',
-                    border: 'none',
-                    background: primaryGradient,
-                    boxShadow: 'none',
-                    fontSize: '14px'
-                  }}
-                  className="hover:opacity-90 transition-opacity"
-                />
-              </Link>
+              {documentRequestFirst ? (
+                <>
+                  {/* 資料請求はこちら (outline / secondary) */}
+                  <Link
+                    href="/document-request"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && window.gtag) {
+                        window.gtag('event', 'button_click_document_request_header', {
+                          button_location: 'header',
+                          button_text: '資料請求はこちら'
+                        });
+                      }
+                    }}
+                  >
+                    <CTAButton
+                      text="資料請求はこちら"
+                      backgroundColor="#FFF"
+                      textGradient={!isGreen}
+                      textColor={isGreen ? primaryColor : undefined}
+                      iconSrc={arrowOutline}
+                      style={{
+                        padding: '10px 24px',
+                        height: '48px',
+                        border: `1px solid ${primaryColor}`,
+                        boxShadow: 'none',
+                        fontSize: '14px'
+                      }}
+                      className="hover:bg-gray-50 transition-colors"
+                    />
+                  </Link>
+
+                  {/* デモをリクエスト (filled / primary) */}
+                  <Link
+                    href="/demo-request"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && window.gtag) {
+                        window.gtag('event', 'button_click_demo_request_header', {
+                          button_location: 'header',
+                          button_text: 'デモをリクエスト'
+                        });
+                      }
+                    }}
+                  >
+                    <CTAButton
+                      text="デモをリクエスト"
+                      backgroundColor="transparent"
+                      textGradient={false}
+                      textColor="#FFF"
+                      iconSrc={arrowFilled}
+                      style={{
+                        padding: '10px 24px',
+                        height: '48px',
+                        border: 'none',
+                        background: primaryGradient,
+                        boxShadow: 'none',
+                        fontSize: '14px'
+                      }}
+                      className="hover:opacity-90 transition-opacity"
+                    />
+                  </Link>
+                </>
+              ) : (
+                <>
+                  {/* デモをリクエスト (filled/gradient) */}
+                  <Link
+                    href="/demo-request"
+                    onClick={() => {
+                      if (typeof window !== 'undefined' && window.gtag) {
+                        window.gtag('event', 'button_click_demo_request_header', {
+                          button_location: 'header',
+                          button_text: 'デモをリクエスト'
+                        });
+                      }
+                    }}
+                  >
+                    <CTAButton
+                      text="デモをリクエスト"
+                      backgroundColor="transparent"
+                      textGradient={false}
+                      textColor="#FFF"
+                      iconSrc={arrowFilled}
+                      style={{
+                        padding: '10px 24px',
+                        height: '48px',
+                        border: 'none',
+                        background: primaryGradient,
+                        boxShadow: 'none',
+                        fontSize: '14px'
+                      }}
+                      className="hover:opacity-90 transition-opacity"
+                    />
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -212,91 +251,140 @@ export default function Header({
             boxSizing: 'border-box'
           }}
         >
-          <div style={{ flex: '1 0 0', minWidth: 0 }}>
-            <Link 
-              href="/document-request"
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'button_click_document_request_fixed_cta', {
-                    button_location: 'fixed_header',
-                    button_text: '資料請求はこちら'
-                  });
-                }
-              }}
-              style={{
-                display: 'flex',
-                height: '48px',
-                padding: '10px 12px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '6px',
-                borderRadius: '300px',
-                border: `1px solid ${primaryColor}`,
-                background: '#FFF',
-                boxShadow: 'none',
-                fontSize: '13px',
-                fontFamily: '"Noto Sans JP"',
-                fontWeight: 700,
-                color: primaryColor,
-                width: '100%',
-                boxSizing: 'border-box',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                textDecoration: 'none'
-              }}
-            >
-              <span>資料請求はこちら</span>
-              <img 
-                src={arrowOutline} 
-                alt="" 
-                style={{ width: '20px', height: '20px', flexShrink: 0 }}
-              />
-            </Link>
-          </div>
+          {documentRequestFirst ? (
+            <>
+              {/* 資料請求はこちら (outline / secondary) */}
+              <div style={{ flex: '1 0 0', minWidth: 0 }}>
+                <Link
+                  href="/document-request"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && window.gtag) {
+                      window.gtag('event', 'button_click_document_request_fixed_cta', {
+                        button_location: 'fixed_header',
+                        button_text: '資料請求はこちら'
+                      });
+                    }
+                  }}
+                  style={{
+                    display: 'flex',
+                    height: '48px',
+                    padding: '10px 12px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '6px',
+                    borderRadius: '300px',
+                    border: `1px solid ${primaryColor}`,
+                    background: '#FFF',
+                    boxShadow: 'none',
+                    fontSize: '13px',
+                    fontFamily: '"Noto Sans JP"',
+                    fontWeight: 700,
+                    color: primaryColor,
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span>資料請求はこちら</span>
+                  <img
+                    src={arrowOutline}
+                    alt=""
+                    style={{ width: '20px', height: '20px', flexShrink: 0 }}
+                  />
+                </Link>
+              </div>
 
-          <div style={{ flex: '1 0 0', minWidth: 0 }}>
-            <Link
-              href="https://www.omakase.ai/jp/register"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'button_click_free_trial_fixed_cta', {
-                    button_location: 'fixed_header',
-                    button_text: '無料で始める'
-                  });
-                }
-              }}
-              style={{
-                display: 'flex',
-                height: '48px',
-                padding: '10px 24px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '10px',
-                borderRadius: '300px',
-                border: 'none',
-                background: primaryGradient,
-                boxShadow: 'none',
-                fontSize: '14px',
-                fontFamily: '"Noto Sans JP"',
-                fontWeight: 700,
-                color: '#FFF',
-                width: '100%',
-                boxSizing: 'border-box',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                textDecoration: 'none'
-              }}
-            >
-              <span>無料で始める</span>
-              <img 
-                src={arrowFilled} 
-                alt="" 
-                style={{ width: '20px', height: '20px', flexShrink: 0 }}
-              />
-            </Link>
-          </div>
+              {/* デモをリクエスト (filled / primary) */}
+              <div style={{ flex: '1 0 0', minWidth: 0 }}>
+                <Link
+                  href="/demo-request"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && window.gtag) {
+                      window.gtag('event', 'button_click_demo_request_fixed_cta', {
+                        button_location: 'fixed_header',
+                        button_text: 'デモをリクエスト'
+                      });
+                    }
+                  }}
+                  style={{
+                    display: 'flex',
+                    height: '48px',
+                    padding: '10px 12px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '6px',
+                    borderRadius: '300px',
+                    border: 'none',
+                    background: primaryGradient,
+                    boxShadow: 'none',
+                    fontSize: '13px',
+                    fontFamily: '"Noto Sans JP"',
+                    fontWeight: 700,
+                    color: '#FFF',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span>デモをリクエスト</span>
+                  <img
+                    src={arrowFilled}
+                    alt=""
+                    style={{ width: '20px', height: '20px', flexShrink: 0 }}
+                  />
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* デモをリクエスト (filled/gradient) */}
+              <div style={{ flex: '1 0 0', minWidth: 0 }}>
+                <Link
+                  href="/demo-request"
+                  onClick={() => {
+                    if (typeof window !== 'undefined' && window.gtag) {
+                      window.gtag('event', 'button_click_demo_request_fixed_cta', {
+                        button_location: 'fixed_header',
+                        button_text: 'デモをリクエスト'
+                      });
+                    }
+                  }}
+                  style={{
+                    display: 'flex',
+                    height: '48px',
+                    padding: '10px 12px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '6px',
+                    borderRadius: '300px',
+                    border: 'none',
+                    background: primaryGradient,
+                    boxShadow: 'none',
+                    fontSize: '13px',
+                    fontFamily: '"Noto Sans JP"',
+                    fontWeight: 700,
+                    color: '#FFF',
+                    width: '100%',
+                    boxSizing: 'border-box',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <span>デモをリクエスト</span>
+                  <img
+                    src={arrowFilled}
+                    alt=""
+                    style={{ width: '20px', height: '20px', flexShrink: 0 }}
+                  />
+                </Link>
+              </div>
+            </>
+          )}
         </div>
         </div>
       </div>
