@@ -2,34 +2,9 @@
 
 import Link from "next/link";
 import { Container } from "@/components/Container";
+import LogoSlider from "@/components/LogoSlider";
 import { TOB_COLORS, TOB_DEMO_URL } from "./constants";
 
-/** 無限スクロールロゴマーキー */
-function LogoMarquee() {
-  return (
-    <div style={{ marginTop: 48, background: "#fff", overflow: "hidden", padding: "20px 0" }}>
-      <style>{`
-        @keyframes tob-marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .tob-marquee-track {
-          display: flex;
-          width: max-content;
-          animation: tob-marquee 18s linear infinite;
-        }
-        .tob-marquee-track:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-      <div className="tob-marquee-track">
-        {/* logos.png を2枚並べてシームレスにループ */}
-        <img src="/images/tob/logos.png" alt="導入企業ロゴ" style={{ width: "100vw", height: "auto", display: "block", flexShrink: 0 }} />
-        <img src="/images/tob/logos.png" alt="" aria-hidden style={{ width: "100vw", height: "auto", display: "block", flexShrink: 0 }} />
-      </div>
-    </div>
-  );
-}
 
 /** 24x24 チェックアイコン（Figma: Frame 24x24 with checkmark） */
 function CheckIcon() {
@@ -158,7 +133,7 @@ export function TobFirstView() {
         </div>
 
         {/* ロゴスクロール */}
-        <LogoMarquee />
+        <LogoSlider />
       </div>
 
       {/* ── モバイル版 ── */}
@@ -232,7 +207,7 @@ export function TobFirstView() {
         </div>
 
         {/* ロゴスクロール */}
-        <LogoMarquee />
+        <LogoSlider />
       </div>
     </section>
   );
