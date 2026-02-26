@@ -93,15 +93,15 @@ function IntegrationCard({
         justifyContent: "center",
         minHeight: 0,
         minWidth: 0,
-        overflow: "hidden",
+        overflow: "visible",
       }}
     >
-      {/* ステータスバッジ（右上） */}
+      {/* ステータスバッジ（ボーダーに重なる右上） */}
       <span
         style={{
           position: "absolute",
-          top: 8,
-          right: 8,
+          top: -6,
+          right: -6,
           background: comingSoon ? "#FF7A00" : TOB_COLORS.primary,
           color: "#fff",
           fontSize: 9,
@@ -110,6 +110,7 @@ function IntegrationCard({
           borderRadius: 100,
           padding: "3px 7px",
           whiteSpace: "nowrap",
+          zIndex: 1,
         }}
       >
         {comingSoon ? "近日公開" : "利用可能"}
@@ -119,7 +120,7 @@ function IntegrationCard({
       <img
         src={logo}
         alt={name}
-        style={{ width: "70%", height: "55%", objectFit: "contain" }}
+        style={{ width: "85%", height: "70%", objectFit: "contain" }}
       />
     </div>
   );
@@ -137,7 +138,7 @@ function IntegrationGrid() {
         gap: 10,
         padding: 16,
         boxSizing: "border-box",
-        overflow: "hidden",
+        overflow: "visible",
       }}
     >
       {INTEGRATIONS.map((item) => (
@@ -380,7 +381,7 @@ export function TobFeaturesSection() {
                         borderRadius: 10,
                         position: "relative",
                         height: 210,
-                        overflow: "hidden",
+                        overflow: "visible",
                       }}
                     >
                       {item.showIntegrations ? (
