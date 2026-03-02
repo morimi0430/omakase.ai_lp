@@ -12,7 +12,6 @@ const FEATURES = [
     showIntegrations: false,
     // 下端にピン固定: width固定・height:auto・bottom:0
     pcImageStyle: { position: "absolute" as const, left: 32, right: 32, bottom: 0, width: "calc(100% - 64px)", height: "auto", display: "block" },
-    spImageStyle: { position: "absolute" as const, left: 20, right: 20, bottom: 0, width: "calc(100% - 40px)", height: "auto", display: "block" },
   },
   {
     title: "リアルタイム通知",
@@ -27,7 +26,6 @@ const FEATURES = [
     showIntegrations: false,
     // 右端にピン固定: height固定・width:auto・right:0
     pcImageStyle: { position: "absolute" as const, top: 32, bottom: 32, right: 0, height: "calc(100% - 64px)", width: "auto", display: "block" },
-    spImageStyle: { position: "absolute" as const, top: 20, bottom: 20, right: 0, height: "calc(100% - 40px)", width: "auto", display: "block" },
   },
   {
     title: "ツール連携",
@@ -398,7 +396,7 @@ export function TobFeaturesSection() {
                         <img
                           src={item.image}
                           alt={item.title}
-                          style={item.spImageStyle ?? {
+                          style={{
                             position: "absolute",
                             inset: 20,
                             width: "calc(100% - 40px)",
