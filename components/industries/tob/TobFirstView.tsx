@@ -170,11 +170,13 @@ export function TobFirstView() {
           </div>
 
           {/* hero 画像 */}
-          <img
-            src="/images/industries/tob/hero.png"
-            alt="Omakase.ai デモ画面"
-            style={{ width: "100%", height: "auto", objectFit: "contain" }}
-          />
+          <div style={{ marginRight: -16 }}>
+            <img
+              src="/images/industries/tob/hero.png"
+              alt="Omakase.ai デモ画面"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          </div>
 
           {/* CTAボタン */}
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>

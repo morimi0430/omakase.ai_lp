@@ -9,23 +9,31 @@ const FEATURES = [
     title: "ハイブリッドAI",
     body: "音声とチャット、顧客の好みに合わせた接客で離脱を防ぐ。",
     image: "/images/industries/tob/feature01.png",
+    mobileImage: "/images/industries/tob/mobile/feature01.png",
     showIntegrations: false,
     // 下端にピン固定: width固定・height:auto・bottom:0
     pcImageStyle: { position: "absolute" as const, left: 32, right: 32, bottom: 0, width: "calc(100% - 64px)", height: "auto", display: "block" },
+    spImageStyle: { position: "absolute" as const, left: 20, bottom: 0, width: "calc(100% - 40px)", height: "calc(100% - 20px)", objectFit: "contain" as const, objectPosition: "center bottom" },
+    spContainerMargin: "0 12px 0",
   },
   {
     title: "リアルタイム通知",
     body: "メールアドレス獲得の瞬間、即座に担当者へ通知。鉄は熱いうちに打てる。",
     image: "/images/industries/tob/feature02.png",
+    mobileImage: "/images/industries/tob/mobile/feature02.png",
     showIntegrations: false,
   },
   {
     title: "ログ管理画面",
     body: "AIとの全会話履歴を可視化。顧客の熱量や悩みも一目で把握。",
     image: "/images/industries/tob/feature03.png",
+    mobileImage: "/images/industries/tob/mobile/feature03.png",
     showIntegrations: false,
-    // 右端にピン固定: height固定・width:auto・right:0
-    pcImageStyle: { position: "absolute" as const, top: 32, bottom: 32, right: 0, height: "calc(100% - 64px)", width: "auto", display: "block" },
+    // 右下にピン固定
+    pcImageStyle: { position: "absolute" as const, left: 32, right: 0, bottom: 0, width: "calc(100% - 32px)", height: "auto", display: "block" },
+    spImageStyle: { position: "absolute" as const, inset: 0, width: "100%", height: "100%", objectFit: "contain" as const, objectPosition: "right bottom" },
+    spContainerMargin: "0",
+    spContainerBorderRadius: 0,
   },
   {
     title: "ツール連携",
@@ -383,20 +391,20 @@ export function TobFeaturesSection() {
                   >
                     <div
                       style={{
-                        margin: "0 12px 12px",
-                        borderRadius: 10,
+                        margin: item.spContainerMargin ?? "0 12px 12px",
+                        borderRadius: item.spContainerBorderRadius ?? 10,
                         position: "relative",
                         height: 210,
-                        overflow: "visible",
+                        overflow: "hidden",
                       }}
                     >
                       {item.showIntegrations ? (
                         <IntegrationGrid />
                       ) : (
                         <img
-                          src={item.image}
+                          src={item.mobileImage ?? item.image}
                           alt={item.title}
-                          style={{
+                          style={item.spImageStyle ?? {
                             position: "absolute",
                             inset: 20,
                             width: "calc(100% - 40px)",

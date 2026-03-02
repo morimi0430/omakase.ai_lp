@@ -94,7 +94,7 @@ export function TobLastCTASection() {
       <div className="md:hidden">
       <div
         style={{
-          padding: "48px 16px",
+          padding: "48px 16px 0",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -139,6 +139,15 @@ export function TobLastCTASection() {
             デモをリクエストする
             <ArrowBadge variant="outline" />
           </Link>
+        </div>
+
+        {/* CTA画像：下端ぴったり */}
+        <div style={{ marginRight: -16, alignSelf: "stretch" }}>
+          <img
+            src="/images/industries/tob/cta.png"
+            alt="Omakase.ai"
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
         </div>
       </div>
       </div>

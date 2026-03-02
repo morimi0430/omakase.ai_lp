@@ -4,7 +4,6 @@ import { INDUSTRIES } from "@/lib/industries";
 
 export default function Footer() {
   return (
-    <>
     <footer className="w-full bg-neutral-800 border-t border-white/10 box-border">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@500;700&display=swap');
@@ -90,8 +89,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-    {/* モバイル: 固定CTAの下に隠れないよう、フッター直後のスクロール余白 */}
-    <div className="footer-mobile-spacer md:hidden" aria-hidden />
-    </>
   );
 }
