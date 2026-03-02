@@ -9,7 +9,7 @@ export function TobAboutSection() {
       style={{
         paddingTop: 80,
         paddingBottom: 80,
-        backgroundImage: "url('/images/tob/about-bg.png')",
+        backgroundImage: "url('/images/industries/tob/about-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -106,7 +106,7 @@ export function TobAboutSection() {
         {/* 右側: about 画像 (434x465) */}
         <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
           <img
-            src="/images/tob/about.png"
+            src="/images/industries/tob/about.png"
             alt="Omakase.ai 会話デモ"
             style={{ width: "100%", maxWidth: 434, height: 465, objectFit: "contain" }}
           />
@@ -155,7 +155,7 @@ export function TobAboutSection() {
         </div>
 
         <img
-          src="/images/tob/about.png"
+          src="/images/industries/tob/about.png"
           alt="Omakase.ai 会話デモ"
           style={{ width: "100%", height: "auto", objectFit: "contain" }}
         />

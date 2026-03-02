@@ -9,19 +9,19 @@ const STEPS = [
     step: "STEP 01",
     title: "Omakase.aiに\nURLをペースト",
     body: "Omakase.aiを導入したいサイトのURLを入力します。",
-    image: "/images/tob/step01.png",
+    image: "/images/industries/tob/step01.png",
   },
   {
     step: "STEP 02",
     title: "AIが学習し、\n即座に接客AIを作成",
     body: "AIが自動でサイトの内容を理解し、接客エージェントを自動で作成します。",
-    image: "/images/tob/step02.png",
+    image: "/images/industries/tob/step02.png",
   },
   {
     step: "STEP 03",
     title: "リードはメール通知&\nデータ連携",
     body: "リードが獲得できたら、即座に担当者へメールを通知。追客が可能です。",
-    image: "/images/tob/step03.png",
+    image: "/images/industries/tob/step03.png",
   },
 ] as const;
 

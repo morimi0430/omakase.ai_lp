@@ -8,20 +8,26 @@ const FEATURES = [
   {
     title: "ハイブリッドAI",
     body: "音声とチャット、顧客の好みに合わせた接客で離脱を防ぐ。",
-    image: "/images/tob/feature01.png",
+    image: "/images/industries/tob/feature01.png",
     showIntegrations: false,
+    // 下端にピン固定: width固定・height:auto・bottom:0
+    pcImageStyle: { position: "absolute" as const, left: 32, right: 32, bottom: 0, width: "calc(100% - 64px)", height: "auto", display: "block" },
+    spImageStyle: { position: "absolute" as const, left: 20, right: 20, bottom: 0, width: "calc(100% - 40px)", height: "auto", display: "block" },
   },
   {
     title: "リアルタイム通知",
     body: "メールアドレス獲得の瞬間、即座に担当者へ通知。鉄は熱いうちに打てる。",
-    image: "/images/tob/feature02.png",
+    image: "/images/industries/tob/feature02.png",
     showIntegrations: false,
   },
   {
     title: "ログ管理画面",
     body: "AIとの全会話履歴を可視化。顧客の熱量や悩みも一目で把握。",
-    image: "/images/tob/feature03.png",
+    image: "/images/industries/tob/feature03.png",
     showIntegrations: false,
+    // 右端にピン固定: height固定・width:auto・right:0
+    pcImageStyle: { position: "absolute" as const, top: 32, bottom: 32, right: 0, height: "calc(100% - 64px)", width: "auto", display: "block" },
+    spImageStyle: { position: "absolute" as const, top: 20, bottom: 20, right: 0, height: "calc(100% - 40px)", width: "auto", display: "block" },
   },
   {
     title: "ツール連携",
@@ -35,43 +41,43 @@ const INTEGRATIONS = [
   {
     name: "HubSpot",
     category: "CRMプラットフォーム",
-    logo: "/images/tob/logo-hubspot.png",
+    logo: "/images/industries/tob/logo-hubspot.png",
     comingSoon: false,
   },
   {
     name: "Zendesk",
     category: "サポートプラットフォーム",
-    logo: "/images/tob/logo-zendesk.png",
+    logo: "/images/industries/tob/logo-zendesk.png",
     comingSoon: false,
   },
   {
     name: "Gorgias",
     category: "サポートプラットフォーム",
-    logo: "/images/tob/logo-gorgias.png",
+    logo: "/images/industries/tob/logo-gorgias.png",
     comingSoon: false,
   },
   {
     name: "Hacomono",
     category: "電話予約・予約管理",
-    logo: "/images/tob/logo-hacomono.png",
+    logo: "/images/industries/tob/logo-hacomono.png",
     comingSoon: false,
   },
   {
     name: "Salesforce",
     category: "CRMプラットフォーム",
-    logo: "/images/tob/logo-salesforce.png",
+    logo: "/images/industries/tob/logo-salesforce.png",
     comingSoon: true,
   },
   {
     name: "Zapier",
     category: "自動化プラットフォーム",
-    logo: "/images/tob/logo-zapier.png",
+    logo: "/images/industries/tob/logo-zapier.png",
     comingSoon: true,
   },
   {
     name: "EC Force",
     category: "ECプラットフォーム",
-    logo: "/images/tob/logo-ecforce.webp",
+    logo: "/images/industries/tob/logo-ecforce.webp",
     comingSoon: true,
   },
 ];
@@ -279,12 +285,14 @@ export function TobFeaturesSection() {
                     src={item.image}
                     alt={item.title}
                     style={{
-                      position: "absolute",
-                      inset: 32,
-                      width: "calc(100% - 64px)",
-                      height: "calc(100% - 64px)",
-                      objectFit: "contain",
-                      objectPosition: "center",
+                      ...(item.pcImageStyle ?? {
+                        position: "absolute",
+                        inset: 32,
+                        width: "calc(100% - 64px)",
+                        height: "calc(100% - 64px)",
+                        objectFit: "contain",
+                        objectPosition: "center",
+                      }),
                       opacity: selectedIndex === i ? 1 : 0,
                       transition: "opacity 0.3s ease",
                     }}
@@ -390,7 +398,7 @@ export function TobFeaturesSection() {
                         <img
                           src={item.image}
                           alt={item.title}
-                          style={{
+                          style={item.spImageStyle ?? {
                             position: "absolute",
                             inset: 20,
                             width: "calc(100% - 40px)",

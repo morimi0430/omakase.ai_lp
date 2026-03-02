@@ -47,12 +47,10 @@ export function TobFirstView() {
     >
       {/* ── PC版 ── */}
       <div className="hidden md:block" style={{ paddingTop: 120, paddingBottom: 0 }}>
-        {/* 左120px余白維持・右は画像を端まで伸ばすためContainerを使わず直接指定 */}
-        <div style={{ maxWidth: 1440, margin: "0 auto", paddingLeft: 120 }}>
-          {/* HORIZONTAL: left title (671px) + right image（右端まで） */}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 32, overflow: "hidden" }}>
+        {/* HORIZONTAL: left title (671px) + right image（右端まで） */}
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 32, overflow: "hidden" }}>
             {/* 左側 title frame（671px） */}
-            <div style={{ width: 671, flexShrink: 0, display: "flex", flexDirection: "column", gap: 32 }}>
+            <div style={{ marginLeft: 120, width: 671, flexShrink: 0, display: "flex", flexDirection: "column", gap: 32 }}>
               {/* メインタイトル 44pt fw700 black LEFT */}
               <h1
                 style={{
@@ -124,12 +122,11 @@ export function TobFirstView() {
             {/* 右側 hero 画像：右端まで余白なし */}
             <div style={{ flex: "1 1 0", minWidth: 0, alignSelf: "flex-end" }}>
               <img
-                src="/images/tob/hero.png"
+                src="/images/industries/tob/hero.png"
                 alt="Omakase.ai デモ画面"
                 style={{ width: "100%", height: "auto", display: "block", objectFit: "contain", objectPosition: "right bottom" }}
               />
             </div>
-          </div>
         </div>
 
         {/* ロゴスクロール */}
@@ -174,7 +171,7 @@ export function TobFirstView() {
 
           {/* hero 画像 */}
           <img
-            src="/images/tob/hero.png"
+            src="/images/industries/tob/hero.png"
             alt="Omakase.ai デモ画面"
             style={{ width: "100%", height: "auto", objectFit: "contain" }}
           />

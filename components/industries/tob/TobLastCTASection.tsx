@@ -25,19 +25,15 @@ export function TobLastCTASection() {
       <div
         className="hidden md:flex"
         style={{
-          maxWidth: 1440,
-          margin: "0 auto",
           paddingTop: 66,
           paddingBottom: 0,
-          paddingLeft: 120,
-          paddingRight: 0,
           gap: 80,
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
         {/* 左側テキスト + ボタン（Frame 65, 500x402, gap 40, VERTICAL, CENTER） */}
-        <div style={{ width: 500, flexShrink: 0, display: "flex", flexDirection: "column", gap: 40, justifyContent: "center" }}>
+        <div style={{ marginLeft: 120, width: 500, flexShrink: 0, display: "flex", flexDirection: "column", gap: 40, justifyContent: "center" }}>
           {/* キャッチコピー 40pt fw700 white LEFT */}
           <h2
             style={{
@@ -87,7 +83,7 @@ export function TobLastCTASection() {
         {/* 右側: CTA画像（右端まで余白なし・下揃え） */}
         <div style={{ flex: "1 1 0", minWidth: 0, alignSelf: "flex-end", overflow: "hidden" }}>
           <img
-            src="/images/tob/cta.png"
+            src="/images/industries/tob/cta.png"
             alt="Omakase.ai"
             style={{ width: "100%", height: "auto", display: "block", objectFit: "contain", objectPosition: "right bottom" }}
           />

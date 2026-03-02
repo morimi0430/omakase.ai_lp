@@ -11,7 +11,7 @@ const CASES = [
     highlight: "50％削減",
     headlineFontWeight: 600,
     body: "イベント開催直前〜開催中に殺到するお問い合わせをOmakase.aiが一次受けすることで、問い合わせ件数を約50%削減。（※前年比）し、カスタマーサポート工数を大幅削減に成功。\nまたAIにエンタメ性を持たせることで、イベントに対するエンゲージメントも向上。",
-    image: "/images/tob/case01.png",
+    image: "/images/industries/tob/case01.png",
     imageLeft: true,
   },
   {
@@ -21,7 +21,7 @@ const CASES = [
     highlight: "平均5件",
     headlineFontWeight: 700,
     body: "会話開始時にメールアドレスを取得し、自動メール配信による継続的な接点づくりを実現。商談前にはユーザーの会話履歴を確認できるため、興味関心や検討状況を可視化し、効果的なアプローチにつなげています。",
-    image: "/images/tob/case02.png",
+    image: "/images/industries/tob/case02.png",
     imageLeft: false,
   },
 ] as const;

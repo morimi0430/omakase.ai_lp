@@ -6,17 +6,17 @@ const PROBLEMS = [
   {
     title: "資料請求フォーム離脱",
     body: "入力項目が多く、面倒に感じた見込み客が離脱している。",
-    image: "/images/tob/problem01.png",
+    image: "/images/industries/tob/problem01.png",
   },
   {
     title: "対応のタイムロス",
     body: "夜間や休日のお問い合わせ対応が漏れ、商談機会を逃している。",
-    image: "/images/tob/problem02.png",
+    image: "/images/industries/tob/problem02.png",
   },
   {
     title: "リソースの枯渇",
     body: "質の低い問い合わせへの対応に追われ、本来注力すべき商談の準備ができていない。",
-    image: "/images/tob/problem03.png",
+    image: "/images/industries/tob/problem03.png",
   },
 ] as const;
 
