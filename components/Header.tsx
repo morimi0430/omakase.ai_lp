@@ -74,17 +74,19 @@ export default function Header({
           <div className="h-full flex items-center justify-center w-full md:max-w-[1440px]">
           {/* モバイル版 */}
           <div className="flex md:hidden w-full">
-            <img
-              src={imageOverrides?.logoMobile ?? DEFAULT_LOGO_MOBILE}
-              alt="Omakase Logo"
-              style={{ width: '300px', height: 'auto', flexShrink: 0 }}
-            />
+            <a href="/">
+              <img
+                src={imageOverrides?.logoMobile ?? DEFAULT_LOGO_MOBILE}
+                alt="Omakase Logo"
+                style={{ width: '300px', height: 'auto', flexShrink: 0 }}
+              />
+            </a>
           </div>
 
           {/* PC版 */}
           <div className="hidden md:flex w-full justify-between items-center">
             {/* ロゴエリア */}
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <a href="/" className="flex items-center gap-2 flex-shrink-0">
               {!imageOverrides?.hideFavicon && (
                 <Image
                   src={imageOverrides?.faviconPc ?? DEFAULT_FAVICON}
@@ -106,7 +108,7 @@ export default function Header({
                   {rightTitle}
                 </span>
               )}
-            </div>
+            </a>
 
             {/* ボタンエリア */}
             <div className="flex justify-end items-center gap-4 flex-shrink-0">

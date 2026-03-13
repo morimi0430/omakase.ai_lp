@@ -162,7 +162,7 @@ export default async function InterviewPage({ params }: Props) {
               style={{
                 marginBottom: "20px",
                 paddingBottom: "20px",
-                ...(!["maguro-no-takumi", "5strands-japan"].includes(interview.slug) ? { borderBottom: "1px solid #E5E5E5" } : {}),
+                ...(!["maguro-no-takumi", "5strands-japan", "yu-kaen"].includes(interview.slug) ? { borderBottom: "1px solid #E5E5E5" } : {}),
                 gap: "20px",
               }}
             >
@@ -176,7 +176,7 @@ export default async function InterviewPage({ params }: Props) {
                     color: "#374151",
                   }}
                 >
-                  {interview.slug === "5strands-japan" ? (
+                  {["5strands-japan", "yu-kaen"].includes(interview.slug) ? (
                     <>
                       企業名： {interview.companyName}
                       {interview.companySub ? `（${interview.companySub}）` : ""}
@@ -201,7 +201,7 @@ export default async function InterviewPage({ params }: Props) {
             </div>
 
             {/* 鮪匠・5Strands：リード文下の横線の代わりにCTAを配置（モバイルは横並び） */}
-            {["maguro-no-takumi", "5strands-japan"].includes(interview.slug) && (
+            {["maguro-no-takumi", "5strands-japan", "yu-kaen"].includes(interview.slug) && (
               <div className="w-full" style={{ marginBottom: "20px" }}>
                 <InterviewCTAButtons />
                 {/* PC：既存のCTAコンポーネント */}
