@@ -57,7 +57,7 @@ export default function DemoRequestHeader({ isMobile = false }: DemoRequestHeade
         lineHeight: 'normal',
         margin: 0
       }}>
-        デモをリクエスト
+        無料体験はこちら
       </h1>
       
       <p style={{

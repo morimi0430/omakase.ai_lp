@@ -135,7 +135,7 @@ export default function Hero() {
           </div>
           
           {/* CTAセクション */}
-          <div style={{
+          {/* <div style={{
             display: 'flex',
             width: '100%',
             maxWidth: '375px',
@@ -179,7 +179,7 @@ export default function Hero() {
             >
               7日間無料トライアルはこちら
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
       
@@ -516,7 +516,7 @@ export default function Hero() {
             </ThreeBadges>
 
             {/* CTAボタン */}
-            <Link 
+            {/* <Link 
               href="https://www.omakase.ai/jp/register" 
               target="_blank" 
               rel="noopener noreferrer"
@@ -566,7 +566,7 @@ export default function Hero() {
               }}>
                 ▶︎
               </div>
-            </Link>
+            </Link> */}
 
             {/* 注釈テキスト */}
             <div style={{

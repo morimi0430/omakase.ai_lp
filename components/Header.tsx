@@ -143,20 +143,20 @@ export default function Header({
                     />
                   </Link>
 
-                  {/* デモをリクエスト (filled / primary) */}
+                  {/* 無料体験はこちら (filled / primary) */}
                   <Link
                     href="/demo-request"
                     onClick={() => {
                       if (typeof window !== 'undefined' && window.gtag) {
                         window.gtag('event', 'button_click_demo_request_header', {
                           button_location: 'header',
-                          button_text: 'デモをリクエスト'
+                          button_text: '無料体験はこちら'
                         });
                       }
                     }}
                   >
                     <CTAButton
-                      text="デモをリクエスト"
+                      text="無料体験はこちら"
                       backgroundColor="transparent"
                       textGradient={false}
                       textColor="#FFF"
@@ -175,20 +175,20 @@ export default function Header({
                 </>
               ) : (
                 <>
-                  {/* デモをリクエスト (filled/gradient) */}
+                  {/* 無料体験はこちら (filled/gradient) */}
                   <Link
                     href="/demo-request"
                     onClick={() => {
                       if (typeof window !== 'undefined' && window.gtag) {
                         window.gtag('event', 'button_click_demo_request_header', {
                           button_location: 'header',
-                          button_text: 'デモをリクエスト'
+                          button_text: '無料体験はこちら'
                         });
                       }
                     }}
                   >
                     <CTAButton
-                      text="デモをリクエスト"
+                      text="無料体験はこちら"
                       backgroundColor="transparent"
                       textGradient={false}
                       textColor="#FFF"
@@ -298,7 +298,7 @@ export default function Header({
                 </Link>
               </div>
 
-              {/* デモをリクエスト (filled / primary) */}
+              {/* 無料体験はこちら (filled / primary) */}
               <div style={{ flex: '1 0 0', minWidth: 0 }}>
                 <Link
                   href="/demo-request"
@@ -306,7 +306,7 @@ export default function Header({
                     if (typeof window !== 'undefined' && window.gtag) {
                       window.gtag('event', 'button_click_demo_request_fixed_cta', {
                         button_location: 'fixed_header',
-                        button_text: 'デモをリクエスト'
+                        button_text: '無料体験はこちら'
                       });
                     }
                   }}
@@ -332,7 +332,7 @@ export default function Header({
                     textDecoration: 'none'
                   }}
                 >
-                  <span>デモをリクエスト</span>
+                  <span>無料体験はこちら</span>
                   <img
                     src={arrowFilled}
                     alt=""
@@ -343,7 +343,7 @@ export default function Header({
             </>
           ) : (
             <>
-              {/* デモをリクエスト (filled/gradient) */}
+              {/* 無料体験はこちら (filled/gradient) */}
               <div style={{ flex: '1 0 0', minWidth: 0 }}>
                 <Link
                   href="/demo-request"
@@ -351,7 +351,7 @@ export default function Header({
                     if (typeof window !== 'undefined' && window.gtag) {
                       window.gtag('event', 'button_click_demo_request_fixed_cta', {
                         button_location: 'fixed_header',
-                        button_text: 'デモをリクエスト'
+                        button_text: '無料体験はこちら'
                       });
                     }
                   }}
@@ -377,7 +377,7 @@ export default function Header({
                     textDecoration: 'none'
                   }}
                 >
-                  <span>デモをリクエスト</span>
+                  <span>無料体験はこちら</span>
                   <img
                     src={arrowFilled}
                     alt=""

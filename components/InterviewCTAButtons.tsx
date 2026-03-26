@@ -7,20 +7,20 @@ import CTAButton from "./CTAButton";
 export default function InterviewCTAButtons() {
   return (
     <div className="w-full flex flex-col gap-6 md:hidden" style={{ maxWidth: "343px", margin: "0 auto" }}>
-      {/* 資料請求はこちら → デモをリクエストに変更 */}
+      {/* 無料体験はこちら */}
       <Link
-        href="/document-request"
+        href="/demo-request"
         onClick={() => {
           if (typeof window !== "undefined" && window.gtag) {
             window.gtag("event", "button_click_demo_request_cta", {
               button_location: "cta_buttons_only_mobile",
-              button_text: "デモをリクエスト",
+              button_text: "無料体験はこちら",
             });
           }
         }}
       >
         <CTAButton
-          text="デモをリクエスト"
+          text="無料体験はこちら"
           backgroundColor="#FFF"
           iconSrc="/images/pc/arrow_white.png"
           iconFixed={true}

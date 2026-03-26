@@ -113,7 +113,7 @@ export function TobFirstView() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  デモをリクエストする
+                  無料体験はこちら
                   <ArrowIcon />
                 </Link>
               </div>
@@ -199,7 +199,7 @@ export function TobFirstView() {
                 textDecoration: "none",
               }}
             >
-              デモをリクエストする
+              無料体験はこちら
               <ArrowIcon />
             </Link>
           </div>

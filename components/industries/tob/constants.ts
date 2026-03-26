@@ -13,7 +13,7 @@ export const TOB_COLORS = {
 /** 「資料請求はこちら」ボタンの遷移先 */
 export const TOB_DOCUMENT_URL = "/document-request";
 
-/** 「デモをリクエスト」ボタンの遷移先 */
+/** 「無料体験はこちら」ボタンの遷移先 */
 export const TOB_DEMO_URL = "/demo-request";
 
 /** 「無料トライアル」ボタンの遷移先 */

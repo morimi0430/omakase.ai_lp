@@ -11,27 +11,27 @@ interface CTAProps {
 function CTAButtons({ isMobile }: { isMobile: boolean }) {
   return (
     <>
-      {/* デモをリクエスト */}
+      {/* 無料体験はこちら */}
       <Link
         href="/demo-request"
         onClick={() => {
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'button_click_demo_request_cta', {
               button_location: isMobile ? 'cta_buttons_only_mobile' : 'cta_buttons_only_pc',
-              button_text: 'デモをリクエスト',
+              button_text: '無料体験はこちら',
             });
           }
         }}
       >
         <CTAButton
-          text="デモをリクエスト"
+          text="無料体験はこちら"
           backgroundColor="#FFF"
           iconSrc="/images/pc/arrow_white.png"
           iconFixed={isMobile}
           style={isMobile ? { width: '100%' } : undefined}
         />
       </Link>
-      <Link
+      {/* <Link
         href="https://www.omakase.ai/jp/register"
         onClick={() => {
           if (typeof window !== 'undefined' && window.gtag) {
@@ -51,7 +51,7 @@ function CTAButtons({ isMobile }: { isMobile: boolean }) {
           iconFixed={isMobile}
           style={isMobile ? { width: '100%' } : undefined}
         />
-      </Link>
+      </Link> */}
     </>
   );
 }
@@ -108,8 +108,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
               lineHeight: '150%',
               margin: 0
             }}>
-              圧倒的AI接客体験を<br />
-              今すぐ！
+              あなた専用のボイスAIエージェントを体験！
             </h2>
           </div>
 
@@ -120,27 +119,27 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             gap: '24px',
             width: '100%'
           }}>
-            {/* デモをリクエスト */}
+            {/* 無料体験はこちら */}
             <Link 
               href="/demo-request"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
                   window.gtag('event', 'button_click_demo_request_cta', {
                     button_location: 'cta_section_mobile',
-                    button_text: 'デモをリクエスト'
+                    button_text: '無料体験はこちら'
                   });
                 }
               }}
             >
               <CTAButton
-                text="デモをリクエスト"
+                text="無料体験はこちら"
                 backgroundColor="#FFF"
                 iconSrc="/images/pc/arrow_white.png"
                 iconFixed={true}
                 style={{ width: '100%' }}
               />
             </Link>
-            <Link 
+            {/* <Link 
               href="https://www.omakase.ai/jp/register"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
@@ -160,7 +159,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
                 iconFixed={true}
                 style={{ width: '100%' }}
               />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
@@ -213,7 +212,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             lineHeight: '150%',
             margin: 0
           }}>
-            圧倒的AI接客体験を今すぐ！
+            あなた専用のボイスAIエージェントを体験！
           </h2>
 
           {/* ボタンコンテナ（横並び） */}
@@ -222,26 +221,26 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             gap: '24px',
             alignItems: 'center'
           }}>
-            {/* デモをリクエスト */}
+            {/* 無料体験はこちら */}
             <Link 
               href="/demo-request"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
                   window.gtag('event', 'button_click_demo_request_cta', {
                     button_location: 'cta_section_pc',
-                    button_text: 'デモをリクエスト'
+                    button_text: '無料体験はこちら'
                   });
                 }
               }}
             >
               <CTAButton
-                text="デモをリクエスト"
+                text="無料体験はこちら"
                 backgroundColor="#FFF"
                 iconSrc="/images/pc/arrow_white.png"
               />
             </Link>
             
-            <Link 
+            {/* <Link 
               href="https://www.omakase.ai/jp/register"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
@@ -259,7 +258,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
                 backgroundColor="#F8FF6C"
                 iconSrc="/images/pc/arrow_white.png"
               />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>

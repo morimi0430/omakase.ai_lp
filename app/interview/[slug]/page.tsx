@@ -376,7 +376,7 @@ export default async function InterviewPage({ params }: Props) {
               </p>
               <div className="flex flex-row flex-nowrap gap-3" style={{ marginTop: "24px" }}>
                 <Link
-                  href="/document-request"
+                  href="/demo-request"
                   className="inline-flex items-center justify-center flex-1 min-w-[100px] rounded-full font-bold no-underline px-4 text-center text-[14px] transition-opacity hover:opacity-90"
                   style={{
                     fontFamily: '"Noto Sans JP"',
@@ -386,9 +386,9 @@ export default async function InterviewPage({ params }: Props) {
                     color: "#6017FF",
                   }}
                 >
-                  デモをリクエスト
+                  無料体験はこちら
                 </Link>
-                <Link
+                {/* <Link
                   href="https://www.omakase.ai/jp/register"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -400,7 +400,7 @@ export default async function InterviewPage({ params }: Props) {
                   }}
                 >
                   無料で始める
-                </Link>
+                </Link> */}
               </div>
             </div>
 

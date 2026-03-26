@@ -74,7 +74,7 @@ export function TobLastCTASection() {
                 whiteSpace: "nowrap",
               }}
             >
-              デモをリクエストする
+              無料体験はこちら
               <ArrowBadge variant="outline" />
             </Link>
           </div>
@@ -136,7 +136,7 @@ export function TobLastCTASection() {
               textDecoration: "none",
             }}
           >
-            デモをリクエストする
+            無料体験はこちら
             <ArrowBadge variant="outline" />
           </Link>
         </div>
