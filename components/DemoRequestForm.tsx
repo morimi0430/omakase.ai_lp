@@ -168,23 +168,6 @@ export default function DemoRequestForm({ isMobile = false }: DemoRequestFormPro
             });
           }
         }
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'form_submit_demo_request', {
-            form_type: 'demo_request',
-            mtg_booked: hasMtgBooking,
-            company: formData.company,
-            department: formData.department
-          });
-          if (hasMtgBooking) {
-            window.gtag('event', 'demo_mtg_booked', {
-              form_type: 'demo_request',
-              mtg_datetime: formData.preferredDate,
-              company: formData.company,
-              department: formData.department
-            });
-          }
-        }
-
         // PDF を自動ダウンロード
         if (typeof window !== 'undefined') {
           const a = document.createElement('a');
