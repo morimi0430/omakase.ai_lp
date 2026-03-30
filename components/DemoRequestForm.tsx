@@ -105,6 +105,11 @@ export default function DemoRequestForm({ isMobile = false }: DemoRequestFormPro
       return;
     }
 
+    if (!formData.preferredDate) {
+      alert('デモ・ミーティングの希望日時を選択してください。');
+      return;
+    }
+
     if (!validateEmail(formData.email)) {
       alert('メールアドレスの形式が正しくありません。');
       return;
@@ -167,6 +172,12 @@ export default function DemoRequestForm({ isMobile = false }: DemoRequestFormPro
               department: formData.department,
             });
           }
+
+          // ③ サンクスページ到達イベント（遷移前にpushしGA4二重初期化による重複送信を防ぐ）
+          window.dataLayer.push({
+            event: 'page_view_demo_request_thankyou',
+            page_path: '/demo-request/thank-you',
+          });
         }
         // PDF を自動ダウンロード
         if (typeof window !== 'undefined') {
@@ -433,7 +444,7 @@ export default function DemoRequestForm({ isMobile = false }: DemoRequestFormPro
       {/* デモ・ミーティングの希望日時 */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <p style={{ ...labelStyle, margin: 0 }}>
-          デモ・ミーティングの希望日時
+          デモ・ミーティングの希望日時<span style={requiredStyle}>（必須）</span>
         </p>
         <p style={{ fontFamily: '"Noto Sans JP"', fontSize: '11px', fontWeight: 400, color: '#666', margin: 0, lineHeight: 1.5 }}>
           カレンダーから日付を選択し、希望の時間帯を選んでください。

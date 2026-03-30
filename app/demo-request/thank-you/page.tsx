@@ -1,23 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 
 export default function DemoThankYouPage() {
   const router = useRouter();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // ① デモリクエスト thank-you ページ到達
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'page_view_demo_request_thankyou',
-        page_path: '/demo-request/thank-you',
-      });
-    }
-  }, []);
 
   return (
     <>
