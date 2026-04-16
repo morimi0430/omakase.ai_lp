@@ -16,7 +16,7 @@ export default function Footer() {
             {/* ロゴ */}
             <div className="flex items-center">
               <div className="text-white text-2xl font-bold font-['Montserrat'] tracking-tight drop-shadow-[0_4px_12px_rgba(0,115,255,0.3)]">
-                Omakase.ai
+                Omakase AI
               </div>
             </div>
 
@@ -60,7 +60,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-1 list-none m-0 p-0">
                 <li>
                   <a
-                    href="https://www.omakase.ai/jp/register/privacy"
+                    href="https://www.Omakase AI/jp/register/privacy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
@@ -70,7 +70,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.omakase.ai/jp/register/terms"
+                    href="https://www.Omakase AI/jp/register/terms"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"

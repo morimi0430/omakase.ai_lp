@@ -6,7 +6,7 @@ export default function About() {
     <>
       {/* モバイル版 */}
       <section className="w-full md:hidden" style={{ paddingTop: '60px', paddingBottom: '60px', paddingLeft: '16px', paddingRight: '16px' }}>
-        <SectionTitle title="Omakase.aiとは" isMobile={true} />
+        <SectionTitle title="Omakase AIとは" isMobile={true} />
 
         {/* 60pxのスペース */}
         <div style={{ height: '60px' }} />
@@ -44,7 +44,7 @@ export default function About() {
             margin: 0
           }}>
             まるで実際に人が対応しているかのような、きめ細やかなAI接客。<br />
-            Omakase.aiがあなたの代わりに24時間フル稼働して成果につなげます。
+            Omakase AIがあなたの代わりに24時間フル稼働して成果につなげます。
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export default function About() {
         }}>
           <Image 
             src="/images/common/omakase_demo.png" 
-            alt="Omakase.ai デモ" 
+            alt="Omakase AI デモ" 
             width={343} 
             height={197}
             style={{
@@ -73,7 +73,7 @@ export default function About() {
       {/* PC版 */}
       <section className="hidden md:flex w-full justify-center" style={{ paddingTop: '60px', paddingBottom: '80px' }}>
         <div className="w-full md:max-w-[1440px]" style={{ paddingRight: '120px', paddingLeft: '120px' }}>
-          <SectionTitle title="Omakase.aiとは" isMobile={false} />
+          <SectionTitle title="Omakase AIとは" isMobile={false} />
           
           {/* 80pxのスペース */}
           <div style={{ height: '80px' }} />
@@ -121,7 +121,7 @@ export default function About() {
                 padding: 0
               }}>
                 まるで実際に人が対応しているかのような、きめ細やかなAI接客。<br />
-                Omakase.aiがあなたの代わりに24時間フル稼働して成果につなげます。
+                Omakase AIがあなたの代わりに24時間フル稼働して成果につなげます。
               </p>
             </div>
             
@@ -133,7 +133,7 @@ export default function About() {
             }}>
               <Image 
                 src="/images/common/omakase_demo.png" 
-                alt="Omakase.ai デモ" 
+                alt="Omakase AI デモ" 
                 width={582} 
                 height={337}
                 style={{

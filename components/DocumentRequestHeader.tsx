@@ -28,7 +28,7 @@ export default function DocumentRequestHeader({ isMobile = false }: DocumentRequ
             color: '#000',
             textAlign: 'center'
           }}>
-            Omakase.ai
+            Omakase AI
           </span>
         </div>
       ) : (

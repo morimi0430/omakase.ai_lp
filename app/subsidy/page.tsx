@@ -3,17 +3,20 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SubsidyHero from '@/components/SubsidyHero';
+import SubsidyMerits from '@/components/SubsidyMerits';
+import SubsidyManualStrip from '@/components/SubsidyManualStrip';
 import SubsidyOverview from '@/components/SubsidyOverview';
 import SubsidyPriceTable from '@/components/SubsidyPriceTable';
 import SubsidySteps from '@/components/SubsidySteps';
 import SubsidyChecklist from '@/components/SubsidyChecklist';
 import SubsidySchedule from '@/components/SubsidySchedule';
+import SubsidyCTASection from '@/components/SubsidyCTASection';
+import LogoSlider from '@/components/LogoSlider';
 import FAQ from '@/components/FAQ';
 import type { FAQEntry } from '@/components/FAQ';
-import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'IT導入補助金でOmakase AIを導入 | Omakase.ai',
+  title: 'IT導入補助金でOmakase AIを導入 | Omakase AI',
   description:
     '通常254万円のOmakase AI導入パッケージがIT導入補助金で実質85万円から。ZEALSが申請から入金まで伴走サポート。第1次締切2026年5月12日。',
 };
@@ -49,160 +52,20 @@ const subsidyFAQs: FAQEntry[] = [
     answer:
       'ZEALSが申請の準備・マイページへの招待・書類確認まで伴走サポートします。ただし、GビズID取得やマイページへの情報入力など、一部お客様に対応いただく必要がある作業もあります。',
   },
+  {
+    question: '用意する資金は、補助金適用後の金額だけでよいですか？',
+    answer:
+      '事業実施の際は、一旦事業費（導入費用）の全額をお支払いいただく必要があります。交付決定後、所定の手続きを経て事務局から補助金が指定口座に振り込まれます。',
+  },
+  {
+    question: 'どんな会社が補助金の対象になりますか？',
+    answer:
+      '中小企業・小規模事業者の定義に該当する事業者が対象です。資本金・従業員数などの要件は制度・年度で定められています。個別の可否はお問い合わせください。',
+  },
 ];
 
-function SubsidyCTASection() {
-  return (
-    <>
-      {/* モバイル版 */}
-      <section
-        className="md:hidden w-full"
-        style={{
-          backgroundColor: '#4900EE',
-          paddingTop: '60px',
-          paddingBottom: '60px',
-          paddingLeft: '16px',
-          paddingRight: '16px',
-        }}
-      >
-        <div style={{ maxWidth: '343px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-          <h2 style={{
-            color: '#fff',
-            textAlign: 'center',
-            fontSize: '24px',
-            fontWeight: 700,
-            fontFamily: '"Noto Sans JP"',
-            lineHeight: '150%',
-            textShadow: '0 2px 10px #6836D5',
-          }}>
-            補助金申請の相談は<br />無料で受け付けています
-          </h2>
-          <p style={{
-            color: 'rgba(255,255,255,0.8)',
-            textAlign: 'center',
-            fontSize: '14px',
-            fontFamily: '"Noto Sans JP"',
-            lineHeight: '170%',
-          }}>
-            締切まで時間がありません。<br />今すぐお問い合わせください。
-          </p>
-          <Link
-            href="/document-request"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              padding: '18px 24px',
-              borderRadius: '300px',
-              background: '#fff',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-              color: '#6017FF',
-              fontWeight: 700,
-              fontSize: '16px',
-              fontFamily: '"Noto Sans JP"',
-              textDecoration: 'none',
-              width: '100%',
-            }}
-          >
-            補助金申請の相談をする
-          </Link>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '12px', fontFamily: '"Noto Sans JP"' }}>
-            ⚠️ 第1次締切：2026年5月12日（火）17:00
-          </p>
-        </div>
-      </section>
-
-      {/* PC版 */}
-      <section
-        className="hidden md:flex"
-        style={{
-          position: 'relative',
-          width: '100%',
-          padding: '60px 0',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '24px',
-          overflow: 'hidden',
-          background: 'linear-gradient(135deg, #4900EE 0%, #8249FF 100%)',
-        }}
-      >
-        {/* 背景装飾 */}
-        <div style={{
-          position: 'absolute',
-          top: '-80px',
-          right: '80px',
-          width: '400px',
-          height: '400px',
-          background: '#8249FF',
-          opacity: 0.3,
-          filter: 'blur(100px)',
-          pointerEvents: 'none',
-        }} />
-
-        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-          <h2 style={{
-            color: '#fff',
-            textAlign: 'center',
-            textShadow: '0 2px 10px #6836D5',
-            fontFamily: '"Noto Sans JP"',
-            fontSize: '32px',
-            fontWeight: 700,
-            lineHeight: '150%',
-          }}>
-            補助金申請の相談は無料で受け付けています
-          </h2>
-          <p style={{
-            color: 'rgba(255,255,255,0.85)',
-            fontSize: '16px',
-            fontFamily: '"Noto Sans JP"',
-            textAlign: 'center',
-          }}>
-            締切まで時間がありません。今すぐお問い合わせください。
-          </p>
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <Link
-              href="/document-request"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '20px 40px',
-                borderRadius: '300px',
-                background: '#fff',
-                boxShadow: '0 6px 24px rgba(0,0,0,0.2)',
-                color: '#6017FF',
-                fontWeight: 700,
-                fontSize: '18px',
-                fontFamily: '"Noto Sans JP"',
-                textDecoration: 'none',
-              }}
-            >
-              補助金申請の相談をする
-              <span style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '50%',
-                background: 'rgba(96,23,255,0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '13px',
-              }}>▶</span>
-            </Link>
-          </div>
-          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', fontFamily: '"Noto Sans JP"' }}>
-            ⚠️ 第1次締切：2026年5月12日（火）17:00
-          </p>
-        </div>
-      </section>
-    </>
-  );
-}
-
 // ページの公開フラグ。true → 表示、false → 404非表示
-const PAGE_ENABLED = false;
+const PAGE_ENABLED = true;
 
 export default function SubsidyPage() {
   if (!PAGE_ENABLED) notFound();
@@ -211,11 +74,14 @@ export default function SubsidyPage() {
     <main className="overflow-x-hidden">
       <Header documentRequestFirst />
       <SubsidyHero />
+      <LogoSlider />
+      <SubsidyMerits />
       <SubsidyOverview />
       <SubsidyPriceTable />
       <SubsidyChecklist />
       <SubsidySteps />
       <SubsidySchedule />
+      <SubsidyManualStrip variant="inline" />
       <FAQ
         title="よくある質問"
         items={subsidyFAQs}

@@ -26,8 +26,8 @@ export async function generateMetadata({
   const { slug } = await params;
   const interview = getInterviewBySlug(slug);
   if (!interview)
-    return { title: "インタビューが見つかりません | Omakase.ai" };
-  const title = `${interview.companyName} 導入インタビュー | Omakase.ai`;
+    return { title: "インタビューが見つかりません | Omakase AI" };
+  const title = `${interview.companyName} 導入インタビュー | Omakase AI`;
   const description = interview.title.replace(/\n/g, " ");
   // OGP・Twitter Card 用：絶対URL必須（SNSクローラーは相対URLを解決しないことがある）
   const ogImagePath = interview.image.startsWith("/") ? interview.image : `/${interview.image}`;
@@ -42,7 +42,7 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
-      siteName: "Omakase.ai",
+      siteName: "Omakase AI",
       images: [{ url: ogImageUrl, alt: interview.companyName }],
     },
     twitter: {
@@ -83,7 +83,7 @@ export default async function InterviewPage({ params }: Props) {
           >
             <li>
               <Link href="/" className="no-underline" style={{ color: "#6b7280" }}>
-                Omakase.ai
+                Omakase AI
               </Link>
             </li>
             <li style={{ color: "#9ca3af" }} aria-hidden>/</li>
@@ -389,7 +389,7 @@ export default async function InterviewPage({ params }: Props) {
                   無料体験はこちら
                 </Link>
                 {/* <Link
-                  href="https://www.omakase.ai/jp/register"
+                  href="https://www.Omakase AI/jp/register"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 min-w-[100px] rounded-full font-bold no-underline px-4 text-white transition-opacity hover:opacity-90 text-center text-[14px]"

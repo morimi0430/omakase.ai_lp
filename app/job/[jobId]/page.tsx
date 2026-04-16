@@ -17,9 +17,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { jobId } = await params;
   const job = getKaigoJobById(jobId);
-  if (!job) return { title: "求人が見つかりません | Omakase.ai" };
+  if (!job) return { title: "求人が見つかりません | Omakase AI" };
   return {
-    title: `${job.title}（架空の求人） | Omakase.ai`,
+    title: `${job.title}（架空の求人） | Omakase AI`,
     description: job.point,
   };
 }
@@ -49,7 +49,7 @@ export default async function JobPage({ params }: Props) {
             style={{ padding: "16px 24px", marginBottom: "24px" }}
           >
 <p className="text-sm font-bold text-amber-800 m-0">
-            この求人票は架空のものです。当サイトはOmakase.aiの介護エージェント業界向け導入事例であり、求人紹介は行っておりません。
+            この求人票は架空のものです。当サイトはOmakase AIの介護エージェント業界向け導入事例であり、求人紹介は行っておりません。
           </p>
           </div>
 

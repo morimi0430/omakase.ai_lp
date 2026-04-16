@@ -23,7 +23,7 @@ export default function Message() {
             </div>
 
             <p className="text-black text-sm font-normal leading-relaxed opacity-90 text-justify">
-              AIに任せるのは不安、そんな常識をOmakase.aiが変えます。単なる自動応答ではなく、顧客の心をつかみ、エンゲージメントを向上させてきたZEALS独自の接客ロジックをAIに実装。最先端のAI技術と、現場で積み上げてきたプロの知見を掛け合わせることで、どこよりも「売れる」AI接客体験を実現します。
+              AIに任せるのは不安、そんな常識をOmakase AIが変えます。単なる自動応答ではなく、顧客の心をつかみ、エンゲージメントを向上させてきたZEALS独自の接客ロジックをAIに実装。最先端のAI技術と、現場で積み上げてきたプロの知見を掛け合わせることで、どこよりも「売れる」AI接客体験を実現します。
             </p>
 
             <div className="flex flex-col items-start">
@@ -74,7 +74,7 @@ export default function Message() {
                   </div>
 
                   <p className="text-black text-sm font-normal leading-relaxed opacity-90">
-                    AIに任せるのは不安、そんな常識をOmakase.aiが変えます。単なる自動応答ではなく、顧客の心をつかみ、エンゲージメントを向上させてきたZEALS独自の接客ロジックをAIに実装。最先端のAI技術と、現場で積み上げてきたプロの知見を掛け合わせることで、どこよりも「売れる」AI接客体験を実現します。
+                    AIに任せるのは不安、そんな常識をOmakase AIが変えます。単なる自動応答ではなく、顧客の心をつかみ、エンゲージメントを向上させてきたZEALS独自の接客ロジックをAIに実装。最先端のAI技術と、現場で積み上げてきたプロの知見を掛け合わせることで、どこよりも「売れる」AI接客体験を実現します。
                   </p>
 
                   <div className="flex flex-col items-start gap-2">

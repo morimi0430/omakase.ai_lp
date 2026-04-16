@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const industry = getIndustryBySlug(slug);
-  if (!industry) return { title: "事例紹介 | Omakase.ai" };
+  if (!industry) return { title: "事例紹介 | Omakase AI" };
   return {
     title: industry.title,
     description: industry.description,

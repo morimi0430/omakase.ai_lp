@@ -123,7 +123,7 @@ export function TobFirstView() {
             <div style={{ flex: "1 1 0", minWidth: 0, alignSelf: "flex-end" }}>
               <img
                 src="/images/industries/tob/hero.png"
-                alt="Omakase.ai デモ画面"
+                alt="Omakase AI デモ画面"
                 style={{ width: "100%", height: "auto", display: "block", objectFit: "contain", objectPosition: "right bottom" }}
               />
             </div>
@@ -173,7 +173,7 @@ export function TobFirstView() {
           <div style={{ marginRight: -16 }}>
             <img
               src="/images/industries/tob/hero.png"
-              alt="Omakase.ai デモ画面"
+              alt="Omakase AI デモ画面"
               style={{ width: "100%", height: "auto", display: "block" }}
             />
           </div>

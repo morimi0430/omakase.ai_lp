@@ -28,7 +28,7 @@ export default function DemoRequestHeader({ isMobile = false }: DemoRequestHeade
             color: '#000',
             textAlign: 'center'
           }}>
-            Omakase.ai
+            Omakase AI
           </span>
         </div>
       ) : (

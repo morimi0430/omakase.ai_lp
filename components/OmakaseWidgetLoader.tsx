@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const MAIN_WIDGET_LOADER =
-  "https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_-LH8h-LAMmQrbZC02FkjeBkFlVXMSMbfz2xXGAbQewylhLITikHOxV4AcpYd9vNB&_=1769417340779";
+  "https://cdn.Omakase AI/loader.min.js?apiKey=oma_live_-LH8h-LAMmQrbZC02FkjeBkFlVXMSMbfz2xXGAbQewylhLITikHOxV4AcpYd9vNB&_=1769417340779";
 
 const KAIGO_WIDGET_LOADER =
-  "https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_f33BaAwatfyqcQhBXabRXmr3DbMSlp5ho6nUFIwCjPN7U1kL0C_SYl2QcO5iOKU5&apiRegion=us";
+  "https://cdn.Omakase AI/loader.min.js?apiKey=oma_live_f33BaAwatfyqcQhBXabRXmr3DbMSlp5ho6nUFIwCjPN7U1kL0C_SYl2QcO5iOKU5&apiRegion=us";
 
 const LOADER_SCRIPT_ID = "omakase-widget-loader-script";
 const OMAKASE_SCRIPT_ID = "OmakaseAI";
@@ -20,7 +20,7 @@ function isKaigoPath(path: string): boolean {
 
 function injectLoader(loaderUrl: string): void {
   document.getElementById(LOADER_SCRIPT_ID)?.remove();
-  document.querySelectorAll('script[src*="cdn.omakase.ai/loader.min.js"]').forEach((s) => s.remove());
+  document.querySelectorAll('script[src*="cdn.Omakase AI/loader.min.js"]').forEach((s) => s.remove());
   document.getElementById(OMAKASE_SCRIPT_ID)?.remove();
 
   const script = document.createElement("script");

@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 /**
- * メインページ（/）以外で「ここはOmakase.aiの導入紹介サイトです」を表示。
+ * メインページ（/）以外で「ここはOmakase AIの導入紹介サイトです」を表示。
  * ヘッダーとFV（ファーストビュー）の間に配置する想定。
  */
 export default function DemoSiteNotice() {
@@ -16,7 +16,7 @@ export default function DemoSiteNotice() {
       role="status"
       aria-label="導入紹介サイトである旨の告知"
     >
-      ここはOmakase.aiの導入紹介サイトです
+      ここはOmakase AIの導入紹介サイトです
     </div>
   );
 }

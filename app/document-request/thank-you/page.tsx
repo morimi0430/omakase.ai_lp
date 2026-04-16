@@ -136,7 +136,7 @@ export default function ThankYouPage() {
                 color: '#000',
                 textAlign: 'center'
               }}>
-                Omakase.ai
+                Omakase AI
               </span>
             </div>
             

@@ -17,4 +17,4 @@ export const TOB_DOCUMENT_URL = "/document-request";
 export const TOB_DEMO_URL = "/demo-request";
 
 /** 「無料トライアル」ボタンの遷移先 */
-export const TOB_TRIAL_URL = "https://www.omakase.ai/jp/register";
+export const TOB_TRIAL_URL = "https://www.Omakase AI/jp/register";

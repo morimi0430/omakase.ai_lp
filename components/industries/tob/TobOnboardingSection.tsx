@@ -7,8 +7,8 @@ import { TOB_COLORS } from "./constants";
 const STEPS = [
   {
     step: "STEP 01",
-    title: "Omakase.aiに\nURLをペースト",
-    body: "Omakase.aiを導入したいサイトのURLを入力します。",
+    title: "Omakase AIに\nURLをペースト",
+    body: "Omakase AIを導入したいサイトのURLを入力します。",
     image: "/images/industries/tob/step01.png",
   },
   {

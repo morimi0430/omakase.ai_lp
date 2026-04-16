@@ -13,7 +13,7 @@ export type UseCaseItem = {
 };
 
 interface UseCasesProps {
-  /** セクションタイトル。未指定時は「Omakase.ai活用例」。children 使用時は表示しない */
+  /** セクションタイトル。未指定時は「Omakase AI活用例」。children 使用時は表示しない */
   sectionTitle?: string;
   /** カードデータ。未指定時はメインLP用デフォルト4件。children がある場合は未使用 */
   items?: UseCaseItem[];
@@ -58,7 +58,7 @@ function IconWrapper({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function UseCases(props?: UseCasesProps) {
-  const { sectionTitle = "Omakase.ai活用例", items: itemsProp, accentColor, children, sectionClassName, sectionStyle } = props ?? {};
+  const { sectionTitle = "Omakase AI活用例", items: itemsProp, accentColor, children, sectionClassName, sectionStyle } = props ?? {};
   const useChildren = Boolean(children);
   const useCustomContent = !useChildren && Boolean(itemsProp && itemsProp.length > 0);
   const items = itemsProp ?? [];
@@ -196,7 +196,7 @@ export default function UseCases(props?: UseCasesProps) {
           margin: 0,
           marginBottom: '40px'
         }}>
-          Omakase.ai活用例
+          Omakase AI活用例
         </h2>
 
         {/* カードコンテナ */}
@@ -235,7 +235,7 @@ export default function UseCases(props?: UseCasesProps) {
           <UseCaseCard
             icon={<IconWrapper src="/images/common/cart.png" alt="カートアイコン" />}
             title="購入・予約前の不安解消"
-            description="いくら文章や動画で説明しても、顧客が迷っているポイントは千差万別。Omakase.aiは自然な会話の流れで顧客の本当に知りたい情報を聞き出し、不安を解消してあげることができます。"
+            description="いくら文章や動画で説明しても、顧客が迷っているポイントは千差万別。Omakase AIは自然な会話の流れで顧客の本当に知りたい情報を聞き出し、不安を解消してあげることができます。"
             profileImage={{
               src: "/images/common/ex_consulting_icon.png",
               alt: "コンサルティング会社担当者"
@@ -289,7 +289,7 @@ export default function UseCases(props?: UseCasesProps) {
               margin: 0,
               padding: 0
             }}>
-              Omakase.ai活用例
+              Omakase AI活用例
             </h2>
             
             {/* カード4つを入れる親 */}
@@ -350,7 +350,7 @@ export default function UseCases(props?: UseCasesProps) {
                   isPC={true}
                   icon={<IconWrapper src="/images/common/cart.png" alt="カートアイコン" />}
                   title="購入・予約前の不安解消"
-                  description="いくら文章や動画で説明しても、顧客が迷っているポイントは千差万別。Omakase.aiは自然な会話の流れで顧客の本当に知りたい情報を聞き出し、不安を解消してあげることができます。"
+                  description="いくら文章や動画で説明しても、顧客が迷っているポイントは千差万別。Omakase AIは自然な会話の流れで顧客の本当に知りたい情報を聞き出し、不安を解消してあげることができます。"
                   profileImage={{
                     src: "/images/common/ex_consulting_icon.png",
                     alt: "コンサルティング会社担当者"

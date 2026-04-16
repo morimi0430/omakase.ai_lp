@@ -32,7 +32,7 @@ function CTAButtons({ isMobile }: { isMobile: boolean }) {
         />
       </Link>
       {/* <Link
-        href="https://www.omakase.ai/jp/register"
+        href="https://www.Omakase AI/jp/register"
         onClick={() => {
           if (typeof window !== 'undefined' && window.gtag) {
             window.gtag('event', 'button_click_free_trial_cta', {
@@ -108,7 +108,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
               lineHeight: '150%',
               margin: 0
             }}>
-              あなた専用のボイスAIエージェントを体験！
+              あなた専用の音声AIエージェントを体験！
             </h2>
           </div>
 
@@ -140,7 +140,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
               />
             </Link>
             {/* <Link 
-              href="https://www.omakase.ai/jp/register"
+              href="https://www.Omakase AI/jp/register"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
                   window.gtag('event', 'button_click_free_trial_cta', {
@@ -212,7 +212,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             lineHeight: '150%',
             margin: 0
           }}>
-            あなた専用のボイスAIエージェントを体験！
+            あなた専用の音声AIエージェントを体験！
           </h2>
 
           {/* ボタンコンテナ（横並び） */}
@@ -241,7 +241,7 @@ export default function CTA({ buttonsOnly = false }: CTAProps) {
             </Link>
             
             {/* <Link 
-              href="https://www.omakase.ai/jp/register"
+              href="https://www.Omakase AI/jp/register"
               onClick={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
                   window.gtag('event', 'button_click_free_trial_cta', {

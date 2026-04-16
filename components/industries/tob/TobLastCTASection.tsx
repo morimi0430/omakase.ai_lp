@@ -84,7 +84,7 @@ export function TobLastCTASection() {
         <div style={{ flex: "1 1 0", minWidth: 0, alignSelf: "flex-end", overflow: "hidden" }}>
           <img
             src="/images/industries/tob/cta.png"
-            alt="Omakase.ai"
+            alt="Omakase AI"
             style={{ width: "100%", height: "auto", display: "block", objectFit: "contain", objectPosition: "right bottom" }}
           />
         </div>
@@ -145,7 +145,7 @@ export function TobLastCTASection() {
         <div style={{ marginRight: -16, alignSelf: "stretch" }}>
           <img
             src="/images/industries/tob/cta.png"
-            alt="Omakase.ai"
+            alt="Omakase AI"
             style={{ width: "100%", height: "auto", display: "block" }}
           />
         </div>

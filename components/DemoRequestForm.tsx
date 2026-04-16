@@ -182,8 +182,8 @@ export default function DemoRequestForm({ isMobile = false }: DemoRequestFormPro
         // PDF を自動ダウンロード
         if (typeof window !== 'undefined') {
           const a = document.createElement('a');
-          a.href = '/document/Omakase.ai_法人様向け資料.pdf';
-          a.download = 'Omakase.ai_法人様向け資料.pdf';
+          a.href = '/document/Omakase AI_法人様向け資料.pdf';
+          a.download = 'Omakase AI_法人様向け資料.pdf';
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
@@ -429,7 +429,7 @@ export default function DemoRequestForm({ isMobile = false }: DemoRequestFormPro
       {/* 導入検討中のホームページ */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
         <label style={labelStyle}>
-          omakase.aiの導入を検討しているホームページ<span style={requiredStyle}>（必須）</span>
+          Omakase AIの導入を検討しているホームページ<span style={requiredStyle}>（必須）</span>
         </label>
         <input
           type="url"

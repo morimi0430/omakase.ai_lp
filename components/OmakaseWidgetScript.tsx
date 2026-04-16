@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 const OMAKASE_LOADER_URL =
-  "https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_f33BaAwatfyqcQhBXabRXmr3DbMSlp5ho6nUFIwCjPN7U1kL0C_SYl2QcO5iOKU5&apiRegion=us";
+  "https://cdn.Omakase AI/loader.min.js?apiKey=oma_live_f33BaAwatfyqcQhBXabRXmr3DbMSlp5ho6nUFIwCjPN7U1kL0C_SYl2QcO5iOKU5&apiRegion=us";
 
 /**
  * Omakase AI Widget を読み込む。

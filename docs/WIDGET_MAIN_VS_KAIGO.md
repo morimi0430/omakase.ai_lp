@@ -29,7 +29,7 @@
 3. `isKaigoPath("/")` → `false`。
 4. `loaderUrl = MAIN_WIDGET_LOADER`（メイン用 API キー）。
 5. 既存の loader 用 script を削除してから、上記 URL を読み込む IIFE を script で注入。
-6. IIFE が実行され、`cdn.omakase.ai/loader.min.js?apiKey=oma_live_-LH8h-LAMm...` を読み込む script が追加される。
+6. IIFE が実行され、`cdn.Omakase AI/loader.min.js?apiKey=oma_live_-LH8h-LAMm...` を読み込む script が追加される。
 7. メイン用ウィジェットが表示される。
 
 ---
@@ -118,9 +118,9 @@
 
 | 内容 | 判定 |
 |------|------|
-| `<script id="OmakaseAI" src="https://cdn.omakase.ai/loader.min.js?apiKey=oma_live_f33BaAwat...&apiRegion=us">` | ✅ **介護用** loader（正しい API キー） |
+| `<script id="OmakaseAI" src="https://cdn.Omakase AI/loader.min.js?apiKey=oma_live_f33BaAwat...&apiRegion=us">` | ✅ **介護用** loader（正しい API キー） |
 | `<script id="omakase-widget-loader-script">` 内の IIFE の URL | ✅ 同じく **介護用** URL |
-| `<script type="module" src="https://cdn.omakase.ai/widget.min.js?apiKey=oma_live_f33BaAwat...&apiRegion=us">` | ✅ 介護用 **widget.min.js**（loader が差し込んだもの） |
+| `<script type="module" src="https://cdn.Omakase AI/widget.min.js?apiKey=oma_live_f33BaAwat...&apiRegion=us">` | ✅ 介護用 **widget.min.js**（loader が差し込んだもの） |
 | `<style>` 内の `.oma-sheet`, `.oma-header` など | ✅ ウィジェット用 CSS が注入されている |
 
 ### 結論（フロント側）
@@ -136,7 +136,7 @@
 1. **API / バックエンド側**
    - 介護用 API キーで、このオリジン（`omakase-ai-lp.vercel.app` や `omakase-voice-ai.com`）やパスが許可されていない。
    - その結果、loader/widget は読めても **初期化時に 403 や「表示しない」** となり、UI がマウントされない。
-   - **確認**: ブラウザの Console に `[ApiModule]` や 403 のエラーが出ていないか。Network で `cdn.omakase.ai` への XHR/fetch が 403 になっていないか。
+   - **確認**: ブラウザの Console に `[ApiModule]` や 403 のエラーが出ていないか。Network で `cdn.Omakase AI` への XHR/fetch が 403 になっていないか。
 
 2. **DOM / CSS**
    - 介護ページのレイアウト（z-index・overflow・position）で、ウィジェットのルート要素が **背面に隠れている** または **高さ 0 で潰れている**。

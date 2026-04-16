@@ -1,345 +1,501 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { Container } from './Container';
+import TrustBadgesRow from './TrustBadgesRow';
+import { subsidyDesign as D } from './subsidy/designTokens';
+
+const PDF_PATH = '/document/Omakase AI_法人様向け資料.pdf';
+const PDF_NAME = 'Omakase AI_法人様向け資料.pdf';
+
+const bulletPoints = [
+  'AIシステム・初期構築・研修が補助対象に含まれるパッケージ',
+  '補助率は通常枠1/2、賃金引上枠で最大2/3',
+  'ZEALSが申請準備から実績報告まで伴走',
+];
+
+function CheckIcon() {
+  return (
+    <div
+      style={{
+        width: 14,
+        height: 14,
+        flexShrink: 0,
+        marginTop: 4,
+      }}
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7" cy="7" r="7" fill={D.purple} />
+        <path d="M3.5 7L6 9.5L10.5 4.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
 
 export default function SubsidyHero() {
   return (
-    <section className="w-full relative overflow-hidden" style={{ background: '#fff' }}>
-      {/* 背景ぼかし装飾 */}
+    <section className="w-full" style={{ background: D.bgWhite }}>
+      {/* 告知帯：メインLPのヘッダー下より控えめ（白＋下線） */}
       <div
-        className="hidden md:block"
         style={{
-          position: 'absolute',
-          top: '-60px',
-          right: '80px',
-          width: '300px',
-          height: '300px',
-          background: '#6017FF',
-          opacity: 0.15,
-          filter: 'blur(120px)',
-          pointerEvents: 'none',
+          borderBottom: `1px solid ${D.border}`,
+          background: D.bgGray50,
+          padding: '12px 0',
         }}
-      />
-      <div
-        className="hidden md:block"
-        style={{
-          position: 'absolute',
-          bottom: '0px',
-          left: '-60px',
-          width: '200px',
-          height: '200px',
-          background: '#8249FF',
-          opacity: 0.12,
-          filter: 'blur(100px)',
-          pointerEvents: 'none',
-        }}
-      />
+      >
+        <Container>
+          <p
+            style={{
+              margin: 0,
+              textAlign: 'center',
+              color: D.textBody,
+              fontFamily: D.fontNoto,
+              fontSize: 13,
+              fontWeight: 500,
+              lineHeight: '160%',
+            }}
+          >
+            IT導入補助金活用時、
+            <span style={{ color: D.purple, fontWeight: 700 }}>最大約170万円</span>
+            の補助・
+            <span style={{ color: D.purple, fontWeight: 700 }}>実質約85万円</span>
+            からの導入（賃金引上枠・税抜ベース目安）
+          </p>
+        </Container>
+      </div>
 
-      {/* モバイル版 */}
-      <div className="flex md:hidden flex-col" style={{ paddingTop: '24px', paddingLeft: '16px', paddingRight: '16px', paddingBottom: '48px' }}>
-        {/* 締切バナー */}
+      <div
+        style={{
+          borderBottom: `1px solid ${D.border}`,
+          background: D.bgTint,
+          padding: '12px 0',
+        }}
+      >
+        <Container>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <TrustBadgesRow />
+          </div>
+        </Container>
+      </div>
+
+      {/* モバイル */}
+      <div
+        className="flex md:hidden flex-col"
+        style={{
+          paddingTop: 40,
+          paddingBottom: D.sectionPbMobile,
+          paddingLeft: D.pxMobile,
+          paddingRight: D.pxMobile,
+        }}
+      >
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: '#FEF3C7',
-            border: '1px solid #F59E0B',
-            borderRadius: '8px',
-            padding: '10px 14px',
-            marginBottom: '24px',
+            border: `1px solid ${D.border}`,
+            borderRadius: D.radiusSm,
+            background: '#FFFBEB',
+            padding: '12px 14px',
+            marginBottom: 24,
           }}
         >
-          <span style={{ fontSize: '18px' }}>⚠️</span>
-          <span style={{ color: '#92400E', fontSize: '13px', fontWeight: 700, fontFamily: '"Noto Sans JP"' }}>
-            第1次締切：2026年5月12日（火）17:00まで
-          </span>
-        </div>
-
-        {/* キャッチコピー */}
-        <div style={{ marginBottom: '20px' }}>
-          <p style={{ color: '#6017FF', fontSize: '13px', fontWeight: 700, fontFamily: '"Noto Sans JP"', marginBottom: '8px' }}>
-            IT導入補助金 × Omakase AI
-          </p>
-          <h1 style={{ fontSize: '28px', fontWeight: 700, color: '#0F0F0F', lineHeight: '150%', fontFamily: '"Noto Sans JP"' }}>
-            通常<span style={{ color: '#6017FF' }}>254万円</span>のAI導入パッケージが
-          </h1>
-          <div style={{ position: 'relative', display: 'inline-block', marginTop: '4px' }}>
-            <span style={{ fontSize: '48px', fontWeight: 700, color: '#6017FF', fontFamily: 'var(--font-inter)', lineHeight: '1.1' }}>
-              85万円
-            </span>
-            <span style={{ fontSize: '24px', fontWeight: 700, color: '#0F0F0F', fontFamily: '"Noto Sans JP"' }}>
-              から導入可能！
-            </span>
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '4px',
-                left: '0',
-                width: '220px',
-                height: '12px',
-                background: '#F6FF51',
-                zIndex: -1,
-              }}
-            />
-          </div>
-          <p style={{ fontSize: '13px', color: '#555', fontFamily: '"Noto Sans JP"', marginTop: '8px', lineHeight: '160%' }}>
-            ※賃金引上枠（補助率2/3）適用時。実質負担額は事業者状況により異なります。
+          <p
+            style={{
+              margin: 0,
+              color: '#92400E',
+              fontSize: 13,
+              fontWeight: 700,
+              fontFamily: D.fontNoto,
+              lineHeight: '150%',
+            }}
+          >
+            【締切】第1次：2026年5月12日（火）17:00まで
           </p>
         </div>
 
-        {/* 特徴リスト */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
-          {[
-            'AIシステム＋初期構築＋研修が全て補助対象',
-            '補助率最大2/3（賃金引上枠）',
-            'ZEALSが申請から入金まで完全伴走サポート',
-          ].map((text, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-              <div style={{
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                marginTop: '2px',
-              }}>
-                <svg width="11" height="9" viewBox="0 0 11 9" fill="none">
-                  <path d="M1 4.5L3.8 7.5L10 1.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <span style={{ fontSize: '14px', fontWeight: 500, color: '#1a1a1a', fontFamily: '"Noto Sans JP"', lineHeight: '160%' }}>
+        <p
+          style={{
+            color: D.purple,
+            fontSize: 13,
+            fontWeight: 700,
+            fontFamily: D.fontNoto,
+            margin: '0 0 8px 0',
+          }}
+        >
+          IT導入補助金 × Omakase AI
+        </p>
+        <h1
+          style={{
+            fontSize: 28,
+            fontWeight: 700,
+            color: D.text,
+            lineHeight: '150%',
+            fontFamily: D.fontNoto,
+            margin: 0,
+          }}
+        >
+          通常
+          <span style={{ color: D.purple }}>254万円</span>
+          のAI導入パッケージが
+        </h1>
+        <p
+          style={{
+            fontSize: 28,
+            fontWeight: 700,
+            color: D.purple,
+            fontFamily: D.fontNoto,
+            lineHeight: '150%',
+            margin: '4px 0 0 0',
+          }}
+        >
+          実質約85万円から導入可能
+        </p>
+        <p
+          style={{
+            fontSize: 12,
+            color: D.textNote,
+            fontFamily: D.fontNoto,
+            margin: '12px 0 0 0',
+            lineHeight: '160%',
+          }}
+        >
+          ※賃金引上枠（補助率2/3）適用時の目安。個別条件により異なります。
+        </p>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24, marginBottom: 20 }}>
+          {bulletPoints.map((text) => (
+            <div key={text} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+              <CheckIcon />
+              <span
+                style={{
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: D.textBody,
+                  fontFamily: D.fontNoto,
+                  lineHeight: '150%',
+                }}
+              >
                 {text}
               </span>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
-        <Link
-          href="/document-request"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            padding: '18px 24px',
-            borderRadius: '300px',
-            background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-            border: '1px solid #EF96FF',
-            boxShadow: '0 6px 20px rgba(96,23,255,0.30)',
-            color: '#fff',
-            fontWeight: 700,
-            fontSize: '16px',
-            fontFamily: '"Noto Sans JP"',
-            textDecoration: 'none',
-          }}
-        >
-          補助金申請の相談をする
-          <span style={{
-            width: '24px',
-            height: '24px',
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.25)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-          }}>▶</span>
-        </Link>
-        <p style={{ textAlign: 'center', fontSize: '12px', color: '#888', marginTop: '10px', fontFamily: '"Noto Sans JP"' }}>
-          無料相談・資料請求はこちら
-        </p>
+        <div className="w-full flex justify-center" style={{ boxSizing: 'border-box', marginBottom: 28 }}>
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '382px',
+              aspectRatio: '382/319',
+              boxSizing: 'border-box',
+              borderRadius: D.radiusCard,
+              border: `1px solid ${D.border}`,
+              overflow: 'hidden',
+              background: D.bgGray50,
+            }}
+          >
+            <Image
+              src="/images/common/fv_main.png"
+              alt="Omakase AIの操作画面イメージ"
+              width={382}
+              height={319}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+          <a
+            href={PDF_PATH}
+            download={PDF_NAME}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '14px 20px',
+              borderRadius: D.radiusPill,
+              background: D.bgWhite,
+              border: `1px solid ${D.purpleBtn}`,
+              color: D.purpleBtn,
+              fontWeight: 700,
+              fontSize: 14,
+              fontFamily: D.fontNoto,
+              textDecoration: 'none',
+            }}
+          >
+            資料をダウンロード
+          </a>
+          <Link
+            href="/document-request"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              padding: '14px 20px',
+              borderRadius: D.radiusPill,
+              background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+              border: '1px solid #EF96FF',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: 14,
+              fontFamily: D.fontNoto,
+              textDecoration: 'none',
+            }}
+          >
+            補助金・導入の相談
+          </Link>
+        </div>
       </div>
 
-      {/* PC版 */}
-      <div className="hidden md:flex w-full justify-center" style={{ minHeight: '560px' }}>
+      {/* PC */}
+      <div className="hidden md:flex w-full justify-center">
         <div
           className="w-full"
           style={{
-            maxWidth: '1440px',
-            paddingLeft: '120px',
-            paddingRight: '120px',
-            paddingTop: '60px',
-            paddingBottom: '72px',
+            maxWidth: D.innerMax,
+            paddingLeft: D.innerPadPc,
+            paddingRight: D.innerPadPc,
+            paddingTop: 56,
+            paddingBottom: 72,
             display: 'flex',
-            alignItems: 'center',
-            gap: '60px',
+            alignItems: 'flex-start',
+            gap: 60,
           }}
         >
-          {/* 左側 */}
-          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '0px' }}>
-            {/* 締切バナー */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <div
               style={{
                 display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: '#FEF3C7',
-                border: '1px solid #F59E0B',
-                borderRadius: '8px',
+                border: `1px solid ${D.border}`,
+                borderRadius: D.radiusSm,
+                background: '#FFFBEB',
                 padding: '10px 16px',
-                marginBottom: '28px',
+                marginBottom: 24,
                 alignSelf: 'flex-start',
               }}
             >
-              <span style={{ fontSize: '18px' }}>⚠️</span>
-              <span style={{ color: '#92400E', fontSize: '14px', fontWeight: 700, fontFamily: '"Noto Sans JP"' }}>
-                第1次締切：2026年5月12日（火）17:00まで
-              </span>
+              <p
+                style={{
+                  margin: 0,
+                  color: '#92400E',
+                  fontSize: 14,
+                  fontWeight: 700,
+                  fontFamily: D.fontNoto,
+                }}
+              >
+                【締切】第1次：2026年5月12日（火）17:00まで
+              </p>
             </div>
 
-            {/* ラベル */}
-            <p style={{ color: '#6017FF', fontSize: '14px', fontWeight: 700, fontFamily: '"Noto Sans JP"', marginBottom: '12px' }}>
+            <p
+              style={{
+                color: D.purple,
+                fontSize: 14,
+                fontWeight: 700,
+                fontFamily: D.fontNoto,
+                margin: '0 0 8px 0',
+              }}
+            >
               IT導入補助金 × Omakase AI
             </p>
-
-            {/* キャッチコピー */}
-            <h1 style={{ fontFamily: '"Noto Sans JP"', fontWeight: 700, color: '#0F0F0F', lineHeight: '150%', margin: 0, marginBottom: '8px' }}>
-              <span style={{ fontSize: '28px' }}>通常</span>
-              <span style={{ fontSize: '36px', color: '#6017FF' }}>254万円</span>
-              <span style={{ fontSize: '28px' }}>のAI導入パッケージが</span>
-            </h1>
-            <div style={{ position: 'relative', display: 'inline-block', marginBottom: '16px' }}>
-              <span style={{
-                fontSize: '72px',
+            <h1
+              style={{
+                fontFamily: D.fontNoto,
                 fontWeight: 700,
-                color: '#6017FF',
-                fontFamily: 'var(--font-inter)',
-                lineHeight: '1.0',
-              }}>
-                85万円
-              </span>
-              <span style={{ fontSize: '28px', fontWeight: 700, color: '#0F0F0F', fontFamily: '"Noto Sans JP"' }}>
-                &nbsp;から導入可能！
-              </span>
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '8px',
-                  left: '0',
-                  width: '330px',
-                  height: '14px',
-                  background: '#F6FF51',
-                  zIndex: -1,
-                }}
-              />
-            </div>
-            <p style={{ fontSize: '12px', color: '#777', fontFamily: '"Noto Sans JP"', marginBottom: '28px' }}>
-              ※賃金引上枠（補助率2/3）適用時。実質負担額は事業者状況により異なります。
+                color: D.text,
+                lineHeight: '150%',
+                margin: 0,
+                fontSize: 28,
+              }}
+            >
+              通常<span style={{ color: D.purple, fontSize: 36 }}>254万円</span>のAI導入パッケージが
+            </h1>
+            <p
+              style={{
+                fontFamily: D.fontNoto,
+                fontWeight: 700,
+                color: D.purple,
+                fontSize: 36,
+                lineHeight: '140%',
+                margin: '8px 0 0 0',
+              }}
+            >
+              実質約85万円から導入可能
+            </p>
+            <p
+              style={{
+                fontSize: 12,
+                color: D.textNote,
+                fontFamily: D.fontNoto,
+                margin: '12px 0 28px 0',
+                lineHeight: '160%',
+              }}
+            >
+              ※賃金引上枠（補助率2/3）適用時の目安。個別条件により異なります。
             </p>
 
-            {/* 特徴リスト */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
-              {[
-                'AIシステム＋初期構築費＋研修費が全て補助対象',
-                '補助率最大2/3（賃金引上枠）／通常枠は1/2',
-                'ZEALSが申請準備から補助金入金まで完全伴走',
-              ].map((text, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{
-                    width: '22px',
-                    height: '22px',
-                    borderRadius: '50%',
-                    background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
-                      <path d="M1 5L4.5 8.5L11 1.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <span style={{ fontSize: '16px', fontWeight: 500, color: '#1a1a1a', fontFamily: '"Noto Sans JP"' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 32 }}>
+              {bulletPoints.map((text) => (
+                <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <CheckIcon />
+                  <span
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 500,
+                      color: D.textBody,
+                      fontFamily: D.fontNoto,
+                      lineHeight: '150%',
+                    }}
+                  >
                     {text}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* CTAボタン */}
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
+              <a
+                href={PDF_PATH}
+                download={PDF_NAME}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '16px 28px',
+                  borderRadius: D.radiusPill,
+                  background: D.bgWhite,
+                  border: `1px solid ${D.purpleBtn}`,
+                  color: D.purpleBtn,
+                  fontWeight: 700,
+                  fontSize: 16,
+                  fontFamily: D.fontNoto,
+                  textDecoration: 'none',
+                }}
+              >
+                資料をダウンロード
+              </a>
               <Link
                 href="/document-request"
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '20px 36px',
-                  borderRadius: '300px',
-                  background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-                  border: '1px solid #EF96FF',
-                  boxShadow: '0 6px 20px rgba(96,23,255,0.30)',
-                  color: '#fff',
-                  fontWeight: 700,
-                  fontSize: '18px',
-                  fontFamily: '"Noto Sans JP"',
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                補助金申請の相談をする
-                <span style={{
-                  width: '28px',
-                  height: '28px',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.25)',
-                  display: 'flex',
+                  display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: '13px',
-                }}>▶</span>
+                  gap: 10,
+                  padding: '16px 28px',
+                  borderRadius: D.radiusPill,
+                  background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+                  border: '1px solid #EF96FF',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: 16,
+                  fontFamily: D.fontNoto,
+                  textDecoration: 'none',
+                }}
+              >
+                補助金・導入の相談
               </Link>
-              <p style={{ fontSize: '13px', color: '#888', fontFamily: '"Noto Sans JP"', margin: 0 }}>
-                無料相談・資料請求
-              </p>
             </div>
           </div>
 
-          {/* 右側：補助金サマリーカード */}
-          <div style={{ flexShrink: 0, width: '360px' }}>
-            <div style={{
-              background: 'linear-gradient(135deg, #6017FF 0%, #8249FF 100%)',
-              borderRadius: '24px',
-              padding: '36px 32px',
-              color: '#fff',
-              boxShadow: '0 20px 60px rgba(96,23,255,0.30)',
-            }}>
-              <p style={{ fontSize: '13px', fontWeight: 700, fontFamily: '"Noto Sans JP"', marginBottom: '20px', opacity: 0.85 }}>
-                Omakase AI 補助金パッケージ（ベテランプラン相当）
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '10px' }}>
-                  <span style={{ fontSize: '13px', fontFamily: '"Noto Sans JP"' }}>通常合計金額</span>
-                  <span style={{ fontSize: '16px', fontWeight: 700, fontFamily: 'var(--font-inter)', textDecoration: 'line-through', opacity: 0.7 }}>約254万円</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '10px' }}>
-                  <span style={{ fontSize: '13px', fontFamily: '"Noto Sans JP"' }}>補助額（賃金引上枠・2/3）</span>
-                  <span style={{ fontSize: '16px', fontWeight: 700, fontFamily: 'var(--font-inter)', color: '#F6FF51' }}>▲ 約170万円</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '15px', fontWeight: 700, fontFamily: '"Noto Sans JP"' }}>実質負担額</span>
-                  <div style={{ textAlign: 'right' }}>
-                    <span style={{ fontSize: '32px', fontWeight: 700, fontFamily: 'var(--font-inter)', color: '#F6FF51' }}>85</span>
-                    <span style={{ fontSize: '18px', fontWeight: 700, fontFamily: '"Noto Sans JP"', color: '#F6FF51' }}>万円〜</span>
-                  </div>
-                </div>
-              </div>
-              <div style={{
-                background: 'rgba(255,255,255,0.15)',
-                borderRadius: '12px',
-                padding: '12px 16px',
-                fontSize: '12px',
-                fontFamily: '"Noto Sans JP"',
-                lineHeight: '160%',
-              }}>
-                💡 通常枠（補助率1/2）の場合は実質負担<strong>約128万円</strong>
-              </div>
+          <div style={{ flexShrink: 0, width: 360, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div
+              style={{
+                borderRadius: D.radiusCard,
+                border: `1px solid ${D.border}`,
+                overflow: 'hidden',
+                background: D.bgGray50,
+                aspectRatio: '382/319',
+              }}
+            >
+              <Image
+                src="/images/common/fv_main.png"
+                alt="Omakase AIの操作画面イメージ"
+                width={382}
+                height={319}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
             </div>
+            <aside>
+              <div
+                style={{
+                  border: `1px solid ${D.border}`,
+                  borderRadius: D.radiusCard,
+                  background: D.bgWhite,
+                  boxShadow: D.shadowCard,
+                  padding: '28px 24px',
+                }}
+              >
+              <p
+                style={{
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: D.textMuted,
+                  fontFamily: D.fontNoto,
+                  margin: '0 0 20px 0',
+                }}
+              >
+                Omakase AI 補助金パッケージ（ベテラン相当・税抜）
+              </p>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingBottom: 12,
+                  marginBottom: 12,
+                  borderBottom: `1px solid ${D.border}`,
+                }}
+              >
+                <span style={{ fontSize: 13, fontFamily: D.fontNoto, color: D.textMuted }}>通常合計</span>
+                <span
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 700,
+                    fontFamily: 'var(--font-inter)',
+                    textDecoration: 'line-through',
+                    color: D.textSub,
+                  }}
+                >
+                  約254万円
+                </span>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingBottom: 12,
+                  marginBottom: 12,
+                  borderBottom: `1px solid ${D.border}`,
+                }}
+              >
+                <span style={{ fontSize: 13, fontFamily: D.fontNoto, color: D.textMuted }}>補助（賃上枠・目安）</span>
+                <span style={{ fontSize: 15, fontWeight: 700, fontFamily: 'var(--font-inter)', color: D.purple }}>
+                  約170万円
+                </span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <span style={{ fontSize: 14, fontWeight: 700, fontFamily: D.fontNoto }}>実質負担（目安）</span>
+                <span style={{ fontSize: 28, fontWeight: 700, fontFamily: 'var(--font-inter)', color: D.purple }}>
+                  約85万円〜
+                </span>
+              </div>
+              <p
+                style={{
+                  margin: '16px 0 0 0',
+                  padding: 12,
+                  background: D.bgGray50,
+                  borderRadius: D.radiusSm,
+                  fontSize: 12,
+                  color: D.textMuted,
+                  fontFamily: D.fontNoto,
+                  lineHeight: '160%',
+                }}
+              >
+                通常枠（1/2）の場合の実質負担目安は約128万円です。
+              </p>
+              </div>
+            </aside>
           </div>
         </div>
       </div>

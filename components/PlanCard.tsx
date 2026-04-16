@@ -222,7 +222,7 @@ export default function PlanCard({
         </div>
       )}
 
-      <Link href={isEnterprise ? 'https://go.zeals.ai/contact' : 'https://www.omakase.ai/jp/register'}>
+      <Link href={isEnterprise ? 'https://go.zeals.ai/contact' : 'https://www.Omakase AI/jp/register'}>
         <button 
           className={buttonStyle}
           style={{

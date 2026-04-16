@@ -36,7 +36,7 @@ export function KaigoCaseVoiceSection() {
         accentColor={KAIGO_COLORS.primary}
       />
       <p className="text-sm text-center text-gray-600 mt-2" style={{ maxWidth: "720px", marginLeft: "auto", marginRight: "auto" }}>
-        ※転職者の声はOmakase.ai導入エージェントの事例イメージです。当サイトでは求人紹介は行っておりません。
+        ※転職者の声はOmakase AI導入エージェントの事例イメージです。当サイトでは求人紹介は行っておりません。
       </p>
     </>
   );

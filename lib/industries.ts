@@ -34,9 +34,9 @@ export const INDUSTRIES: IndustryMeta[] = [
   {
     slug: "kaigo",
     name: "人材エージェント",
-    title: "Omakase.ai 事例｜介護業界のAI音声・チャット接客",
+    title: "Omakase AI 事例｜介護業界のAI音声・チャット接客",
     description:
-      "介護・障がい福祉の施設向けに、Omakase.aiで問い合わせを24時間対応。営業時間外の相談、よくある質問、入居検討の不安解消をAIがサポートします。",
+      "介護・障がい福祉の施設向けに、Omakase AIで問い合わせを24時間対応。営業時間外の相談、よくある質問、入居検討の不安解消をAIがサポートします。",
     headerImages: {
       // 介護用ロゴは public/images/industries/kaigo/header-logo.png を配置すると差し替わります
       hideFavicon: true,
@@ -46,7 +46,7 @@ export const INDUSTRIES: IndustryMeta[] = [
   {
     slug: "tob",
     name: "法人・BtoB向け",
-    title: "Omakase.ai｜法人向けAI音声・チャット接客ソリューション",
+    title: "Omakase AI｜法人向けAI音声・チャット接客ソリューション",
     description:
       "顧客対応を24時間AIが自動化。開発不要で最短5分導入、人手不足・コスト課題を解決するBtoB向けAI接客ツール。導入企業15,000社以上の実績。",
     headerDocumentRequestFirst: false,

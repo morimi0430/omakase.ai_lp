@@ -68,7 +68,7 @@ export default function RootLayout({
         
         {children}
         
-        {/* Omakase.ai ウィジェット（パスでメイン/介護を切り替え。localhostでは403のため読み込まない） */}
+        {/* Omakase AI ウィジェット（パスでメイン/介護を切り替え。localhostでは403のため読み込まない） */}
         <OmakaseWidgetLoader />
       </body>
     </html>

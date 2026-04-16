@@ -81,7 +81,7 @@ const DEFAULT_CASES: CaseStudyItem[] = [
         '買い回り・セット購入を後押しできる設計'
       ],
       effects: [
-        'Omakase.ai経由の平均購入金額が3.5倍を記録',
+        'Omakase AI経由の平均購入金額が3.5倍を記録',
         'セール・キャンペーン情報の訴求を自動化'
       ]
     }

@@ -6,7 +6,7 @@ export default function Features() {
     <>
       {/* モバイル版 */}
       <section className="w-full md:hidden" style={{ paddingTop: '60px', paddingBottom: '60px', paddingLeft: '16px', paddingRight: '16px', background: '#F8F6FF' }}>
-        <SectionTitle title="Omakase.aiの特徴" isMobile={true} />
+        <SectionTitle title="Omakase AIの特徴" isMobile={true} />
 
         {/* 60pxのスペース */}
         <div style={{ height: '60px' }} />
@@ -67,7 +67,7 @@ export default function Features() {
       {/* PC版 */}
       <section className="hidden md:flex w-full justify-center" style={{ paddingTop: '80px', paddingBottom: '100px', background: '#F8F6FF' }}>
         <div className="w-full md:max-w-[1440px]">
-          <SectionTitle title="Omakase.aiの特徴" isMobile={false} />
+          <SectionTitle title="Omakase AIの特徴" isMobile={false} />
           
           {/* 80pxのスペース */}
           <div style={{ height: '80px' }} />

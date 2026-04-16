@@ -35,7 +35,7 @@ export function TobAboutSection() {
               {/* ヘッダーと同じロゴ（ファビコンなし） */}
               <img
                 src="/images/pc/header_logo.png"
-                alt="Omakase.ai"
+                alt="Omakase AI"
                 style={{ width: 160, height: 22, objectFit: "contain" }}
               />
               <span
@@ -107,7 +107,7 @@ export function TobAboutSection() {
         <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
           <img
             src="/images/industries/tob/about.png"
-            alt="Omakase.ai 会話デモ"
+            alt="Omakase AI 会話デモ"
             style={{ width: "100%", maxWidth: 434, height: 465, objectFit: "contain" }}
           />
         </div>
@@ -120,7 +120,7 @@ export function TobAboutSection() {
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <img
               src="/images/pc/header_logo.png"
-              alt="Omakase.ai"
+              alt="Omakase AI"
               style={{ height: 18, width: "auto", objectFit: "contain" }}
             />
             <span style={{ fontFamily: '"Noto Sans JP"', fontSize: 16, fontWeight: 700, color: "#000" }}>なら、</span>
@@ -156,7 +156,7 @@ export function TobAboutSection() {
 
         <img
           src="/images/industries/tob/about.png"
-          alt="Omakase.ai 会話デモ"
+          alt="Omakase AI 会話デモ"
           style={{ width: "100%", height: "auto", objectFit: "contain" }}
         />
       </div>
