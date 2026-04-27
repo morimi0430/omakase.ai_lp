@@ -220,8 +220,69 @@ const INTERVIEW_YU_KAEN: InterviewDetail = {
   ],
 };
 
+const INTERVIEW_ULULAB: InterviewDetail = {
+  slug: "ululab",
+  image: "/images/common/interview/ululab/image-1.jpg",
+  title:
+    "不動産業界のアナログな壁を越える。\nうるラボが「Omakase AI」で目指す、誰もが気軽に相談できる環境づくり",
+  companyName: "喜正産業株式会社 うるラボ",
+  companyNameShort: "うるラボ",
+  companySub: "山口様、中村様",
+  businessDescription: "不動産売却特化型専門サービス",
+  sections: [
+    {
+      heading: "1. 導入に至った背景",
+      question: "まず、導入に至った背景について教えていただけますか？",
+      image: "/images/common/interview/ululab/image-1.jpg",
+      paragraphs: [
+        "弊社は不動産の売却に特化した、売主様をサポートする事業を行っています。",
+        "現在の不動産業界は、未だにFAXを使った営業や、足を使った人海戦術の営業が残っているなど、アナログな環境が根強く残っています。また、情報をオープンにしないというクローズドな商慣習もあり、お客様からすると「騙されるのではないか」「怖い」といった感情が先行してしまい、不動産会社に相談するハードルが非常に高いという課題がありました。",
+        "そこで、AIを活用することで、お客様がもっと不動産会社に相談しやすい環境を整えられないかと考えていました。",
+      ],
+    },
+    {
+      heading: "2. 検討〜導入まで",
+      question: "どのような経緯でOmakase AIの導入に至ったのでしょうか？",
+      paragraphs: [
+        "導入のきっかけは、YouTube番組の「リアルバリュー」を見たことでした。そこで初めてこういったAIサービスがあることを知りました。",
+        "不動産業界でこのようなAIを導入している事例を見たことがなかったので、他社に先行してやってみようと決断しました。また、自社だけで初期構築を行うには知識が足りなかったため、構築を安心してお任せできる点も決め手の一つです。コミュニケーションもスムーズで、こちらの意図を汲み取って対応していただけました。",
+      ],
+    },
+    {
+      heading: "3. 実際に使ってみて",
+      question: "実際に使ってみて、どのような印象を持たれましたか？",
+      imageAfterHeading: "/images/common/interview/ululab/image-2.png",
+      paragraphs: [
+        "まず実感したのは、チャットAIの精度の高さです。管理画面も感覚的に操作でき、学習させるための資料のアップロードも簡単に行えました。",
+        "一方で、音声AIについては地名の難しい読み方やイントネーション、聞き取りの精度などにまだ課題があると感じています。しかし、AIの技術は日々進化しているため、レスポンスの速度や自然な間合いなどが改善され、より人間同士の会話に近いクオリティになっていくような、今後のプロダクトの進化に大いに期待しています。",
+        "また、不動産という複雑な分野だからこそ、法的アドバイスの線引きなど、AIに知識を移植していくことの難しさも実感しています。作って終わりではなく、AIを「育てていく」必要があると感じました。",
+      ],
+    },
+    {
+      heading: "4. 導入してみての効果",
+      question: "導入後、具体的にどのような変化がありましたか？",
+      imageAfterHeading: "/images/common/interview/ululab/image-3.png",
+      paragraphs: [
+        "まだ導入直後ですが、ログデータを確認したところ、当初想定していた近隣エリアだけでなく、関東以外の地方エリアの方からもアクセスや利用があることが判明しました。これは新しい発見でした。",
+        "また、チャット形式のAIについては社内のメンバーも利用しており、すでに一定の評価を得ています。実際にユーザーが触ったログデータが蓄積されてきているため、今後の音声出力の改善に向けた明確な課題も見えてきています。",
+      ],
+    },
+    {
+      heading: "5. 今後の展望や期待",
+      question: "最後に、今後の展望についてお聞かせください。",
+      imageAfterHeading: "/images/common/interview/ululab/image-4.jpg",
+      paragraphs: [
+        "今後は、AIを「入り口の段階の相談役」として活用していきたいと考えています。社内の営業スタッフが2名とリソースが限られているため、いきなり人間が対応するのではなく、まずはAIにライトに相談して疑問を解消していただき、本格的な相談が必要になった段階で我々がサポートする「2段構え」の体制を構築できれば理想的です。",
+        "また、市場データなどを元に「今の目安の売却金額」を簡易的に提示できる査定機能ができれば、売主様のニーズに直結するため、大きな武器になると期待しています。",
+        "不動産売却を考え始め、まだどこにも相談していない方が自身の課題感を整理するためのツールとして、そして50代〜70代などのご高齢の方々であっても、ハードルを感じることなく気軽に相談できる窓口になってほしいと願っています。",
+      ],
+    },
+  ],
+};
+
 /** 詳細データがあるインタビュー（slug → 詳細） */
 const INTERVIEW_DETAIL_MAP: Record<string, InterviewDetail> = {
+  [INTERVIEW_ULULAB.slug]: INTERVIEW_ULULAB,
   [INTERVIEW_5STRANDS.slug]: INTERVIEW_5STRANDS,
   [INTERVIEW_MAGURO_TAKUMI.slug]: INTERVIEW_MAGURO_TAKUMI,
   [INTERVIEW_YU_KAEN.slug]: INTERVIEW_YU_KAEN,
@@ -230,6 +291,12 @@ const INTERVIEW_DETAIL_MAP: Record<string, InterviewDetail> = {
 /** 一覧用：詳細があるインタビューのみ */
 export function getInterviewList(): InterviewListItem[] {
   return [
+    {
+      slug: INTERVIEW_ULULAB.slug,
+      image: INTERVIEW_ULULAB.image,
+      title: INTERVIEW_ULULAB.title,
+      companyName: INTERVIEW_ULULAB.companyNameShort ?? INTERVIEW_ULULAB.companyName,
+    },
     {
       slug: INTERVIEW_MAGURO_TAKUMI.slug,
       image: INTERVIEW_MAGURO_TAKUMI.image,
