@@ -389,7 +389,7 @@ export default async function InterviewPage({ params }: Props) {
                   無料体験はこちら
                 </Link>
                 {/* <Link
-                  href="https://www.Omakase AI/jp/register"
+                  href="https://www.omakase.ai/jp/register"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center flex-1 min-w-[100px] rounded-full font-bold no-underline px-4 text-white transition-opacity hover:opacity-90 text-center text-[14px]"

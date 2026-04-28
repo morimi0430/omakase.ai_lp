@@ -28,7 +28,7 @@ export default function InterviewCTAButtons() {
         />
       </Link>
       <Link
-        href="https://www.Omakase AI/jp/register"
+        href="https://www.omakase.ai/jp/register"
         onClick={() => {
           if (typeof window !== "undefined" && window.gtag) {
             window.gtag("event", "button_click_free_trial_cta", {

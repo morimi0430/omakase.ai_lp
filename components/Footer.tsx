@@ -60,7 +60,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-1 list-none m-0 p-0">
                 <li>
                   <a
-                    href="https://www.Omakase AI/jp/register/privacy"
+                    href="https://www.omakase.ai/jp/register/privacy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
@@ -70,7 +70,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://www.Omakase AI/jp/register/terms"
+                    href="https://www.omakase.ai/jp/register/terms"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"

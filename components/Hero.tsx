@@ -146,7 +146,7 @@ export default function Hero() {
             margin: '0 auto'
           }}>
             <Link 
-              href="https://www.Omakase AI/jp/register" 
+              href="https://www.omakase.ai/jp/register"
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => {
@@ -517,7 +517,7 @@ export default function Hero() {
 
             {/* CTAボタン */}
             {/* <Link 
-              href="https://www.Omakase AI/jp/register" 
+              href="https://www.omakase.ai/jp/register"
               target="_blank" 
               rel="noopener noreferrer"
               onClick={() => {
