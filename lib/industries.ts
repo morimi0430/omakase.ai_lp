@@ -24,10 +24,8 @@ export interface IndustryMeta {
   headerImages?: IndustryHeaderImages;
   /** 業界LPヘッダー右側に表示するテキスト（例: カイゴテンショク）。指定時は左にロゴ・右にこの文字を配置 */
   headerTitle?: string;
-  /** ヘッダーの2ボタン（資料請求・無料で始める）の色テーマ。'green' は緑基調（介護LPなど） */
+  /** ヘッダーのCTAの色テーマ。'green' は緑基調（介護LPなど） */
   headerButtonTheme?: "default" | "green";
-  /** true のとき「資料請求はこちら」を primary ボタン（左）、「デモをリクエスト」を secondary（右）に表示 */
-  headerDocumentRequestFirst?: boolean;
 }
 
 export const INDUSTRIES: IndustryMeta[] = [
@@ -49,7 +47,6 @@ export const INDUSTRIES: IndustryMeta[] = [
     title: "Omakase AI｜法人向けAI音声・チャット接客ソリューション",
     description:
       "顧客対応を24時間AIが自動化。開発不要で最短5分導入、人手不足・コスト課題を解決するBtoB向けAI接客ツール。導入企業15,000社以上の実績。",
-    headerDocumentRequestFirst: false,
   },
 ];
 

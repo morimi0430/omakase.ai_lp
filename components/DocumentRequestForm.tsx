@@ -85,8 +85,8 @@ export default function DocumentRequestForm({ isMobile = false }: DocumentReques
         if (typeof window !== 'undefined') {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
-            event: 'form_submit_document_request',
-            form_type: 'document_request',
+            event: 'form_submit_inquiry',
+            form_type: 'inquiry',
             company: formData.company,
             department: formData.department,
           });

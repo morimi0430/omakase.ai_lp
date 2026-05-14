@@ -7,42 +7,20 @@ import CTAButton from "./CTAButton";
 export default function InterviewCTAButtons() {
   return (
     <div className="w-full flex flex-col gap-6 md:hidden" style={{ maxWidth: "343px", margin: "0 auto" }}>
-      {/* 無料体験はこちら */}
       <Link
-        href="/demo-request"
+        href="/document-request"
         onClick={() => {
           if (typeof window !== "undefined" && window.gtag) {
-            window.gtag("event", "button_click_demo_request_cta", {
+            window.gtag("event", "button_click_inquiry_cta", {
               button_location: "cta_buttons_only_mobile",
-              button_text: "無料体験はこちら",
+              button_text: "お問い合わせ",
             });
           }
         }}
       >
         <CTAButton
-          text="無料体験はこちら"
+          text="お問い合わせ"
           backgroundColor="#FFF"
-          iconSrc="/images/pc/arrow_white.png"
-          iconFixed={true}
-          style={{ width: "100%" }}
-        />
-      </Link>
-      <Link
-        href="https://www.omakase.ai/jp/register"
-        onClick={() => {
-          if (typeof window !== "undefined" && window.gtag) {
-            window.gtag("event", "button_click_free_trial_cta", {
-              button_location: "cta_buttons_only_mobile",
-              button_text: "トライアルはこちら",
-            });
-          }
-        }}
-      >
-        <CTAButton
-          text="トライアルはこちら"
-          highlightText="7日間無料"
-          highlightColor="#FD3EA1"
-          backgroundColor="#F8FF6C"
           iconSrc="/images/pc/arrow_white.png"
           iconFixed={true}
           style={{ width: "100%" }}

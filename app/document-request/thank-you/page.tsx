@@ -2,9 +2,32 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import Footer from '@/components/Footer';
+import {
+  INQUIRY_DOCUMENT_DOWNLOAD_NAME,
+  INQUIRY_DOCUMENT_URL,
+} from '@/lib/inquiryDocument';
 
-/** デモリクエスト送信後のサンクスページ（資料ダウンロードは行わない） */
+const downloadButtonStyle: CSSProperties = {
+  display: 'inline-flex',
+  height: '48px',
+  padding: '0 28px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '300px',
+  border: 'none',
+  background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+  color: '#fff',
+  fontFamily: '"Noto Sans JP"',
+  fontSize: '14px',
+  fontWeight: 700,
+  textDecoration: 'none',
+  cursor: 'pointer',
+  boxSizing: 'border-box',
+};
+
+/** お問い合わせ送信後のサンクスページ */
 export default function ThankYouPage() {
   const router = useRouter();
 
@@ -72,13 +95,20 @@ export default function ThankYouPage() {
             </p>
           </div>
 
-          {/* ボタンエリア（資料DLなし） */}
+          {/* ボタンエリア */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             gap: '24px'
           }}>
+            <a
+              href={INQUIRY_DOCUMENT_URL}
+              download={INQUIRY_DOCUMENT_DOWNLOAD_NAME}
+              style={downloadButtonStyle}
+            >
+              資料をダウンロード
+            </a>
             <button
               onClick={() => router.push('/')}
               style={{
@@ -168,7 +198,7 @@ export default function ThankYouPage() {
             </p>
           </div>
 
-          {/* ボタンエリア（資料DLなし） */}
+          {/* ボタンエリア */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -176,6 +206,18 @@ export default function ThankYouPage() {
             gap: '24px',
             width: '100%'
           }}>
+            <a
+              href={INQUIRY_DOCUMENT_URL}
+              download={INQUIRY_DOCUMENT_DOWNLOAD_NAME}
+              style={{
+                ...downloadButtonStyle,
+                width: '100%',
+                maxWidth: '280px',
+                fontSize: '13px',
+              }}
+            >
+              資料をダウンロード
+            </a>
             <button
               onClick={() => router.push('/')}
               style={{

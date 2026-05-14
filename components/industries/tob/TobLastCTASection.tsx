@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { TOB_COLORS, TOB_DEMO_URL } from "./constants";
+import { TOB_COLORS, TOB_INQUIRY_URL } from "./constants";
 
 /** 矢印アイコン：ヘッダーと同じ画像を使用 */
 function ArrowBadge({ variant }: { variant: "primary" | "outline" }) {
@@ -55,7 +55,7 @@ export function TobLastCTASection() {
           <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
             {/* デモボタン: outline white, white text */}
             <Link
-              href={TOB_DEMO_URL}
+              href={TOB_INQUIRY_URL}
               style={{
                 display: "inline-flex",
                 height: 48,
@@ -74,7 +74,7 @@ export function TobLastCTASection() {
                 whiteSpace: "nowrap",
               }}
             >
-              無料体験はこちら
+              お問い合わせ
               <ArrowBadge variant="outline" />
             </Link>
           </div>
@@ -119,7 +119,7 @@ export function TobLastCTASection() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: 12, width: "100%" }}>
           <Link
-            href={TOB_DEMO_URL}
+            href={TOB_INQUIRY_URL}
             style={{
               display: "flex",
               height: 48,
@@ -136,7 +136,7 @@ export function TobLastCTASection() {
               textDecoration: "none",
             }}
           >
-            無料体験はこちら
+            お問い合わせ
             <ArrowBadge variant="outline" />
           </Link>
         </div>

@@ -16,8 +16,8 @@ interface HeaderProps {
   rightTitle?: string;
   /** 介護LPのとき "green" を指定。未指定は紫のメインLP */
   buttonTheme?: ButtonTheme;
-  /** true のとき「資料請求はこちら」(filled)を左、「デモをリクエスト」(outline)を右に表示 */
-  documentRequestFirst?: boolean;
+  /** 補助金LP用：ヘッダーCTAを「補助金申請の相談をする」のみ表示（/document-request） */
+  subsidyLp?: boolean;
 }
 
 const DEFAULT_LOGO_PC = "/images/pc/header_logo.png";
@@ -28,14 +28,12 @@ export default function Header({
   imageOverrides,
   rightTitle,
   buttonTheme = "default",
-  documentRequestFirst = false,
+  subsidyLp = false,
 }: HeaderProps) {
   const [showMobileCTA, setShowMobileCTA] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const isGreen = buttonTheme === "green";
-  const arrowOutline = isGreen ? KAIGO_CTA_ARROWS.outline : "/images/pc/arrow_white.png";
   const arrowFilled = isGreen ? KAIGO_CTA_ARROWS.filled : "/images/pc/arrow_purple.png";
-  const primaryColor = isGreen ? KAIGO_COLORS.primary : "#5004F5";
   const primaryGradient = isGreen
     ? `linear-gradient(310deg, ${KAIGO_COLORS.primary} 44.35%, ${KAIGO_COLORS.primaryLight} 86.86%)`
     : "linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)";
@@ -110,101 +108,71 @@ export default function Header({
               )}
             </a>
 
-            {/* ボタンエリア */}
+            {/* 補助金LPは「補助金申請の相談をする」1本、それ以外はお問い合わせ */}
             <div className="flex justify-end items-center gap-4 flex-shrink-0">
-              {documentRequestFirst ? (
-                <>
-                  {/* 資料請求はこちら (outline / secondary) */}
-                  <Link
-                    href="/document-request"
-                    onClick={() => {
-                      if (typeof window !== 'undefined' && window.gtag) {
-                        window.gtag('event', 'button_click_document_request_header', {
-                          button_location: 'header',
-                          button_text: '資料請求はこちら'
-                        });
-                      }
-                    }}
-                  >
-                    <CTAButton
-                      text="資料請求はこちら"
-                      backgroundColor="#FFF"
-                      textGradient={!isGreen}
-                      textColor={isGreen ? primaryColor : undefined}
-                      iconSrc={arrowOutline}
-                      style={{
-                        padding: '10px 24px',
-                        height: '48px',
-                        border: `1px solid ${primaryColor}`,
-                        boxShadow: 'none',
-                        fontSize: '14px'
-                      }}
-                      className="hover:bg-gray-50 transition-colors"
-                    />
-                  </Link>
-
-                  {/* 無料体験はこちら (filled / primary) */}
-                  <Link
-                    href="/demo-request"
-                    onClick={() => {
-                      if (typeof window !== 'undefined' && window.gtag) {
-                        window.gtag('event', 'button_click_demo_request_header', {
-                          button_location: 'header',
-                          button_text: '無料体験はこちら'
-                        });
-                      }
-                    }}
-                  >
-                    <CTAButton
-                      text="無料体験はこちら"
-                      backgroundColor="transparent"
-                      textGradient={false}
-                      textColor="#FFF"
-                      iconSrc={arrowFilled}
-                      style={{
-                        padding: '10px 24px',
-                        height: '48px',
-                        border: 'none',
-                        background: primaryGradient,
-                        boxShadow: 'none',
-                        fontSize: '14px'
-                      }}
-                      className="hover:opacity-90 transition-opacity"
-                    />
-                  </Link>
-                </>
+              {subsidyLp ? (
+                <Link
+                  href="/document-request"
+                  onClick={() => {
+                    if (typeof window !== "undefined" && window.gtag) {
+                      window.gtag("event", "button_click_subsidy_consult_header", {
+                        button_location: "header",
+                        button_text: "補助金申請の相談をする",
+                      });
+                    }
+                  }}
+                  className="hover:opacity-90 transition-opacity"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "10px 18px",
+                    borderRadius: 300,
+                    border: "none",
+                    background: primaryGradient,
+                    color: "#fff",
+                    fontFamily: '"Noto Sans JP"',
+                    fontSize: 13,
+                    fontWeight: 700,
+                    textDecoration: "none",
+                    lineHeight: 1.35,
+                    maxWidth: 380,
+                    textAlign: "center",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  <span>補助金申請の相談をする</span>
+                  <img src={arrowFilled} alt="" width={20} height={20} style={{ flexShrink: 0 }} />
+                </Link>
               ) : (
-                <>
-                  {/* 無料体験はこちら (filled/gradient) */}
-                  <Link
-                    href="/demo-request"
-                    onClick={() => {
-                      if (typeof window !== 'undefined' && window.gtag) {
-                        window.gtag('event', 'button_click_demo_request_header', {
-                          button_location: 'header',
-                          button_text: '無料体験はこちら'
-                        });
-                      }
+                <Link
+                  href="/document-request"
+                  onClick={() => {
+                    if (typeof window !== "undefined" && window.gtag) {
+                      window.gtag("event", "button_click_inquiry_header", {
+                        button_location: "header",
+                        button_text: "お問い合わせ",
+                      });
+                    }
+                  }}
+                >
+                  <CTAButton
+                    text="お問い合わせ"
+                    backgroundColor="transparent"
+                    textGradient={false}
+                    textColor="#FFF"
+                    iconSrc={arrowFilled}
+                    style={{
+                      padding: "10px 24px",
+                      height: "48px",
+                      border: "none",
+                      background: primaryGradient,
+                      boxShadow: "none",
+                      fontSize: "14px",
                     }}
-                  >
-                    <CTAButton
-                      text="無料体験はこちら"
-                      backgroundColor="transparent"
-                      textGradient={false}
-                      textColor="#FFF"
-                      iconSrc={arrowFilled}
-                      style={{
-                        padding: '10px 24px',
-                        height: '48px',
-                        border: 'none',
-                        background: primaryGradient,
-                        boxShadow: 'none',
-                        fontSize: '14px'
-                      }}
-                      className="hover:opacity-90 transition-opacity"
-                    />
-                  </Link>
-                </>
+                    className="hover:opacity-90 transition-opacity"
+                  />
+                </Link>
               )}
             </div>
           </div>
@@ -233,161 +201,115 @@ export default function Header({
           style={{
             display: 'flex',
             width: '100%',
-            height: '72px',
+            height: subsidyLp ? 'auto' : '72px',
+            minHeight: '72px',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             background: 'rgba(255, 255, 255, 0.40)',
             backdropFilter: 'blur(10px)',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            padding: subsidyLp ? '10px 0' : undefined,
           }}
         >
-        <div
-          style={{
-            display: 'flex',
-            padding: '0 16px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '8px',
-            width: '100%',
-            boxSizing: 'border-box'
-          }}
-        >
-          {documentRequestFirst ? (
-            <>
-              {/* 資料請求はこちら (outline / secondary) */}
-              <div style={{ flex: '1 0 0', minWidth: 0 }}>
+          <div
+            style={{
+              display: "flex",
+              padding: "0 16px",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "8px",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            {subsidyLp ? (
+              <div style={{ flex: "1 0 0", minWidth: 0, width: "100%", padding: "0 16px", boxSizing: "border-box" }}>
                 <Link
                   href="/document-request"
                   onClick={() => {
-                    if (typeof window !== 'undefined' && window.gtag) {
-                      window.gtag('event', 'button_click_document_request_fixed_cta', {
-                        button_location: 'fixed_header',
-                        button_text: '資料請求はこちら'
+                    if (typeof window !== "undefined" && window.gtag) {
+                      window.gtag("event", "button_click_subsidy_consult_fixed_cta", {
+                        button_location: "fixed_header",
+                        button_text: "補助金申請の相談をする",
                       });
                     }
                   }}
                   style={{
-                    display: 'flex',
-                    height: '48px',
-                    padding: '10px 12px',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '6px',
-                    borderRadius: '300px',
-                    border: `1px solid ${primaryColor}`,
-                    background: '#FFF',
-                    boxShadow: 'none',
-                    fontSize: '13px',
-                    fontFamily: '"Noto Sans JP"',
-                    fontWeight: 700,
-                    color: primaryColor,
-                    width: '100%',
-                    boxSizing: 'border-box',
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    textDecoration: 'none'
-                  }}
-                >
-                  <span>資料請求はこちら</span>
-                  <img
-                    src={arrowOutline}
-                    alt=""
-                    style={{ width: '20px', height: '20px', flexShrink: 0 }}
-                  />
-                </Link>
-              </div>
-
-              {/* 無料体験はこちら (filled / primary) */}
-              <div style={{ flex: '1 0 0', minWidth: 0 }}>
-                <Link
-                  href="/demo-request"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && window.gtag) {
-                      window.gtag('event', 'button_click_demo_request_fixed_cta', {
-                        button_location: 'fixed_header',
-                        button_text: '無料体験はこちら'
-                      });
-                    }
-                  }}
-                  style={{
-                    display: 'flex',
-                    height: '48px',
-                    padding: '10px 12px',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '6px',
-                    borderRadius: '300px',
-                    border: 'none',
+                    display: "flex",
+                    minHeight: "48px",
+                    padding: "10px 12px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "6px",
+                    borderRadius: "300px",
+                    border: "none",
                     background: primaryGradient,
-                    boxShadow: 'none',
-                    fontSize: '13px',
+                    boxShadow: "none",
+                    fontSize: "12px",
                     fontFamily: '"Noto Sans JP"',
                     fontWeight: 700,
-                    color: '#FFF',
-                    width: '100%',
-                    boxSizing: 'border-box',
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    textDecoration: 'none'
+                    color: "#FFF",
+                    width: "100%",
+                    boxSizing: "border-box",
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    lineHeight: 1.35,
+                    textAlign: "center",
                   }}
                 >
-                  <span>無料体験はこちら</span>
+                  <span>補助金申請の相談をする</span>
                   <img
                     src={arrowFilled}
                     alt=""
-                    style={{ width: '20px', height: '20px', flexShrink: 0 }}
+                    style={{ width: "20px", height: "20px", flexShrink: 0 }}
                   />
                 </Link>
               </div>
-            </>
-          ) : (
-            <>
-              {/* 無料体験はこちら (filled/gradient) */}
-              <div style={{ flex: '1 0 0', minWidth: 0 }}>
+            ) : (
+              <div style={{ flex: "1 0 0", minWidth: 0 }}>
                 <Link
-                  href="/demo-request"
+                  href="/document-request"
                   onClick={() => {
-                    if (typeof window !== 'undefined' && window.gtag) {
-                      window.gtag('event', 'button_click_demo_request_fixed_cta', {
-                        button_location: 'fixed_header',
-                        button_text: '無料体験はこちら'
+                    if (typeof window !== "undefined" && window.gtag) {
+                      window.gtag("event", "button_click_inquiry_fixed_cta", {
+                        button_location: "fixed_header",
+                        button_text: "お問い合わせ",
                       });
                     }
                   }}
                   style={{
-                    display: 'flex',
-                    height: '48px',
-                    padding: '10px 12px',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '6px',
-                    borderRadius: '300px',
-                    border: 'none',
+                    display: "flex",
+                    height: "48px",
+                    padding: "10px 12px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "6px",
+                    borderRadius: "300px",
+                    border: "none",
                     background: primaryGradient,
-                    boxShadow: 'none',
-                    fontSize: '13px',
+                    boxShadow: "none",
+                    fontSize: "13px",
                     fontFamily: '"Noto Sans JP"',
                     fontWeight: 700,
-                    color: '#FFF',
-                    width: '100%',
-                    boxSizing: 'border-box',
-                    cursor: 'pointer',
-                    whiteSpace: 'nowrap',
-                    textDecoration: 'none'
+                    color: "#FFF",
+                    width: "100%",
+                    boxSizing: "border-box",
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    textDecoration: "none",
                   }}
                 >
-                  <span>無料体験はこちら</span>
+                  <span>お問い合わせ</span>
                   <img
                     src={arrowFilled}
                     alt=""
-                    style={{ width: '20px', height: '20px', flexShrink: 0 }}
+                    style={{ width: "20px", height: "20px", flexShrink: 0 }}
                   />
                 </Link>
               </div>
-            </>
-          )}
-        </div>
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -10,11 +10,5 @@ export const TOB_COLORS = {
   accent: "#F6FF51",
 } as const;
 
-/** 「資料請求はこちら」ボタンの遷移先 */
-export const TOB_DOCUMENT_URL = "/document-request";
-
-/** 「無料体験はこちら」ボタンの遷移先 */
-export const TOB_DEMO_URL = "/demo-request";
-
-/** 「無料トライアル」ボタンの遷移先 */
-export const TOB_TRIAL_URL = "https://www.omakase.ai/jp/register";
+/** CTA（お問い合わせ）の遷移先 */
+export const TOB_INQUIRY_URL = "/document-request";

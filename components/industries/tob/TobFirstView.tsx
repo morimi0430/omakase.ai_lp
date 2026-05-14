@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import LogoSlider from "@/components/LogoSlider";
-import { TOB_COLORS, TOB_DEMO_URL } from "./constants";
+import { TOB_COLORS, TOB_INQUIRY_URL } from "./constants";
 
 
 /** 24x24 チェックアイコン（Figma: Frame 24x24 with checkmark） */
@@ -94,7 +94,7 @@ export function TobFirstView() {
               <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
                 {/* デモボタン: purple fill, white stroke, white text */}
                 <Link
-                  href={TOB_DEMO_URL}
+                  href={TOB_INQUIRY_URL}
                   style={{
                     display: "flex",
                     height: 48,
@@ -113,8 +113,8 @@ export function TobFirstView() {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  無料体験はこちら
-                  <ArrowIcon />
+                  お問い合わせ
+                  <ArrowIcon onPurple />
                 </Link>
               </div>
             </div>
@@ -181,7 +181,7 @@ export function TobFirstView() {
           {/* CTAボタン */}
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <Link
-              href={TOB_DEMO_URL}
+              href={TOB_INQUIRY_URL}
               style={{
                 display: "flex",
                 height: 48,
@@ -199,8 +199,8 @@ export function TobFirstView() {
                 textDecoration: "none",
               }}
             >
-              無料体験はこちら
-              <ArrowIcon />
+              お問い合わせ
+              <ArrowIcon onPurple />
             </Link>
           </div>
         </div>

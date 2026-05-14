@@ -57,7 +57,7 @@ export default function DocumentRequestHeader({ isMobile = false }: DocumentRequ
         lineHeight: 'normal',
         margin: 0
       }}>
-        資料請求
+        お問い合わせ
       </h1>
       
       <p style={{
@@ -70,7 +70,7 @@ export default function DocumentRequestHeader({ isMobile = false }: DocumentRequ
         lineHeight: 'normal',
         margin: 0
       }}>
-        フォームをご送信いただくと、担当者より資料をお送りいたします。
+        フォーム送信後、完了画面より資料をダウンロードいただけます。内容を確認のうえ、担当者よりご連絡いたします。
       </p>
     </div>
   );

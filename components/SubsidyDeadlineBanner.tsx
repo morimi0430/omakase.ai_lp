@@ -67,7 +67,7 @@ export default function SubsidyDeadlineBanner() {
             display: 'inline',
           }}
         >
-          2026年5月12日(火) 17:00
+          2026年6月15日(月) 17:00
         </span>
       </p>
       <p
@@ -83,18 +83,6 @@ export default function SubsidyDeadlineBanner() {
         申請の事前準備には約2週間かかります。
         <br className="md:hidden" aria-hidden />
         お早めにご相談ください。
-      </p>
-      <p
-        className="text-[12px] md:text-[13px]"
-        style={{
-          color: D.textBody,
-          fontFamily: D.fontNoto,
-          margin: 0,
-          lineHeight: 1.55,
-          fontWeight: 500,
-        }}
-      >
-        二次締切：2026年6月15日（月）17:00
       </p>
       <Link
         href="/document-request"
@@ -113,7 +101,7 @@ export default function SubsidyDeadlineBanner() {
           textDecoration: 'none',
         }}
       >
-        お問い合わせ
+        補助金申請の相談をする
         <InquiryPlayIcon />
       </Link>
     </div>

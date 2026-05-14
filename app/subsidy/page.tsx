@@ -15,7 +15,7 @@ import type { FAQEntry } from '@/components/FAQ';
 export const metadata: Metadata = {
   title: 'デジタル化・AI導入補助金（旧IT導入補助金）でOmakase AIを最大50%OFFで導入 | Omakase AI',
   description:
-    'Omakase AIはデジタル化・AI導入補助金の対象サービスです。ZEALSが申請から入金まで伴走サポート。第1次締切2026年5月12日。',
+    'Omakase AIはデジタル化・AI導入補助金の対象サービスです。ZEALSが申請から入金まで伴走サポート。第1次締切2026年6月15日。',
 };
 
 const subsidyFAQs: FAQEntry[] = [
@@ -63,7 +63,7 @@ export default function SubsidyPage() {
 
   return (
     <main className="overflow-x-hidden">
-      <Header documentRequestFirst />
+      <Header subsidyLp />
       <SubsidyHero />
       <SubsidyCTASection />
       <SubsidyOverview />

@@ -7,4 +7,4 @@ export { TobOnboardingSection } from "./TobOnboardingSection";
 export { TobCaseStudiesSection } from "./TobCaseStudiesSection";
 export { TobFaqSection } from "./TobFaqSection";
 export { TobLastCTASection } from "./TobLastCTASection";
-export { TOB_COLORS, TOB_DEMO_URL, TOB_TRIAL_URL } from "./constants";
+export { TOB_COLORS, TOB_INQUIRY_URL } from "./constants";

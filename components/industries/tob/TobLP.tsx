@@ -24,7 +24,6 @@ export default function TobLP({ industry }: { industry: IndustryMeta }) {
         imageOverrides={industry.headerImages}
         rightTitle={industry.headerTitle}
         buttonTheme={industry.headerButtonTheme}
-        documentRequestFirst={industry.headerDocumentRequestFirst}
       />
       <TobFirstView />
       <TobProblemSection />

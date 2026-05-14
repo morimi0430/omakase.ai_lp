@@ -103,7 +103,7 @@ export default function Form() {
 
       if (response.ok) {
         // 送信成功したら thank you ページへリダイレクト
-        router.push('document-request/thank-you');
+        router.push('/document-request/thank-you');
       } else {
         throw new Error();
       }

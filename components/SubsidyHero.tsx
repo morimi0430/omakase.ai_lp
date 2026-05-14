@@ -49,7 +49,7 @@ function DeadlineBadge({ size = 180 }: { size?: number }) {
         【1次締め切】
       </span>
 
-      {/* 5月12日: 数字40px / 月日24px、字間は columnGap で調整 */}
+      {/* 6月15日: 数字40px / 月日24px、字間は columnGap で調整 */}
       <span
         style={{
           fontFamily: '"Noto Sans JP"',
@@ -63,9 +63,9 @@ function DeadlineBadge({ size = 180 }: { size?: number }) {
           columnGap: s(2),
         }}
       >
-        <span style={{ fontSize: s(40) }}>5</span>
+        <span style={{ fontSize: s(40) }}>6</span>
         <span style={{ fontSize: s(24), fontWeight: 700 }}>月</span>
-        <span style={{ fontSize: s(40), letterSpacing: `${s(1)}px` }}>12</span>
+        <span style={{ fontSize: s(40), letterSpacing: `${s(1)}px` }}>15</span>
         <span style={{ fontSize: s(24), fontWeight: 700 }}>日</span>
       </span>
 
@@ -274,34 +274,21 @@ export default function SubsidyHero() {
               </div>
             </div>
 
-            {/* CTA ボタン（ヘッダーと同一スタイル） */}
+            {/* CTA（補助金申請の相談） */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 32 }}>
               <Link
                 href="/document-request"
                 style={{
-                  display: 'flex', height: '48px', padding: '10px 12px',
-                  justifyContent: 'center', alignItems: 'center', gap: '6px',
-                  borderRadius: '300px', border: '1px solid #5004F5', background: '#FFF',
-                  fontSize: '13px', fontFamily: '"Noto Sans JP"', fontWeight: 700, color: '#5004F5',
-                  textDecoration: 'none', whiteSpace: 'nowrap',
-                }}
-              >
-                <span>資料請求はこちら</span>
-                <img src="/images/pc/arrow_white.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
-              </Link>
-              <Link
-                href="/demo-request"
-                style={{
-                  display: 'flex', height: '48px', padding: '10px 12px',
+                  display: 'flex', minHeight: '48px', padding: '10px 12px',
                   justifyContent: 'center', alignItems: 'center', gap: '6px',
                   borderRadius: '300px', border: 'none',
                   background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
                   fontSize: '13px', fontFamily: '"Noto Sans JP"', fontWeight: 700, color: '#FFF',
-                  textDecoration: 'none', whiteSpace: 'nowrap',
+                  textDecoration: 'none', lineHeight: 1.35, textAlign: 'center',
                 }}
               >
-                <span>無料体験はこちら</span>
-                <img src="/images/pc/arrow_purple.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
+                <span>補助金申請の相談をする</span>
+                <img src="/images/pc/arrow_white.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
               </Link>
             </div>
           </div>
