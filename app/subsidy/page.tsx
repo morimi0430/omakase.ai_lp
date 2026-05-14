@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { SUBSIDY_LP_ENABLED } from '@/lib/featureFlags';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SubsidyHero from '@/components/SubsidyHero';
@@ -57,10 +58,8 @@ ZEALSが申請の準備・マイページへの招待・書類確認まで伴走
   },
 ];
 
-const PAGE_ENABLED = true;
-
 export default function SubsidyPage() {
-  if (!PAGE_ENABLED) notFound();
+  if (!SUBSIDY_LP_ENABLED) notFound();
 
   return (
     <main className="overflow-x-hidden">

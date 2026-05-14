@@ -2,8 +2,13 @@
 
 import Link from "next/link";
 import { INDUSTRIES } from "@/lib/industries";
+import { SUBSIDY_LP_ENABLED } from "@/lib/featureFlags";
 
 export default function Footer() {
+  const mdGridCols = SUBSIDY_LP_ENABLED
+    ? "md:grid-cols-[auto_auto_auto_auto]"
+    : "md:grid-cols-[auto_auto_auto]";
+
   return (
     <footer className="w-full bg-neutral-800 border-t border-white/10 box-border">
       <style>{`
@@ -11,7 +16,9 @@ export default function Footer() {
       `}</style>
 
       <div className="footer-inner flex w-full flex-col lp-container">
-        <div className="mx-auto grid w-full max-w-[343px] grid-cols-1 items-start gap-6 md:max-w-none md:grid-cols-[auto_auto_auto_auto] md:gap-x-12 md:gap-y-10">
+        <div
+          className={`mx-auto grid w-full max-w-[343px] grid-cols-1 items-start gap-6 md:max-w-none md:gap-x-12 md:gap-y-10 ${mdGridCols}`}
+        >
             {/* ロゴ */}
             <div className="flex items-center">
               <div className="text-white text-2xl font-bold font-['Montserrat'] tracking-tight drop-shadow-[0_4px_12px_rgba(0,115,255,0.3)]">
@@ -51,20 +58,21 @@ export default function Footer() {
               </ul>
             </nav>
 
-            {/* 補助金LP */}
-            <nav className="flex flex-col gap-2" aria-label="補助金">
-              <p className="text-white text-sm font-bold m-0">補助金</p>
-              <ul className="flex flex-col gap-1 list-none m-0 p-0">
-                <li>
-                  <Link
-                    href="/subsidy"
-                    className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
-                  >
-                    デジタル化・AI導入補助金で導入
-                  </Link>
-                </li>
-              </ul>
-            </nav>
+            {SUBSIDY_LP_ENABLED ? (
+              <nav className="flex flex-col gap-2" aria-label="補助金">
+                <p className="text-white text-sm font-bold m-0">補助金</p>
+                <ul className="flex flex-col gap-1 list-none m-0 p-0">
+                  <li>
+                    <Link
+                      href="/subsidy"
+                      className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
+                    >
+                      デジタル化・AI導入補助金で導入
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            ) : null}
 
             {/* 法務：見出し + プライバシーポリシー・利用規約 */}
             <nav className="flex flex-col gap-2" aria-label="法務">
