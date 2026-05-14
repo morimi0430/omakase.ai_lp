@@ -3,27 +3,23 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SubsidyHero from '@/components/SubsidyHero';
-import SubsidyMerits from '@/components/SubsidyMerits';
-import SubsidyManualStrip from '@/components/SubsidyManualStrip';
+import SubsidyCTASection from '@/components/SubsidyCTASection';
 import SubsidyOverview from '@/components/SubsidyOverview';
 import SubsidyPriceTable from '@/components/SubsidyPriceTable';
-import SubsidySteps from '@/components/SubsidySteps';
 import SubsidyChecklist from '@/components/SubsidyChecklist';
-import SubsidySchedule from '@/components/SubsidySchedule';
-import SubsidyCTASection from '@/components/SubsidyCTASection';
-import LogoSlider from '@/components/LogoSlider';
+import SubsidySteps from '@/components/SubsidySteps';
 import FAQ from '@/components/FAQ';
 import type { FAQEntry } from '@/components/FAQ';
 
 export const metadata: Metadata = {
-  title: 'IT導入補助金でOmakase AIを導入 | Omakase AI',
+  title: 'デジタル化・AI導入補助金（旧IT導入補助金）でOmakase AIを最大50%OFFで導入 | Omakase AI',
   description:
-    '通常254万円のOmakase AI導入パッケージがIT導入補助金で実質85万円から。ZEALSが申請から入金まで伴走サポート。第1次締切2026年5月12日。',
+    'Omakase AIはデジタル化・AI導入補助金の対象サービスです。ZEALSが申請から入金まで伴走サポート。第1次締切2026年5月12日。',
 };
 
 const subsidyFAQs: FAQEntry[] = [
   {
-    question: 'Omakase AIはIT導入補助金の対象ですか？',
+    question: 'Omakase AIはデジタル化・AI導入補助金（旧IT導入補助金）の対象ですか？',
     answer:
       'はい、対象です。Omakase AIはITツールとして認定されており、システム利用料・初期構築費・研修・運用保守費がまとめて補助対象となります。',
   },
@@ -43,14 +39,11 @@ const subsidyFAQs: FAQEntry[] = [
       'GビズIDの公式サイト（gbiz-id.go.jp）から取得できます。法人代表者のマイナンバーカードとスマートフォンアプリが必要です。発行まで約2週間かかります。',
   },
   {
-    question: '賃金引上枠の条件を教えてください。',
-    answer:
-      '地域別最低賃金＋30円以上の賃上げを実施する事業者が対象です。補助率が2/3となり、通常枠（1/2）よりもお得に導入できます。詳しくはZEALSにご相談ください。',
-  },
-  {
     question: '申請はZEALSが全部やってくれますか？',
-    answer:
-      'ZEALSが申請の準備・マイページへの招待・書類確認まで伴走サポートします。ただし、GビズID取得やマイページへの情報入力など、一部お客様に対応いただく必要がある作業もあります。',
+    answer: `補助金の申請については、申請サポート会社に委託しております。
+準備〜交付申請までを伴走支援を実施する形になりますので、ご安心ください。
+
+ZEALSが申請の準備・マイページへの招待・書類確認まで伴走サポートします。ただし、GビズID取得やマイページへの情報入力など、一部お客様に対応いただく必要がある作業もあります。`,
   },
   {
     question: '用意する資金は、補助金適用後の金額だけでよいですか？',
@@ -64,7 +57,6 @@ const subsidyFAQs: FAQEntry[] = [
   },
 ];
 
-// ページの公開フラグ。true → 表示、false → 404非表示
 const PAGE_ENABLED = true;
 
 export default function SubsidyPage() {
@@ -74,16 +66,13 @@ export default function SubsidyPage() {
     <main className="overflow-x-hidden">
       <Header documentRequestFirst />
       <SubsidyHero />
-      <LogoSlider />
-      <SubsidyMerits />
+      <SubsidyCTASection />
       <SubsidyOverview />
       <SubsidyPriceTable />
       <SubsidyChecklist />
       <SubsidySteps />
-      <SubsidySchedule />
-      <SubsidyManualStrip variant="inline" />
       <FAQ
-        title="よくある質問"
+        title="よくある質問（FAQ）"
         items={subsidyFAQs}
       />
       <SubsidyCTASection />

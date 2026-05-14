@@ -2,32 +2,112 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Container } from './Container';
-import TrustBadgesRow from './TrustBadgesRow';
 import { subsidyDesign as D } from './subsidy/designTokens';
 
-const PDF_PATH = '/document/Omakase AI_法人様向け資料.pdf';
-const PDF_NAME = 'Omakase AI_法人様向け資料.pdf';
-
-const bulletPoints = [
-  'AIシステム・初期構築・研修が補助対象に含まれるパッケージ',
-  '補助率は通常枠1/2、賃金引上枠で最大2/3',
-  'ZEALSが申請準備から実績報告まで伴走',
+const bullets = [
+  'Omakase AIはデジタル化・AI導入補助金の対象サービスです',
+  'ZEALSが申請から入金まで伴走サポート！',
+  '申請まで約2週間かかります。お早めにご準備ください！',
 ];
 
-function CheckIcon() {
+/** 締切バッジ（円形）: size=180 (PC) / size=110 (Mobile) */
+function DeadlineBadge({ size = 180 }: { size?: number }) {
+  const s = (n: number) => Math.round(n * (size / 180));
+  /** 画像に対して丸を上へ（バッジサイズに比例） */
+  const topOffset = Math.round(-55 * (size / 180));
   return (
     <div
       style={{
-        width: 14,
-        height: 14,
-        flexShrink: 0,
-        marginTop: 4,
+        position: 'absolute',
+        top: topOffset,
+        right: 0,
+        width: size,
+        height: size,
+        borderRadius: '50%',
+        background: D.purpleCardGradient,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: s(5),
+        color: '#fff',
+        boxShadow: '0 8px 24px rgba(80,4,245,0.40)',
+        zIndex: 3,
       }}
     >
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="7" cy="7" r="7" fill={D.purple} />
-        <path d="M3.5 7L6 9.5L10.5 4.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      {/* 【1次締め切】: Noto Sans JP 500 18px */}
+      <span
+        style={{
+          fontFamily: '"Noto Sans JP"',
+          fontWeight: 500,
+          fontSize: s(18),
+          lineHeight: '150%',
+          textAlign: 'center',
+          letterSpacing: `${s(1)}px`,
+        }}
+      >
+        【1次締め切】
+      </span>
+
+      {/* 5月12日: 数字40px / 月日24px、字間は columnGap で調整 */}
+      <span
+        style={{
+          fontFamily: '"Noto Sans JP"',
+          fontWeight: 700,
+          lineHeight: '120%',
+          color: '#F2FF00',
+          textAlign: 'center',
+          display: 'inline-flex',
+          alignItems: 'baseline',
+          flexWrap: 'nowrap',
+          columnGap: s(2),
+        }}
+      >
+        <span style={{ fontSize: s(40) }}>5</span>
+        <span style={{ fontSize: s(24), fontWeight: 700 }}>月</span>
+        <span style={{ fontSize: s(40), letterSpacing: `${s(1)}px` }}>12</span>
+        <span style={{ fontSize: s(24), fontWeight: 700 }}>日</span>
+      </span>
+
+      {/* 17:00: Figtree 700 32px、字間調整 */}
+      <span
+        style={{
+          fontFamily: "'Figtree', var(--font-inter), sans-serif",
+          fontWeight: 700,
+          fontSize: s(32),
+          lineHeight: '150%',
+          color: '#F2FF00',
+          letterSpacing: `${s(2)}px`,
+        }}
+      >
+        17:00
+      </span>
+    </div>
+  );
+}
+
+/** バレット: 丸なし・紫のチェックのみ */
+function BulletCheck({ size = 18 }: { size?: number }) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        flexShrink: 0,
+        marginTop: Math.round(size * 0.28),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M3.5 7L6 9.5L10.5 4.5"
+          stroke="#5004F5"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     </div>
   );
@@ -35,470 +115,367 @@ function CheckIcon() {
 
 export default function SubsidyHero() {
   return (
-    <section className="w-full" style={{ background: D.bgWhite }}>
-      {/* 告知帯：メインLPのヘッダー下より控えめ（白＋下線） */}
-      <div
-        style={{
-          borderBottom: `1px solid ${D.border}`,
-          background: D.bgGray50,
-          padding: '12px 0',
-        }}
-      >
-        <Container>
-          <p
-            style={{
-              margin: 0,
-              textAlign: 'center',
-              color: D.textBody,
-              fontFamily: D.fontNoto,
-              fontSize: 13,
-              fontWeight: 500,
-              lineHeight: '160%',
-            }}
-          >
-            IT導入補助金活用時、
-            <span style={{ color: D.purple, fontWeight: 700 }}>最大約170万円</span>
-            の補助・
-            <span style={{ color: D.purple, fontWeight: 700 }}>実質約85万円</span>
-            からの導入（賃金引上枠・税抜ベース目安）
-          </p>
-        </Container>
-      </div>
+    <>
+      {/* Figtree フォントの読み込み */}
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@700&display=swap');`}</style>
 
-      <div
-        style={{
-          borderBottom: `1px solid ${D.border}`,
-          background: D.bgTint,
-          padding: '12px 0',
-        }}
-      >
-        <Container>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <TrustBadgesRow />
-          </div>
-        </Container>
-      </div>
-
-      {/* モバイル */}
-      <div
-        className="flex md:hidden flex-col"
-        style={{
-          paddingTop: 40,
-          paddingBottom: D.sectionPbMobile,
-          paddingLeft: D.pxMobile,
-          paddingRight: D.pxMobile,
-        }}
-      >
+      <section className="w-full relative md:mt-20 overflow-hidden isolate">
+        {/* FV 全体背景（public/images/industries/subsidy/fv-bg.png） */}
         <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-0"
           style={{
-            border: `1px solid ${D.border}`,
-            borderRadius: D.radiusSm,
-            background: '#FFFBEB',
-            padding: '12px 14px',
-            marginBottom: 24,
+            backgroundColor: '#f5f8fc',
+            backgroundImage: "url('/images/industries/subsidy/fv-bg.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
-        >
-          <p
-            style={{
-              margin: 0,
-              color: '#92400E',
-              fontSize: 13,
-              fontWeight: 700,
-              fontFamily: D.fontNoto,
-              lineHeight: '150%',
-            }}
-          >
-            【締切】第1次：2026年5月12日（火）17:00まで
-          </p>
-        </div>
+        />
 
-        <p
-          style={{
-            color: D.purple,
-            fontSize: 13,
-            fontWeight: 700,
-            fontFamily: D.fontNoto,
-            margin: '0 0 8px 0',
-          }}
-        >
-          IT導入補助金 × Omakase AI
-        </p>
-        <h1
-          style={{
-            fontSize: 28,
-            fontWeight: 700,
-            color: D.text,
-            lineHeight: '150%',
-            fontFamily: D.fontNoto,
-            margin: 0,
-          }}
-        >
-          通常
-          <span style={{ color: D.purple }}>254万円</span>
-          のAI導入パッケージが
-        </h1>
-        <p
-          style={{
-            fontSize: 28,
-            fontWeight: 700,
-            color: D.purple,
-            fontFamily: D.fontNoto,
-            lineHeight: '150%',
-            margin: '4px 0 0 0',
-          }}
-        >
-          実質約85万円から導入可能
-        </p>
-        <p
-          style={{
-            fontSize: 12,
-            color: D.textNote,
-            fontFamily: D.fontNoto,
-            margin: '12px 0 0 0',
-            lineHeight: '160%',
-          }}
-        >
-          ※賃金引上枠（補助率2/3）適用時の目安。個別条件により異なります。
-        </p>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24, marginBottom: 20 }}>
-          {bulletPoints.map((text) => (
-            <div key={text} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
-              <CheckIcon />
-              <span
-                style={{
-                  fontSize: 14,
-                  fontWeight: 500,
-                  color: D.textBody,
-                  fontFamily: D.fontNoto,
-                  lineHeight: '150%',
-                }}
-              >
-                {text}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="w-full flex justify-center" style={{ boxSizing: 'border-box', marginBottom: 28 }}>
-          <div
-            style={{
-              width: '100%',
-              maxWidth: '382px',
-              aspectRatio: '382/319',
-              boxSizing: 'border-box',
-              borderRadius: D.radiusCard,
-              border: `1px solid ${D.border}`,
-              overflow: 'hidden',
-              background: D.bgGray50,
-            }}
-          >
-            <Image
-              src="/images/common/fv_main.png"
-              alt="Omakase AIの操作画面イメージ"
-              width={382}
-              height={319}
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
-          <a
-            href={PDF_PATH}
-            download={PDF_NAME}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '14px 20px',
-              borderRadius: D.radiusPill,
-              background: D.bgWhite,
-              border: `1px solid ${D.purpleBtn}`,
-              color: D.purpleBtn,
-              fontWeight: 700,
-              fontSize: 14,
-              fontFamily: D.fontNoto,
-              textDecoration: 'none',
-            }}
-          >
-            資料をダウンロード
-          </a>
-          <Link
-            href="/document-request"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              padding: '14px 20px',
-              borderRadius: D.radiusPill,
-              background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-              border: '1px solid #EF96FF',
-              color: '#fff',
-              fontWeight: 700,
-              fontSize: 14,
-              fontFamily: D.fontNoto,
-              textDecoration: 'none',
-            }}
-          >
-            補助金・導入の相談
-          </Link>
-        </div>
-      </div>
-
-      {/* PC */}
-      <div className="hidden md:flex w-full justify-center">
+        {/* ──────────────────── モバイル版 ──────────────────── */}
+        {/* 左右余白は globals の .lp-container（メインLPの Container と同じ 16px） */}
         <div
-          className="w-full"
-          style={{
-            maxWidth: D.innerMax,
-            paddingLeft: D.innerPadPc,
-            paddingRight: D.innerPadPc,
-            paddingTop: 56,
-            paddingBottom: 72,
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: 60,
-          }}
+          className="lp-container flex md:hidden w-full flex-col relative z-10"
+          style={{ paddingTop: '19px', boxSizing: 'border-box', marginTop: 0 }}
         >
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <div className="flex min-w-0 max-w-full flex-col" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', gap: 20 }}>
+
+            {/* 黒背景バナー: border-radius 8px */}
             <div
               style={{
+                background: '#111',
+                borderRadius: 8,
+                padding: '4px 14px',
+                height: 36,
                 display: 'inline-flex',
-                border: `1px solid ${D.border}`,
-                borderRadius: D.radiusSm,
-                background: '#FFFBEB',
-                padding: '10px 16px',
-                marginBottom: 24,
-                alignSelf: 'flex-start',
+                alignItems: 'center',
+                gap: 6,
+                alignSelf: 'center',
               }}
             >
-              <p
+              <img
+                src="/images/pc/header_logo.png"
+                alt="Omakase.ai"
+                style={{ height: 14, width: 'auto', filter: 'brightness(0) invert(1)', flexShrink: 0 }}
+              />
+              <span
                 style={{
-                  margin: 0,
-                  color: '#92400E',
-                  fontSize: 14,
+                  color: '#fff',
+                  fontFamily: '"Noto Sans JP"',
+                  fontSize: 11,
                   fontWeight: 700,
-                  fontFamily: D.fontNoto,
+                  lineHeight: '150%',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                【締切】第1次：2026年5月12日（火）17:00まで
-              </p>
+                × デジタル化・AI導入補助金
+              </span>
             </div>
 
-            <p
+            {/* ヘッドライン: 40px 相当だが clamp + 折返しで狭い画面のはみ出し防止 */}
+            <div
+              className="min-w-0 max-w-full"
               style={{
-                color: D.purple,
-                fontSize: 14,
-                fontWeight: 700,
-                fontFamily: D.fontNoto,
-                margin: '0 0 8px 0',
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                alignItems: 'baseline',
+                columnGap: 4,
+                rowGap: 6,
+                width: '100%',
+                boxSizing: 'border-box',
+                textAlign: 'center',
+                fontSize: 'clamp(26px, 8.2vw, 40px)',
               }}
             >
-              IT導入補助金 × Omakase AI
-            </p>
-            <h1
-              style={{
-                fontFamily: D.fontNoto,
-                fontWeight: 700,
-                color: D.text,
-                lineHeight: '150%',
-                margin: 0,
-                fontSize: 28,
-              }}
-            >
-              通常<span style={{ color: D.purple, fontSize: 36 }}>254万円</span>のAI導入パッケージが
-            </h1>
-            <p
-              style={{
-                fontFamily: D.fontNoto,
-                fontWeight: 700,
-                color: D.purple,
-                fontSize: 36,
-                lineHeight: '140%',
-                margin: '8px 0 0 0',
-              }}
-            >
-              実質約85万円から導入可能
-            </p>
-            <p
-              style={{
-                fontSize: 12,
-                color: D.textNote,
-                fontFamily: D.fontNoto,
-                margin: '12px 0 28px 0',
-                lineHeight: '160%',
-              }}
-            >
-              ※賃金引上枠（補助率2/3）適用時の目安。個別条件により異なります。
-            </p>
+              <span
+                style={{
+                  fontFamily: '"Noto Sans JP"',
+                  fontWeight: 700,
+                  lineHeight: '1.1',
+                  color: '#0F0F0F',
+                }}
+              >
+                Omakase AIを
+              </span>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  alignItems: 'baseline',
+                  columnGap: 4,
+                  rowGap: 0,
+                  minWidth: 0,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-inter)',
+                    fontWeight: 700,
+                    lineHeight: '1.1',
+                    background: 'linear-gradient(90deg, #BF2BF1 0%, #6017FF 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  最大50%OFF
+                </span>
+                <span
+                  style={{
+                    fontFamily: '"Noto Sans JP"',
+                    fontWeight: 700,
+                    lineHeight: '1.1',
+                    color: '#0F0F0F',
+                  }}
+                >
+                  で導入！
+                </span>
+              </span>
+            </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 32 }}>
-              {bulletPoints.map((text) => (
-                <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <CheckIcon />
-                  <span
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 500,
-                      color: D.textBody,
-                      fontFamily: D.fontNoto,
-                      lineHeight: '150%',
-                    }}
-                  >
+            {/* 箇条書き（3行） */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {bullets.map((text) => (
+                <div key={text} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                  <BulletCheck size={18} />
+                  <span className="text-14 font-medium text-[#040404]" style={{ lineHeight: '150%' }}>
                     {text}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
-              <a
-                href={PDF_PATH}
-                download={PDF_NAME}
+            {/* 画像 + 締切バッジ */}
+            <div
+              className="relative w-full flex justify-center"
+              style={{ boxSizing: 'border-box' }}
+            >
+              <div
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '16px 28px',
-                  borderRadius: D.radiusPill,
-                  background: D.bgWhite,
-                  border: `1px solid ${D.purpleBtn}`,
-                  color: D.purpleBtn,
-                  fontWeight: 700,
-                  fontSize: 16,
-                  fontFamily: D.fontNoto,
-                  textDecoration: 'none',
+                  width: '100%',
+                  maxWidth: 382,
+                  aspectRatio: '382/280',
+                  boxSizing: 'border-box',
+                  position: 'relative',
                 }}
               >
-                資料をダウンロード
-              </a>
+                <Image
+                  src="/images/common/omakase_demo.png"
+                  alt="Omakase AIの操作画面（ラップトップ＋スマートフォン）"
+                  width={382}
+                  height={280}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+                <DeadlineBadge size={110} />
+              </div>
+            </div>
+
+            {/* CTA ボタン（ヘッダーと同一スタイル） */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingBottom: 32 }}>
               <Link
                 href="/document-request"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 10,
-                  padding: '16px 28px',
-                  borderRadius: D.radiusPill,
-                  background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
-                  border: '1px solid #EF96FF',
-                  color: '#fff',
-                  fontWeight: 700,
-                  fontSize: 16,
-                  fontFamily: D.fontNoto,
-                  textDecoration: 'none',
+                  display: 'flex', height: '48px', padding: '10px 12px',
+                  justifyContent: 'center', alignItems: 'center', gap: '6px',
+                  borderRadius: '300px', border: '1px solid #5004F5', background: '#FFF',
+                  fontSize: '13px', fontFamily: '"Noto Sans JP"', fontWeight: 700, color: '#5004F5',
+                  textDecoration: 'none', whiteSpace: 'nowrap',
                 }}
               >
-                補助金・導入の相談
+                <span>資料請求はこちら</span>
+                <img src="/images/pc/arrow_white.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
+              </Link>
+              <Link
+                href="/demo-request"
+                style={{
+                  display: 'flex', height: '48px', padding: '10px 12px',
+                  justifyContent: 'center', alignItems: 'center', gap: '6px',
+                  borderRadius: '300px', border: 'none',
+                  background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+                  fontSize: '13px', fontFamily: '"Noto Sans JP"', fontWeight: 700, color: '#FFF',
+                  textDecoration: 'none', whiteSpace: 'nowrap',
+                }}
+              >
+                <span>無料体験はこちら</span>
+                <img src="/images/pc/arrow_purple.png" alt="" style={{ width: 20, height: 20, flexShrink: 0 }} />
               </Link>
             </div>
           </div>
+        </div>
 
-          <div style={{ flexShrink: 0, width: 360, display: 'flex', flexDirection: 'column', gap: 24 }}>
+        {/* ──────────────────── PC版 ──────────────────── */}
+        <div className="relative z-10 hidden md:flex w-full justify-center">
+          <div
+            className="w-full md:max-w-[1440px] relative"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              /* Figma: コンテンツ最小 526.5 + 上60 + 下80（border-box では合算が必要） */
+              minHeight: 526.5 + D.sectionPtPc + D.sectionPbPc,
+              paddingTop: D.sectionPtPc,
+              paddingBottom: D.sectionPbPc,
+              paddingLeft: D.innerPadPc,
+              paddingRight: D.innerPadPc,
+              boxSizing: 'border-box',
+            }}
+          >
+            {/* FV: 1440幅・上下60/80・テキスト列と画像の間 24px・コンテンツ最小高526.5（Figma） */}
             <div
               style={{
-                borderRadius: D.radiusCard,
-                border: `1px solid ${D.border}`,
-                overflow: 'hidden',
-                background: D.bgGray50,
-                aspectRatio: '382/319',
+                display: 'flex',
+                gap: 24,
+                alignItems: 'center',
+                width: '100%',
               }}
             >
-              <Image
-                src="/images/common/fv_main.png"
-                alt="Omakase AIの操作画面イメージ"
-                width={382}
-                height={319}
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-              />
-            </div>
-            <aside>
               <div
                 style={{
-                  border: `1px solid ${D.border}`,
-                  borderRadius: D.radiusCard,
-                  background: D.bgWhite,
-                  boxShadow: D.shadowCard,
-                  padding: '28px 24px',
-                }}
-              >
-              <p
-                style={{
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: D.textMuted,
-                  fontFamily: D.fontNoto,
-                  margin: '0 0 20px 0',
-                }}
-              >
-                Omakase AI 補助金パッケージ（ベテラン相当・税抜）
-              </p>
-              <div
-                style={{
+                  flex: '1 1 0%',
+                  minWidth: 0,
                   display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingBottom: 12,
-                  marginBottom: 12,
-                  borderBottom: `1px solid ${D.border}`,
+                  flexDirection: 'column',
+                  gap: 20,
                 }}
               >
-                <span style={{ fontSize: 13, fontFamily: D.fontNoto, color: D.textMuted }}>通常合計</span>
-                <span
+                {/* 黒背景バナー: width~405px, height 40px, border-radius 8px */}
+                <div
                   style={{
-                    fontSize: 15,
-                    fontWeight: 700,
-                    fontFamily: 'var(--font-inter)',
-                    textDecoration: 'line-through',
-                    color: D.textSub,
+                    background: '#111',
+                    borderRadius: 8,
+                    padding: '2px 16px',
+                    height: 40,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    width: 'fit-content',
+                    maxWidth: 405,
                   }}
                 >
-                  約254万円
-                </span>
+                  {/* Omakase.ai ロゴ画像（白反転） */}
+                  <img
+                    src="/images/pc/header_logo.png"
+                    alt="Omakase.ai"
+                    style={{ height: 18, width: 'auto', filter: 'brightness(0) invert(1)', flexShrink: 0 }}
+                  />
+                  {/* テキスト: Noto Sans JP 700 18px */}
+                  <span
+                    style={{
+                      color: '#fff',
+                      fontFamily: '"Noto Sans JP"',
+                      fontSize: 18,
+                      fontWeight: 700,
+                      lineHeight: '150%',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    × デジタル化・AI導入補助金
+                  </span>
+                </div>
+
+                {/* ヘッドライン: 全て44px。「最大50%OFFで導入！」は改行しない */}
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'baseline',
+                    columnGap: 6,
+                    rowGap: 0,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: '"Noto Sans JP"',
+                      fontWeight: 700,
+                      fontSize: 44,
+                      lineHeight: '100%',
+                      color: '#0F0F0F',
+                    }}
+                  >
+                    Omakase AIを
+                  </span>
+                  <span style={{ whiteSpace: 'nowrap' }}>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-inter)',
+                        fontWeight: 700,
+                        fontSize: 44,
+                        lineHeight: '100%',
+                        background: 'linear-gradient(90deg, #BF2BF1 0%, #6017FF 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      最大50%OFF
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: '"Noto Sans JP"',
+                        fontWeight: 700,
+                        fontSize: 44,
+                        lineHeight: '100%',
+                        color: '#0F0F0F',
+                      }}
+                    >
+                      で導入！
+                    </span>
+                  </span>
+                </div>
+
+                {/* 箇条書き（3行）・右画像との間は親の gap:24 */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
+                  {bullets.map((text) => (
+                    <div key={text} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                      <BulletCheck size={18} />
+                      <span
+                        style={{
+                          color: '#040404',
+                          fontFamily: '"Noto Sans JP"',
+                          fontSize: 18,
+                          fontWeight: 500,
+                          lineHeight: '150%',
+                        }}
+                      >
+                        {text}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
+
               <div
                 style={{
+                  flex: '0 0 auto',
+                  width: 'clamp(280px, 40.75vw, 587px)',
+                  maxWidth: '100%',
+                  position: 'relative',
+                  height: 392,
                   display: 'flex',
-                  justifyContent: 'space-between',
                   alignItems: 'center',
-                  paddingBottom: 12,
-                  marginBottom: 12,
-                  borderBottom: `1px solid ${D.border}`,
+                  justifyContent: 'center',
                 }}
               >
-                <span style={{ fontSize: 13, fontFamily: D.fontNoto, color: D.textMuted }}>補助（賃上枠・目安）</span>
-                <span style={{ fontSize: 15, fontWeight: 700, fontFamily: 'var(--font-inter)', color: D.purple }}>
-                  約170万円
-                </span>
+                <Image
+                  src="/images/common/omakase_demo.png"
+                  alt="Omakase AIの操作画面（ラップトップ＋スマートフォン）"
+                  width={587}
+                  height={387}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  priority
+                />
+                {/* 締切バッジ: 180×180px */}
+                <DeadlineBadge size={180} />
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <span style={{ fontSize: 14, fontWeight: 700, fontFamily: D.fontNoto }}>実質負担（目安）</span>
-                <span style={{ fontSize: 28, fontWeight: 700, fontFamily: 'var(--font-inter)', color: D.purple }}>
-                  約85万円〜
-                </span>
-              </div>
-              <p
-                style={{
-                  margin: '16px 0 0 0',
-                  padding: 12,
-                  background: D.bgGray50,
-                  borderRadius: D.radiusSm,
-                  fontSize: 12,
-                  color: D.textMuted,
-                  fontFamily: D.fontNoto,
-                  lineHeight: '160%',
-                }}
-              >
-                通常枠（1/2）の場合の実質負担目安は約128万円です。
-              </p>
-              </div>
-            </aside>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+
+      </section>
+    </>
   );
 }

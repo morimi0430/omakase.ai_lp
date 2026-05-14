@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { INDUSTRIES } from "@/lib/industries";
 
 export default function Footer() {
@@ -9,10 +10,8 @@ export default function Footer() {
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@500;700&display=swap');
       `}</style>
 
-      <div className="footer-inner flex flex-col lp-container justify-center items-center">
-        <div className="w-full max-w-[1440px] flex flex-col flex-1 min-h-[12rem] items-center">
-          {/* PC: 中央揃え・ロゴ＋事例紹介列＋法務列（最大幅1440） / モバイル: 縦積み */}
-          <div className="w-full max-w-[343px] md:max-w-none mx-auto flex flex-col md:flex-row md:items-start gap-6 md:gap-12">
+      <div className="footer-inner flex w-full flex-col lp-container">
+        <div className="mx-auto grid w-full max-w-[343px] grid-cols-1 items-start gap-6 md:max-w-none md:grid-cols-[auto_auto_auto_auto] md:gap-x-12 md:gap-y-10">
             {/* ロゴ */}
             <div className="flex items-center">
               <div className="text-white text-2xl font-bold font-['Montserrat'] tracking-tight drop-shadow-[0_4px_12px_rgba(0,115,255,0.3)]">
@@ -52,6 +51,21 @@ export default function Footer() {
               </ul>
             </nav>
 
+            {/* 補助金LP */}
+            <nav className="flex flex-col gap-2" aria-label="補助金">
+              <p className="text-white text-sm font-bold m-0">補助金</p>
+              <ul className="flex flex-col gap-1 list-none m-0 p-0">
+                <li>
+                  <Link
+                    href="/subsidy"
+                    className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
+                  >
+                    デジタル化・AI導入補助金で導入
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
             {/* 法務：見出し + プライバシーポリシー・利用規約 */}
             <nav className="flex flex-col gap-2" aria-label="法務">
               <p className="text-white text-sm font-bold m-0">
@@ -80,13 +94,13 @@ export default function Footer() {
                 </li>
               </ul>
             </nav>
-          </div>
 
-          {/* コピーライト（親の下に配置・中央） */}
-          <p className="mt-auto pt-8 text-white/60 text-sm font-bold font-['Noto_Sans_JP'] m-0 text-center">
-            © 2026 ZEALS Co. Ltd
-          </p>
-        </div>
+            <div className="min-w-0 md:col-span-full">
+              <p className="m-0 pb-10 text-center text-white/60 text-sm font-bold font-['Noto_Sans_JP'] md:pb-14">
+                © 2026 ZEALS Co. Ltd
+              </p>
+            </div>
+          </div>
       </div>
     </footer>
   );

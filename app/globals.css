@@ -38,14 +38,14 @@ html {
 }
 
 /* フッター内余白（* のリセットより後に定義）。左右は .lp-container でヘッダーに合わせる。
- * モバイル: --mobile-bottom-reserved と safe-area で下領域を確保。PC: 1.5rem と safe-area */
+ * モバイル: --mobile-bottom-reserved と safe-area で下領域を確保。PC: 2.25rem と safe-area */
 .footer-inner {
   padding-top: 2rem;
   padding-bottom: calc(var(--mobile-bottom-reserved) + max(1.5rem, env(safe-area-inset-bottom, 0px)));
 }
 @media (min-width: 768px) {
   .footer-inner {
-    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+    padding-bottom: max(2.25rem, env(safe-area-inset-bottom, 0px));
   }
 }
 
