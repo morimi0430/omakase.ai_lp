@@ -162,7 +162,7 @@ export default async function InterviewPage({ params }: Props) {
               style={{
                 marginBottom: "20px",
                 paddingBottom: "20px",
-                ...(!["maguro-no-takumi", "5strands-japan", "yu-kaen", "ululab"].includes(interview.slug) ? { borderBottom: "1px solid #E5E5E5" } : {}),
+                ...(!["maguro-no-takumi", "5strands-japan", "yu-kaen", "ululab", "aub"].includes(interview.slug) ? { borderBottom: "1px solid #E5E5E5" } : {}),
                 gap: "20px",
               }}
             >
@@ -183,7 +183,7 @@ export default async function InterviewPage({ params }: Props) {
                       <br />
                       事業内容： {interview.businessDescription}
                     </>
-                  ) : interview.slug === "maguro-no-takumi" ? (
+                  ) : ["maguro-no-takumi", "aub"].includes(interview.slug) ? (
                     <>
                       企業名： {interview.companyNameShort || interview.companyName}
                       {interview.companySub ? `（${interview.companySub}）` : ""}
@@ -201,7 +201,7 @@ export default async function InterviewPage({ params }: Props) {
             </div>
 
             {/* 鮪匠・5Strands：リード文下の横線の代わりにCTAを配置（モバイルは横並び） */}
-            {["maguro-no-takumi", "5strands-japan", "yu-kaen", "ululab"].includes(interview.slug) && (
+            {["maguro-no-takumi", "5strands-japan", "yu-kaen", "ululab", "aub"].includes(interview.slug) && (
               <div className="w-full" style={{ marginBottom: "20px" }}>
                 <InterviewCTAButtons />
                 {/* PC：既存のCTAコンポーネント */}
@@ -245,6 +245,20 @@ export default async function InterviewPage({ params }: Props) {
                             style={{ height: "auto", maxWidth: "100%", verticalAlign: "middle" }}
                           />
                         </figure>
+                      )}
+                      {section.introBeforeQuestion && (
+                        <p
+                          className="m-0"
+                          style={{
+                            fontFamily: '"Noto Sans JP"',
+                            fontSize: "16px",
+                            lineHeight: 2,
+                            color: "#374151",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          {section.introBeforeQuestion}
+                        </p>
                       )}
                       <h3
                         className="m-0 font-bold"

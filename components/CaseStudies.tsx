@@ -14,6 +14,21 @@ export type CaseStudyItem = {
 
 const DEFAULT_CASES: CaseStudyItem[] = [
     {
+      company: 'AuB',
+      title: '少人数体制でも、"ストア体験"を改善しCSコスト削減の見込みが立ちました。',
+      image: 'images/common/interview/aub/image-1.jpg',
+      reasons: [
+        '商品カテゴリー拡大に伴う「自分に合う商品が分からない」課題',
+        'シナリオ作り込み型チャットでは運用リソースの限界',
+        '必要な機能が揃い、従来ツールよりコストダウン'
+      ],
+      effects: [
+        '初期構築サポートで想定以上にスムーズに立ち上げ',
+        '2ヶ月の育成でAI回答品質が大幅に向上',
+        'CS対応コスト削減の見込みが立つ運用へ'
+      ]
+    },
+    {
       company: 'Medulla',
       title: '日本語音声でも、"販売員レベルの接客"ができました。',
       image: 'images/common/medulla.png',

@@ -4,6 +4,8 @@
 
 export type InterviewSection = {
   heading: string;
+  /** 質問（h3）の直上に表示するリード文（任意） */
+  introBeforeQuestion?: string;
   /** 表示用の質問文（未指定時は heading から生成） */
   question?: string;
   /** 見出しの直上に表示する画像（任意） */
@@ -220,6 +222,62 @@ const INTERVIEW_YU_KAEN: InterviewDetail = {
   ],
 };
 
+const INTERVIEW_AUB: InterviewDetail = {
+  slug: "aub",
+  image: "/images/common/interview/aub/image-1.jpg",
+  title:
+    "接客AIエージェントで顧客体験を向上。\n少人数体制でのD2Cブランドの挑戦",
+  companyName: "AuB株式会社",
+  companyNameShort: "AuB",
+  companySub: "マーケティング本部ECチーム マネージャー　岸田 圭介 様",
+  businessDescription:
+    "ウェルネス・ヘルスケア産業（腸内環境ケアサプリメントおよびコンディショニングプロダクトの企画・販売）",
+  sections: [
+    {
+      heading: "1. 導入に至った背景",
+      introBeforeQuestion:
+        "アスリートの腸内環境研究からスタートし、コンディショニングを支えるサプリメントやインソールなどをD2Cで展開するAuB株式会社。同社は、商品ラインナップの拡大に伴うストアの課題を解決するため、Omakase AIを導入しました。わずか数名の運営体制のなかで、どのように活用し、どのような効果を実感しているのか、ご担当者様にお話を伺いました。",
+      question:
+        "事業の概要と、接客AIエージェントの導入を検討された背景を教えてください。",
+      image: "/images/common/interview/aub/image-1.jpg",
+      paragraphs: [
+        "1年前まではサプリメントが中心でしたが、この1年で食品や調味料、インソールなど様々なカテゴリーの商品が増えました。それに伴い、お客様がストアを訪れた際に「自分に合う商品はどれか」が分かりにくくなっているという課題がありました。ストアの体験を改善するための手段の1つとして、接客AIエージェントの活用を検討し始めました。",
+      ],
+    },
+    {
+      heading: "2. 検討〜導入まで",
+      question:
+        "以前はチャットボットを利用されていたとのことですが、今回「Omakase AI」を選ばれた理由は何でしょうか？",
+      paragraphs: [
+        "以前は別のツールを導入していましたが、主に診断コンテンツへの入り口としてしか使えていませんでした。例えば「インソールのサイズの選び方」といった個別の質問に対して、すべて手動でシナリオを作り込むのは、管理しきれないという課題がありました。",
+        "弊社は少人数で運営しているため、旧来型のシナリオを作り込むやり方ではリソース的に限界があります。また、新商品が出るたびにシナリオを作り直すのも現実的ではありません。",
+        "ちょうど社内でAI活用（レポーティングやリサーチ業務など）を進めていた時期でもあり、Omakase AIであれば、シナリオを作らなくても自然な対応ができそうだと感じました。また、自社に必要な機能が揃っており、過去導入していた別ツールよりもコストダウンにつながる点も大きな決め手です。",
+      ],
+    },
+    {
+      heading: "3. 実際に使ってみて",
+      question: "実際の導入作業や、運用してみてのご感想を教えてください。",
+      imageAfterParagraph: [
+        { afterIndex: 0, src: "/images/common/interview/aub/image-3.png" },
+      ],
+      paragraphs: [
+        "初期構築をお任せできたのは、シンプルにとても楽でした。早く導入を進めるうえで、この初期構築のサポートがあったおかげで、想定以上にスムーズかつ簡単に立ち上げることができました。その後のタグ設定なども難しくなく、管理画面も分かりやすいため、専門知識がなくても、担当メンバーがすぐに触れる環境を作れたのが良かったです。実際の作り込みは、日頃からコールセンターやお客様とやり取りをしていて「こういう質問にはこう返す」というナレッジが溜まっているCS担当が行っています。",
+        "導入初期は、AIの回答は修正も必要でした。しかし、「新入社員の1ヶ月目」のようなものだと思って育成を続けた結果、2ヶ月目にはかなりアウトプットが良くなりました。実際に運用しているCS担当も「ちゃんと成長している」と評価しています。",
+        "定量的な効果はこれからですが、定性的にはさまざまな質問に対してスムーズに回答できるようになり、CS対応にかかるコストが削減できる見込みが立ってきました。",
+      ],
+    },
+    {
+      heading: "4. 今後の展望や期待",
+      question: "今後、「Omakase AI」をどのように活用していきたいですか？",
+      imageAfterHeading: "/images/common/interview/aub/image-2.jpg",
+      paragraphs: [
+        "まずは、現在さまざまな窓口にきている1日5〜10件、月に150〜300件ほどのお問い合わせを、ストアとAIに自然に集約していきたいと考えています。また、Omakase AIに溜まったナレッジを活かして、LINEなど他のチャネルでもAIが応答できるようなマルチチャネルでの展開ができたらいいですね。",
+        "さらにゆくゆくは、単に質問に答えるだけのFAQ的な使い方だけでなく、オフラインの接客に近い「こちらからの働きかけ」を行っていきたいです。私たちの商品は、開発の背景や私たちがその商品をなぜ出したかという考え方をお伝えすることで、ご納得いただけることが多いです。しかし、オンライン広告のような瞬間的な接触では、そうした深い部分までなかなか伝えきれません。だからこそ、オフラインの接客でお話ししているような商品の背景や思いを、AIから自然に提示できるような工夫をしていきたいと考えています。",
+      ],
+    },
+  ],
+};
+
 const INTERVIEW_ULULAB: InterviewDetail = {
   slug: "ululab",
   image: "/images/common/interview/ululab/image-1.jpg",
@@ -282,6 +340,7 @@ const INTERVIEW_ULULAB: InterviewDetail = {
 
 /** 詳細データがあるインタビュー（slug → 詳細） */
 const INTERVIEW_DETAIL_MAP: Record<string, InterviewDetail> = {
+  [INTERVIEW_AUB.slug]: INTERVIEW_AUB,
   [INTERVIEW_ULULAB.slug]: INTERVIEW_ULULAB,
   [INTERVIEW_5STRANDS.slug]: INTERVIEW_5STRANDS,
   [INTERVIEW_MAGURO_TAKUMI.slug]: INTERVIEW_MAGURO_TAKUMI,
@@ -291,6 +350,12 @@ const INTERVIEW_DETAIL_MAP: Record<string, InterviewDetail> = {
 /** 一覧用：詳細があるインタビューのみ */
 export function getInterviewList(): InterviewListItem[] {
   return [
+    {
+      slug: INTERVIEW_AUB.slug,
+      image: INTERVIEW_AUB.image,
+      title: INTERVIEW_AUB.title,
+      companyName: INTERVIEW_AUB.companyNameShort ?? INTERVIEW_AUB.companyName,
+    },
     {
       slug: INTERVIEW_ULULAB.slug,
       image: INTERVIEW_ULULAB.image,
