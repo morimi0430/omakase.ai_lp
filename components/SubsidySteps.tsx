@@ -182,9 +182,9 @@ function PcFlow() {
   };
 
   const periods = [
-    { label: '今すぐ〜6月上旬' },
-    { label: '締切：6月15日(月) 17:00〜' },
-    { label: '7月以降〜' },
+    { label: '今すぐ〜7月中旬' },
+    { label: '締切：7月21日(火) 17:00〜' },
+    { label: '8月以降〜' },
   ];
 
   const pcFlowCardBase: React.CSSProperties = {

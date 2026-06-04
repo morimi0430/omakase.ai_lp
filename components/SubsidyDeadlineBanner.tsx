@@ -67,7 +67,7 @@ export default function SubsidyDeadlineBanner() {
             display: 'inline',
           }}
         >
-          2026年6月15日(月) 17:00
+          2026年7月21日(火) 17:00
         </span>
       </p>
       <p

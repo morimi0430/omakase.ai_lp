@@ -49,7 +49,7 @@ function DeadlineBadge({ size = 180 }: { size?: number }) {
         【1次締め切】
       </span>
 
-      {/* 6月15日: 数字40px / 月日24px、字間は columnGap で調整 */}
+      {/* 7月21日: 数字40px / 月日24px、字間は columnGap で調整 */}
       <span
         style={{
           fontFamily: '"Noto Sans JP"',
@@ -63,9 +63,9 @@ function DeadlineBadge({ size = 180 }: { size?: number }) {
           columnGap: s(2),
         }}
       >
-        <span style={{ fontSize: s(40) }}>6</span>
+        <span style={{ fontSize: s(40) }}>7</span>
         <span style={{ fontSize: s(24), fontWeight: 700 }}>月</span>
-        <span style={{ fontSize: s(40), letterSpacing: `${s(1)}px` }}>15</span>
+        <span style={{ fontSize: s(40), letterSpacing: `${s(1)}px` }}>21</span>
         <span style={{ fontSize: s(24), fontWeight: 700 }}>日</span>
       </span>
 
