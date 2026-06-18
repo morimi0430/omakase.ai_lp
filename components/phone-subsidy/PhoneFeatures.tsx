@@ -37,11 +37,7 @@ const cards = [
 ] as const;
 
 function Tag({ label }: { label: string }) {
-  return (
-    <span className="inline-flex h-[24.5px] flex-col items-start rounded-[9999px] bg-[#F0FDFA] px-[10px] pb-[4.5px] pt-[3px] font-[Inter,sans-serif] text-[11px] font-semibold leading-[16.5px] text-[#0d9488]">
-      {label}
-    </span>
-  );
+  return <span className="phone-usecase-tag">{label}</span>;
 }
 
 function DemoVideo({ src }: { src: string }) {
@@ -92,7 +88,7 @@ export default function PhoneFeatures() {
                 <p className="phone-stack-mt-12 font-[Inter,sans-serif] text-[12px] font-normal leading-[20.4px] text-[#6B7280]">
                   {c.desc}
                 </p>
-                <div className="phone-stack-mt-16 flex flex-wrap gap-1.5">
+                <div className="phone-stack-mt-16 phone-usecase-tags">
                   {c.tags.map((tag) => (
                     <Tag key={tag} label={tag} />
                   ))}

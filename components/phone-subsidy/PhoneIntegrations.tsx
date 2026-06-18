@@ -16,20 +16,15 @@ export default function PhoneIntegrations() {
         <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-[64px]">
           <div className="flex flex-col items-start gap-6 text-left">
             <h2 className="text-left font-[Inter,sans-serif] text-[36px] font-extrabold leading-[54px] tracking-[-1px] text-[#111827]">
-              主要CRM・ECプラットフォーム
-              <br />
-              とすぐに連携。
+              主要CRM・ECプラットフォームとすぐに連携。
             </h2>
             <p className="font-[Inter,sans-serif] text-[16px] leading-[28.8px] text-[#6b7280]">
               要件定義から連携実装・運用保守まで、最短1ヶ月以内に対応。貴社の既存システムをそのまま活かせます。
             </p>
 
-            <div className="flex flex-wrap items-center justify-start gap-4" style={{ paddingTop: 17 }}>
+            <div className="phone-integration-logos">
               {phoneIntegrationLogos.map((logo) => (
-                <div
-                  key={logo.alt}
-                  className="flex min-h-[50px] items-center justify-center rounded-[8px] border border-[#f3f4f6] bg-white px-[17px] py-[9px] shadow-[0px_1px_1px_rgba(0,0,0,0.05)]"
-                >
+                <div key={logo.alt} className="phone-integration-logo-card">
                   <Image
                     src={logo.src}
                     alt={logo.alt}

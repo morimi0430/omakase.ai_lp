@@ -59,8 +59,8 @@ export const phoneIntegrationLogos = [
   {
     src: '/images/phone-subsidy/integrations/logo-hacomono-figma.png',
     alt: 'hacomono',
-    width: 120,
-    height: 34,
+    width: 104,
+    height: 24,
     intrinsic: { width: 1686, height: 367 },
   },
 ] as const;
