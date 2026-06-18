@@ -14,16 +14,20 @@ const oneLineMobileTitleClassName =
 export default function SubsidySectionHeading({
   title,
   oneLineMobile,
+  accentColor,
 }: {
   title: ReactNode;
   /** モバイルで 1 行に収めるため文字サイズを下げる（md 以上は 36px のまま） */
   oneLineMobile?: boolean;
+  /** タイトル下アクセント線の色。未指定時は紫グラデーション */
+  accentColor?: string;
 }) {
   return (
     <>
       <SectionTitle
         title={title}
         titleClassName={oneLineMobile ? oneLineMobileTitleClassName : undefined}
+        accentColor={accentColor}
       />
       <div
         aria-hidden

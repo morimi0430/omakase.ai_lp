@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CTAButton from "./CTAButton";
+import { PhoneCtaButton } from '@/components/phone-subsidy/layout';
+import { PhoneHeaderNav } from '@/components/phone-subsidy/PhoneHeader';
 import type { IndustryHeaderImages } from "@/lib/industries";
 import { KAIGO_COLORS, KAIGO_CTA_ARROWS } from "./industries/kaigo/constants";
 
@@ -15,9 +17,11 @@ interface HeaderProps {
   /** 業界LP用ヘッダー右側テキスト（例: カイゴテンショク） */
   rightTitle?: string;
   /** 介護LPのとき "green" を指定。未指定は紫のメインLP */
-  buttonTheme?: ButtonTheme;
+  buttonTheme?: ButtonTheme; 
   /** 補助金LP用：ヘッダーCTAを「補助金申請の相談をする」のみ表示（/document-request） */
   subsidyLp?: boolean;
+  /** 電話AI LP用：ナビリンク + ページ内CTA（PhoneCtaButton） */
+  phoneLp?: boolean;
 }
 
 const DEFAULT_LOGO_PC = "/images/pc/header_logo.png";
@@ -29,6 +33,7 @@ export default function Header({
   rightTitle,
   buttonTheme = "default",
   subsidyLp = false,
+  phoneLp = false,
 }: HeaderProps) {
   const [showMobileCTA, setShowMobileCTA] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -108,9 +113,10 @@ export default function Header({
               )}
             </a>
 
-            {/* 補助金LPは「補助金申請の相談をする」1本、それ以外はお問い合わせ */}
-            <div className="flex justify-end items-center gap-4 flex-shrink-0">
-              {subsidyLp ? (
+            {/* 電話AI LP / 補助金LP / 通常 */}
+            {phoneLp ? (
+              <PhoneHeaderNav />
+            ) : subsidyLp ? (
                 <Link
                   href="/document-request"
                   onClick={() => {
@@ -174,7 +180,6 @@ export default function Header({
                   />
                 </Link>
               )}
-            </div>
           </div>
         </div>
         </header>
@@ -223,7 +228,13 @@ export default function Header({
               boxSizing: "border-box",
             }}
           >
-            {subsidyLp ? (
+            {phoneLp ? (
+              <div style={{ flex: "1 0 0", minWidth: 0, width: "100%", padding: "0 16px", boxSizing: "border-box" }}>
+                <PhoneCtaButton href="/document-request" className="h-[48px] w-full">
+                  資料請求・無料相談
+                </PhoneCtaButton>
+              </div>
+            ) : subsidyLp ? (
               <div style={{ flex: "1 0 0", minWidth: 0, width: "100%", padding: "0 16px", boxSizing: "border-box" }}>
                 <Link
                   href="/document-request"

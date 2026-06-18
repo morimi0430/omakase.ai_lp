@@ -70,6 +70,14 @@ export default function Footer() {
                       デジタル化・AI導入補助金で導入
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      href="/phone-subsidy"
+                      className="text-white/80 text-sm font-medium hover:text-white hover:underline transition-colors duration-200 underline-offset-2"
+                    >
+                      電話AI
+                    </Link>
+                  </li>
                 </ul>
               </nav>
             ) : null}
