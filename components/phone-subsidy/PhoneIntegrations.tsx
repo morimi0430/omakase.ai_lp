@@ -30,8 +30,7 @@ export default function PhoneIntegrations() {
                     alt={logo.alt}
                     width={logo.intrinsic.width}
                     height={logo.intrinsic.height}
-                    className="block object-contain"
-                    style={{ width: logo.width, height: logo.height }}
+                    className={`block object-contain ${logo.logoClassName}`}
                   />
                 </div>
               ))}

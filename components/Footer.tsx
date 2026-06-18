@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { INDUSTRIES } from "@/lib/industries";
+import { getVisibleIndustries } from "@/lib/industries";
 import { SUBSIDY_LP_ENABLED } from "@/lib/featureFlags";
 
 export default function Footer() {
+  const visibleIndustries = getVisibleIndustries();
   const mdGridCols = SUBSIDY_LP_ENABLED
     ? "md:grid-cols-[auto_auto_auto_auto]"
     : "md:grid-cols-[auto_auto_auto]";
@@ -33,7 +34,7 @@ export default function Footer() {
               </p>
               {/* PC: INDUSTRIES の順番どおり / モバイル: 逆順（BtoB上・人材下） */}
               <ul className="hidden md:flex flex-col gap-y-1 list-none m-0 p-0">
-                {INDUSTRIES.map((industry) => (
+                {visibleIndustries.map((industry) => (
                   <li key={industry.slug}>
                     <a
                       href={`/industries/${industry.slug}`}
@@ -45,7 +46,7 @@ export default function Footer() {
                 ))}
               </ul>
               <ul className="flex md:hidden flex-col gap-y-1 list-none m-0 p-0">
-                {[...INDUSTRIES].reverse().map((industry) => (
+                {[...visibleIndustries].reverse().map((industry) => (
                   <li key={industry.slug}>
                     <a
                       href={`/industries/${industry.slug}`}

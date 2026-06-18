@@ -45,22 +45,19 @@ export const phoneIntegrationLogos = [
   {
     src: '/images/phone-subsidy/integrations/logo-ecforce-figma.png',
     alt: 'ecforce',
-    width: 120,
-    height: 32,
+    logoClassName: 'phone-integration-logo-ecforce',
     intrinsic: { width: 580, height: 155 },
   },
   {
     src: '/images/phone-subsidy/integrations/logo-shopify-figma.png',
     alt: 'Shopify',
-    width: 120,
-    height: 32,
+    logoClassName: 'phone-integration-logo-shopify',
     intrinsic: { width: 1000, height: 525 },
   },
   {
     src: '/images/phone-subsidy/integrations/logo-hacomono-figma.png',
     alt: 'hacomono',
-    width: 104,
-    height: 24,
+    logoClassName: 'phone-integration-logo-hacomono',
     intrinsic: { width: 1686, height: 367 },
   },
 ] as const;

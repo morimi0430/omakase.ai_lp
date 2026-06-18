@@ -4,6 +4,8 @@
  * @see docs/IMAGE_DIRECTORY_STRATEGY.md
  */
 
+import { KAIGO_LP_ENABLED } from "@/lib/featureFlags";
+
 export type IndustrySlug = "kaigo" | "tob";
 
 /** 業界LP用ヘッダー画像の上書き（未指定のキーはメインLPのデフォルトを使用） */
@@ -50,10 +52,22 @@ export const INDUSTRIES: IndustryMeta[] = [
   },
 ];
 
+export function isIndustryVisible(slug: IndustrySlug): boolean {
+  if (slug === "kaigo") return KAIGO_LP_ENABLED;
+  return true;
+}
+
+/** フッター等 — 公開中の業界LPのみ */
+export function getVisibleIndustries(): IndustryMeta[] {
+  return INDUSTRIES.filter((i) => isIndustryVisible(i.slug));
+}
+
 export function getIndustryBySlug(slug: string): IndustryMeta | undefined {
-  return INDUSTRIES.find((i) => i.slug === slug);
+  const industry = INDUSTRIES.find((i) => i.slug === slug);
+  if (!industry || !isIndustryVisible(industry.slug)) return undefined;
+  return industry;
 }
 
 export function getAllIndustrySlugs(): IndustrySlug[] {
-  return INDUSTRIES.map((i) => i.slug);
+  return getVisibleIndustries().map((i) => i.slug);
 }

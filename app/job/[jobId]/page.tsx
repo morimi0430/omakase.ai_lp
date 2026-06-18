@@ -7,10 +7,12 @@ import Footer from "@/components/Footer";
 import { getKaigoJobById, KAIGO_JOB_LISTINGS } from "@/lib/kaigo-jobs";
 import { KAIGO_COLORS } from "@/components/industries/kaigo/constants";
 import { getIndustryBySlug } from "@/lib/industries";
+import { KAIGO_LP_ENABLED } from "@/lib/featureFlags";
 
 type Props = { params: Promise<{ jobId: string }> };
 
 export async function generateStaticParams() {
+  if (!KAIGO_LP_ENABLED) return [];
   return KAIGO_JOB_LISTINGS.map((j) => ({ jobId: j.jobId }));
 }
 
@@ -25,6 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function JobPage({ params }: Props) {
+  if (!KAIGO_LP_ENABLED) notFound();
+
   const { jobId } = await params;
   const job = getKaigoJobById(jobId);
   if (!job) notFound();

@@ -196,16 +196,35 @@ html {
 
 /* CRM連携ロゴカード — * リセットより後に定義 */
 .phone-integration-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 154px);
+  justify-content: center;
   gap: 16px;
   padding-top: 17px;
+  width: 100%;
+}
+
+.phone-integration-logos .phone-integration-logo-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+@media (min-width: 768px) {
+  .phone-integration-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .phone-integration-logos .phone-integration-logo-card:last-child:nth-child(odd) {
+    grid-column: auto;
+    justify-self: auto;
+  }
 }
 
 .phone-integration-logo-card {
   display: flex;
+  width: 154px;
   height: 50px;
   min-height: 50px;
   align-items: center;
@@ -216,6 +235,28 @@ html {
   background: #ffffff;
   padding: 9px 17px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.phone-integration-logo-ecforce,
+.phone-integration-logo-shopify {
+  display: block;
+  height: 32px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+.phone-integration-logo-shopify {
+  transform: scale(1.22);
+  transform-origin: center;
+}
+
+.phone-integration-logo-hacomono {
+  display: block;
+  height: 24px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
 }
 
 /* 導入ステップ — 丸をつなぐ線 */
