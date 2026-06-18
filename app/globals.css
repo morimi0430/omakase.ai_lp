@@ -206,6 +206,7 @@ html {
 
 .phone-integration-logo-card {
   display: flex;
+  height: 50px;
   min-height: 50px;
   align-items: center;
   justify-content: center;
@@ -215,6 +216,35 @@ html {
   background: #ffffff;
   padding: 9px 17px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* 導入ステップ — 丸をつなぐ線 */
+.phone-steps-track {
+  position: relative;
+  width: 100%;
+}
+
+.phone-steps-connector {
+  display: none;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .phone-steps-connector {
+    display: block;
+    position: absolute;
+    left: 12.5%;
+    right: 12.5%;
+    top: 27px;
+    z-index: 0;
+    height: 2px;
+    background: linear-gradient(to right, #99f6e4, #5eead4, #99f6e4);
+  }
+}
+
+.phone-steps-grid {
+  position: relative;
+  z-index: 1;
 }
 
 .phone-card-screen {

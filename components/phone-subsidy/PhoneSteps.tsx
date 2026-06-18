@@ -23,16 +23,13 @@ export default function PhoneSteps() {
           <PhoneSectionHeading>最短1ヶ月で本番稼働。</PhoneSectionHeading>
         </PhoneSectionHeader>
 
-        <div className="relative w-full">
-          <div
-            className="absolute left-[12.5%] right-[12.5%] top-[27px] hidden h-px bg-gradient-to-r from-[#99f6e4] via-[#5eead4] to-[#99f6e4] md:block"
-            aria-hidden
-          />
+        <div className="phone-steps-track">
+          <div className="phone-steps-connector" aria-hidden />
 
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-8">
+          <div className="phone-steps-grid grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-8">
             {steps.map((s) => (
               <div key={s.no} className="relative flex flex-col items-center text-center">
-                <div className="flex size-[42px] items-center justify-center rounded-full border-2 border-[#14b8a6] bg-white text-[14px] font-bold leading-[20px] text-[#0d9488] shadow-[0px_1px_1px_rgba(20,184,166,0.1)] md:size-[54px]">
+                <div className="relative z-[1] flex size-[42px] items-center justify-center rounded-full border-2 border-[#14b8a6] bg-white text-[14px] font-bold leading-[20px] text-[#0d9488] shadow-[0px_1px_1px_rgba(20,184,166,0.1)] md:size-[54px]">
                   {s.no}
                 </div>
                 <h3 className="phone-stack-mt-16 text-[14px] font-bold leading-[20px] text-[#111827]">{s.title}</h3>

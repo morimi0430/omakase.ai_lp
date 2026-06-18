@@ -53,7 +53,7 @@ export const phoneIntegrationLogos = [
     src: '/images/phone-subsidy/integrations/logo-shopify-figma.png',
     alt: 'Shopify',
     width: 120,
-    height: 41,
+    height: 32,
     intrinsic: { width: 1000, height: 525 },
   },
   {
