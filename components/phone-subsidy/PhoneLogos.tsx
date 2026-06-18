@@ -47,9 +47,7 @@ export default function PhoneLogos() {
     >
       <PhoneFigmaInner gap="40">
         <h2 className="relative z-10 w-full overflow-visible text-center font-[Inter,sans-serif] text-[36px] font-extrabold leading-[54px] tracking-[-1px] text-[#111827]">
-          大手600社を超える
-          <br />
-          ZEALSグループの支援実績
+          大手600社を超えるZEALSグループの支援実績
         </h2>
 
         <div className="phone-logos-marquee relative z-0 flex w-full flex-col gap-3 md:gap-4">

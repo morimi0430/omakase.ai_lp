@@ -34,11 +34,7 @@ export default function PhoneCallData() {
           leadClassName="max-w-[600px]"
           lead="顧客管理・通話ログ・文字起こし・AIサマリーを一元管理。データドリブンな改善を実現します。"
         >
-          <PhoneSectionHeading>
-            すべての通話を、
-            <br />
-            改善データに変える。
-          </PhoneSectionHeading>
+          <PhoneSectionHeading>すべての通話を、改善データに変える。</PhoneSectionHeading>
         </PhoneSectionHeader>
 
         <div className="phone-grid-gap-12 grid w-full md:grid-cols-3">

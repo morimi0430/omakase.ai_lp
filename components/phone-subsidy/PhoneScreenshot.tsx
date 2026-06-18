@@ -76,12 +76,18 @@ export function PhoneScreenshot({
 
   const cardStyle = paired
     ? ({
-        ...standardFrameStyle,
+        boxSizing: 'border-box' as const,
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
         height: '100%',
         minHeight: '100%',
+        padding: '13px 13px 30px',
+        borderRadius: 16,
+        border: FRAME_BORDER,
+        background: '#ffffff',
+        boxShadow: FRAME_SHADOW_STANDARD,
       } as const)
     : standardFrameStyle;
 

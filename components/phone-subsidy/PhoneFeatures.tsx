@@ -73,11 +73,7 @@ export default function PhoneFeatures() {
           leadClassName="max-w-[700px]"
           lead="D2C・通販・EC・金融・通信など、600社超の導入知見をもとに最適なフローを構築します。"
         >
-          <PhoneSectionHeading>
-            あらゆる電話業務を
-            <br />
-            AIに任せる。
-          </PhoneSectionHeading>
+          <PhoneSectionHeading>あらゆる電話業務をAIに任せる。</PhoneSectionHeading>
         </PhoneSectionHeader>
 
         <div className="phone-grid-gap-16 grid w-full grid-cols-1 xl:grid-cols-4">

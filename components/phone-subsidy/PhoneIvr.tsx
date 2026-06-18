@@ -45,11 +45,7 @@ export default function PhoneIvr() {
     <PhoneFigmaSection py="standard">
       <PhoneFigmaInner gap="64">
         <PhoneSectionHeader lead="シナリオ設計不要。自然言語で対話し、状況に応じてフローを自律判断します。">
-          <PhoneSectionHeading>
-            従来のIVRとは、
-            <br />
-            根本から違う。
-          </PhoneSectionHeading>
+          <PhoneSectionHeading>従来のIVRとは、根本から違う。</PhoneSectionHeading>
         </PhoneSectionHeader>
 
         <div className="phone-grid-gap-16 grid w-full grid-cols-1 lg:grid-cols-3">

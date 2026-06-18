@@ -260,6 +260,15 @@ html {
 
 .phone-screenshot-pair {
   align-items: stretch;
+  width: 100%;
+}
+
+.phone-screenshot-pair > figure {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+  min-width: 0;
 }
 
 .phone-hero-screenshot {
@@ -310,12 +319,6 @@ html {
     aspect-ratio: auto;
     height: 328.08px;
   }
-}
-
-.phone-screenshot-pair > figure {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
 }
 
 .phone-stack-mt-4 {

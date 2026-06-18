@@ -17,11 +17,7 @@ export default function PhoneFinalCta() {
       <PhoneFigmaInner gap="48" className="relative mx-auto items-center">
         <div className="flex w-full max-w-[500px] flex-col items-center text-center" style={{ gap: 23 }}>
           <h2 className="font-[Inter,sans-serif] text-[36px] font-extrabold leading-[43.2px] tracking-[-1px] text-white">
-            電話対応の課題、
-            <br />
-            Omakase AIが解決し
-            <br />
-            ます。
+            電話対応の課題、Omakase AIが解決します。
           </h2>
           <p className="font-[Inter,sans-serif] text-[15px] leading-[27px] text-[rgba(255,255,255,0.5)] md:text-[14px] md:leading-[25.2px]">
             導入コストや対応範囲など、ご要件に合わせて個別にご提案いたします。

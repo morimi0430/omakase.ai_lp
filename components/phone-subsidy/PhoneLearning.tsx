@@ -42,13 +42,7 @@ export default function PhoneLearning() {
           leadClassName="max-w-[700px]"
           lead="医療・化粧品・不動産・金融など、専門用語や商品名を辞書登録することで音声認識と回答精度を向上できます。"
         >
-          <PhoneSectionHeading>
-            業界用語も学習。専
-            <br />
-            門商材でも高精度対
-            <br />
-            応。
-          </PhoneSectionHeading>
+          <PhoneSectionHeading>業界用語も学習。専門商材でも高精度対応。</PhoneSectionHeading>
         </PhoneSectionHeader>
 
         <div className="phone-grid-gap-24 grid w-full grid-cols-1 pt-2 md:grid-cols-2">

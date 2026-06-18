@@ -20,11 +20,7 @@ export default function PhoneSteps() {
           leadClassName="max-w-[700px]"
           lead="AIと業界の知識に精通した、ZEALSのAIコンサルタントが初期設定から運用改善まで伴走します。"
         >
-          <PhoneSectionHeading>
-            最短1ヶ月で本番稼
-            <br />
-            働。
-          </PhoneSectionHeading>
+          <PhoneSectionHeading>最短1ヶ月で本番稼働。</PhoneSectionHeading>
         </PhoneSectionHeader>
 
         <div className="relative w-full">
