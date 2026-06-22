@@ -1,36 +1,34 @@
 import Image from 'next/image';
 import { PhoneFigmaInner, PhoneFigmaSection } from './layout';
-import { phoneImages } from './images';
-
-const STRIP_WIDTH = 1712;
-const STRIP_HEIGHT = 101;
-const ROW_HEIGHT = STRIP_HEIGHT / 2;
+import { phonePartnerLogosBottom, phonePartnerLogosTop, type PhonePartnerLogo } from './logos';
 
 function LogoMarqueeRow({
   direction,
-  row,
+  logos,
 }: {
   direction: 'left' | 'right';
-  row: 'top' | 'bottom';
+  logos: PhonePartnerLogo[];
 }) {
   const trackClass =
     direction === 'left' ? 'phone-logos-marquee-left' : 'phone-logos-marquee-right';
-  const stripClass = row === 'top' ? 'phone-logos-strip-top' : 'phone-logos-strip-bottom';
 
   return (
     <div className="phone-logos-marquee-row phone-logos-marquee-mask">
       <div className={`phone-logos-marquee-track ${trackClass}`}>
         {[0, 1].map((copy) => (
-          <div key={copy} className={`phone-logos-strip-frame ${stripClass}`}>
-            <Image
-              src={phoneImages.logosStrip}
-              alt={copy === 0 ? '導入企業ロゴ一覧' : ''}
-              aria-hidden={copy !== 0}
-              width={STRIP_WIDTH}
-              height={STRIP_HEIGHT}
-              className="phone-logos-strip-image max-w-none shrink-0 select-none"
-              draggable={false}
-            />
+          <div key={copy} className="phone-logos-marquee-set" aria-hidden={copy !== 0}>
+            {logos.map((item) => (
+              <div key={`${copy}-${item.src}`} className="phone-logos-marquee-item">
+                <Image
+                  src={item.src}
+                  alt={copy === 0 ? item.alt : ''}
+                  width={item.width}
+                  height={item.height}
+                  className="phone-logos-marquee-image"
+                  draggable={false}
+                />
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -51,8 +49,8 @@ export default function PhoneLogos() {
         </h2>
 
         <div className="phone-logos-marquee relative z-0 flex w-full flex-col gap-3 md:gap-4">
-          <LogoMarqueeRow direction="right" row="top" />
-          <LogoMarqueeRow direction="left" row="bottom" />
+          <LogoMarqueeRow direction="right" logos={phonePartnerLogosTop} />
+          <LogoMarqueeRow direction="left" logos={phonePartnerLogosBottom} />
         </div>
       </PhoneFigmaInner>
     </PhoneFigmaSection>

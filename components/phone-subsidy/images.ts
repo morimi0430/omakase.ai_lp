@@ -1,7 +1,6 @@
 /** 電話AI LP（/phone-subsidy）の画像パス — Figma node 318:834 準拠 */
 export const phoneImages = {
   logoHeader: '/images/phone-subsidy/logo-header.png',
-  logosStrip: '/images/phone-subsidy/logos-strip.png',
   hero: '/images/phone-subsidy/hero-phone-ai.png',
   customerManagement: '/images/phone-subsidy/customer-management.png',
   callDetailSummary: '/images/phone-subsidy/call-detail-summary.png',

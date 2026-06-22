@@ -321,26 +321,28 @@ html {
   will-change: transform;
 }
 
-.phone-logos-strip-frame {
+.phone-logos-marquee-set {
+  display: flex;
   flex-shrink: 0;
-  width: 1712px;
+  align-items: center;
+}
+
+.phone-logos-marquee-item {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   height: 50.5px;
-  overflow: hidden;
+  padding: 0 28px;
 }
 
-.phone-logos-strip-image {
+.phone-logos-marquee-image {
   display: block;
-  width: 1712px;
-  height: 101px;
-  max-width: none;
-}
-
-.phone-logos-strip-top .phone-logos-strip-image {
-  transform: translateY(0);
-}
-
-.phone-logos-strip-bottom .phone-logos-strip-image {
-  transform: translateY(-50.5px);
+  height: 32px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
 }
 
 @keyframes phone-logos-scroll-left {
