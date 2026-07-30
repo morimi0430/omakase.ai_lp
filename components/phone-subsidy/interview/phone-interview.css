@@ -204,17 +204,22 @@
   }
 }
 
-.phone-interview__lede {
+/* 中央タイトル・副題: セクション h2 と同じ大きさ・太さ
+ * ※ .phone-interview__content p より詳細度を上げて上書きを防ぐ */
+.phone-interview__content p.phone-interview__lede {
   text-align: center;
   margin: 0 0 24px;
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 24px;
+  line-height: 1.5;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--pi-ink);
 }
 
 @media screen and (max-width: 767px) {
-  .phone-interview__lede {
+  .phone-interview__content p.phone-interview__lede {
     margin-bottom: 6.4vw;
+    font-size: 18px;
   }
 }
 
@@ -269,7 +274,7 @@
 }
 
 /* 質問: ZEALS は #333399 + bold italic → 電話はティール / 本文と同じ 15px */
-.phone-interview__question {
+.phone-interview__content p.phone-interview__question {
   margin: 0 0 24px;
   font-size: 15px;
   line-height: 1.8;
@@ -279,7 +284,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .phone-interview__question {
+  .phone-interview__content p.phone-interview__question {
     margin-bottom: 6.4vw;
   }
 }

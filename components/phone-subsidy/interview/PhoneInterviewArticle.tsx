@@ -56,12 +56,8 @@ export default function PhoneInterviewArticle({
         </nav>
 
         <div className="phone-interview__content">
-          {/* 中央寄せタイトル + 副題 */}
-          <p className="phone-interview__lede">
-            {interview.title}
-            <br />
-            {interview.subtitle}
-          </p>
+          {/* Contents 下は副題のみ（タイトルは上部 H1 で表示済み） */}
+          <p className="phone-interview__lede">{interview.subtitle}</p>
 
           <p className="phone-interview__attribution">{interview.attribution}</p>
 
