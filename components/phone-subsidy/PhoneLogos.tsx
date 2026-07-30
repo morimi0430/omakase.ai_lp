@@ -1,6 +1,15 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import { PhoneFigmaInner, PhoneFigmaSection } from './layout';
 import { phonePartnerLogosBottom, phonePartnerLogosTop, type PhonePartnerLogo } from './logos';
+
+/**
+ * 下段（短いトラック）の見かけ速度に揃える。
+ * 以前の下段: 約2400px / 45s ≈ 53px/s
+ */
+const MARQUEE_SPEED_PX_PER_S = 2400 / 45;
 
 function LogoMarqueeRow({
   direction,
@@ -9,14 +18,39 @@ function LogoMarqueeRow({
   direction: 'left' | 'right';
   logos: PhonePartnerLogo[];
 }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const setRef = useRef<HTMLDivElement>(null);
   const trackClass =
     direction === 'left' ? 'phone-logos-marquee-left' : 'phone-logos-marquee-right';
 
+  useEffect(() => {
+    const track = trackRef.current;
+    const set = setRef.current;
+    if (!track || !set) return;
+
+    const syncDuration = () => {
+      const setWidth = set.getBoundingClientRect().width;
+      if (setWidth <= 0) return;
+      track.style.animationDuration = `${setWidth / MARQUEE_SPEED_PX_PER_S}s`;
+    };
+
+    syncDuration();
+
+    const ro = new ResizeObserver(syncDuration);
+    ro.observe(set);
+    return () => ro.disconnect();
+  }, [logos]);
+
   return (
     <div className="phone-logos-marquee-row phone-logos-marquee-mask">
-      <div className={`phone-logos-marquee-track ${trackClass}`}>
+      <div ref={trackRef} className={`phone-logos-marquee-track ${trackClass}`}>
         {[0, 1].map((copy) => (
-          <div key={copy} className="phone-logos-marquee-set" aria-hidden={copy !== 0}>
+          <div
+            key={copy}
+            ref={copy === 0 ? setRef : undefined}
+            className="phone-logos-marquee-set"
+            aria-hidden={copy !== 0}
+          >
             {logos.map((item) => (
               <div key={`${copy}-${item.src}`} className="phone-logos-marquee-item">
                 <Image

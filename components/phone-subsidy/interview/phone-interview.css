@@ -1,0 +1,318 @@
+/* ZEALS case blog（NOVA）準拠の電話インタビュー記事スタイル
+ * ZEALS は html { font-size: 10px } のため、こちらは同等の px で指定
+ * アクセントのみ電話グリーンに変更
+ */
+
+.phone-interview {
+  --pi-accent: #14b8a6;
+  --pi-accent-link: #0d9488;
+  --pi-question: #0f766e;
+  --pi-ink: #222222;
+  --pi-muted: #808080;
+  --pi-toc-bg: #f2f4f7;
+  --pi-author: #9da5c4;
+
+  font-size: 15px;
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--pi-ink);
+  background: #fff;
+  max-width: 883px;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview {
+    max-width: none;
+    padding-top: 10.66667vw;
+    padding-bottom: 10.66667vw;
+  }
+}
+
+.phone-interview__pad {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__pad {
+    padding-left: 6.4vw;
+    padding-right: 6.4vw;
+  }
+}
+
+/* entryTtl: 3.4rem @ 10px = 34px / mobile 2rem = 20px */
+.phone-interview__title {
+  margin: 25px 0 8px;
+  color: var(--pi-ink);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__title {
+    font-size: 20px;
+    margin-bottom: 2.13333vw;
+  }
+}
+
+.phone-interview__main-img {
+  margin: 0 0 40px;
+  width: 100%;
+  background: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__main-img {
+    margin-bottom: 10.66667vw;
+  }
+}
+
+.phone-interview__main-img img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
+.phone-interview__main-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #e5e7eb;
+  color: #9ca3af;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Contents TOC — ZEALS #toc 準拠 */
+.phone-interview__toc {
+  background-color: var(--pi-toc-bg);
+  margin-bottom: 40px;
+  padding: 40px;
+  line-height: 1.5;
+  border-radius: 16px;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__toc {
+    margin-bottom: 10.66667vw;
+    padding: 10.66667vw;
+    border-radius: 4.26667vw;
+  }
+}
+
+/* toc h2: 1.6rem = 16px */
+.phone-interview__toc-heading {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pi-ink);
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.phone-interview__toc-heading::after {
+  content: "";
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__toc-heading::after {
+    content: "";
+    display: block;
+    width: 2.13333vw;
+    height: 1.33333vw;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.06667vw;
+    border-left: 0.7vw solid var(--pi-ink);
+    border-bottom: 0.7vw solid var(--pi-ink);
+    transform: rotate(-45deg);
+    box-sizing: border-box;
+  }
+
+  .phone-interview__toc-heading.is-open::after {
+    transform: rotate(135deg);
+  }
+}
+
+/* toc ol: 1.4rem = 14px */
+.phone-interview__toc-list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: decimal;
+  list-style-position: inside;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__toc-list {
+    display: none;
+    margin-top: 4.26667vw;
+  }
+
+  .phone-interview__toc-list.is-open {
+    display: block;
+  }
+}
+
+.phone-interview__toc-list > li + li {
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__toc-list > li + li {
+    margin-top: 4.26667vw;
+  }
+}
+
+.phone-interview__toc-list a {
+  color: var(--pi-accent-link);
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.phone-interview__toc-list a:hover {
+  opacity: 0.85;
+}
+
+/* 本文: 1.5rem = 15px / line-height 1.8 */
+.phone-interview__content {
+  margin-bottom: 40px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__content {
+    margin-bottom: 10.66667vw;
+  }
+}
+
+.phone-interview__lede {
+  text-align: center;
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__lede {
+    margin-bottom: 6.4vw;
+  }
+}
+
+.phone-interview__attribution {
+  margin: 0 0 24px;
+  color: var(--pi-muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__attribution {
+    margin-bottom: 6.4vw;
+  }
+}
+
+.phone-interview__content p {
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 400;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__content p {
+    margin-bottom: 6.4vw;
+  }
+}
+
+/* h2: 2.4rem = 24px / mobile 1.8rem = 18px */
+.phone-interview__content h2 {
+  margin: 40px 0 24px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  color: var(--pi-ink);
+  scroll-margin-top: 100px;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__content h2 {
+    margin-top: 10.66667vw;
+    margin-bottom: 6.4vw;
+    font-size: 18px;
+  }
+}
+
+.phone-interview__content h2:first-of-type {
+  margin-top: 0;
+}
+
+/* 質問: ZEALS は #333399 + bold italic → 電話はティール / 本文と同じ 15px */
+.phone-interview__question {
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--pi-question);
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__question {
+    margin-bottom: 6.4vw;
+  }
+}
+
+.phone-interview__speaker {
+  font-weight: 700;
+  font-style: normal;
+  color: var(--pi-ink);
+}
+
+.phone-interview__cta-buttons {
+  margin: 40px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__cta-buttons {
+    margin: 10.66667vw 0;
+  }
+}
+
+.phone-interview-breadcrumb {
+  max-width: 883px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview-breadcrumb {
+    padding-left: 6.4vw;
+    padding-right: 6.4vw;
+  }
+}

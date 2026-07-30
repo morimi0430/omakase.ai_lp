@@ -5,29 +5,51 @@ import Link from "next/link";
 
 export type InterviewCardItem = {
   slug?: string;
-  image: string;
+  image?: string;
   title: string;
   companyName: string;
 };
 
 interface InterviewCardProps {
   slug?: string;
-  image: string;
+  image?: string;
   title: string;
   companyName: string;
 }
 
+function ImagePlaceholder() {
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center"
+      style={{ background: "#e5e7eb" }}
+      aria-hidden
+    >
+      <span
+        style={{
+          fontFamily: '"Noto Sans JP"',
+          fontSize: "12px",
+          fontWeight: 500,
+          color: "#9ca3af",
+        }}
+      >
+        Image
+      </span>
+    </div>
+  );
+}
+
 export default function InterviewCard({ slug, image, title, companyName }: InterviewCardProps) {
   const [imgError, setImgError] = useState(false);
+  const showImage = Boolean(image) && !imgError;
 
   const content = (
     <>
-      {/* 画像 */}
+      {/* 画像（未設定時は枠のみ） */}
       <div
         className="w-full flex-shrink-0 overflow-hidden rounded-lg"
         style={{ aspectRatio: "16/10", background: "#e5e7eb" }}
       >
-        {!imgError ? (
+        {showImage ? (
           <img
             src={image}
             alt=""
@@ -36,12 +58,7 @@ export default function InterviewCard({ slug, image, title, companyName }: Inter
             onError={() => setImgError(true)}
           />
         ) : (
-          <div
-            className="w-full h-full flex items-center justify-center text-2xl md:text-4xl"
-            style={{ background: "#e5e7eb" }}
-          >
-            🏢
-          </div>
+          <ImagePlaceholder />
         )}
       </div>
       {/* 画像の下：惹かれるタイトル（大きめの文字）＋企業名 */}

@@ -9,7 +9,9 @@ import PhoneIvr from '@/components/phone-subsidy/PhoneIvr';
 import PhoneIntegrations from '@/components/phone-subsidy/PhoneIntegrations';
 import PhoneLearning from '@/components/phone-subsidy/PhoneLearning';
 import PhoneSteps from '@/components/phone-subsidy/PhoneSteps';
+import PhoneInterviewSection from '@/components/phone-subsidy/interview/PhoneInterviewSection';
 import PhoneFinalCta from '@/components/phone-subsidy/PhoneFinalCta';
+import { getPhoneInterviewList } from '@/lib/phone-interviews';
 
 export const viewport: Viewport = {
   colorScheme: 'light',
@@ -33,6 +35,7 @@ export default function PhoneSubsidyPage() {
       <PhoneIntegrations />
       <PhoneLearning />
       <PhoneSteps />
+      <PhoneInterviewSection items={getPhoneInterviewList()} />
       <PhoneFinalCta />
       <Footer />
     </main>

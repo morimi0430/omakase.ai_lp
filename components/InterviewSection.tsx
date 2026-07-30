@@ -11,11 +11,14 @@ import {
 interface InterviewSectionProps {
   title?: string;
   items?: InterviewListItem[];
+  /** セクションタイトル下の線の色 */
+  accentColor?: string;
 }
 
 export default function InterviewSection({
   title = "導入インタビュー",
   items: itemsProp,
+  accentColor,
 }: InterviewSectionProps) {
   const items = itemsProp ?? getInterviewList();
 
@@ -32,7 +35,7 @@ export default function InterviewSection({
         }}
       >
         <div className="flex flex-col items-center" style={{ marginBottom: "40px" }}>
-          <SectionTitle title={title} isMobile={false} />
+          <SectionTitle title={title} isMobile={false} accentColor={accentColor} />
         </div>
         <div
           className="grid gap-4"
@@ -68,7 +71,7 @@ export default function InterviewSection({
               className="flex flex-col items-center"
               style={{ marginBottom: "60px" }}
             >
-              <SectionTitle title={title} isMobile={false} />
+              <SectionTitle title={title} isMobile={false} accentColor={accentColor} />
             </div>
             <div
               className="grid gap-6 md:gap-8"

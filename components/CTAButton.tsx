@@ -60,6 +60,11 @@ interface CTAButtonProps {
     className?: string;
     style?: React.CSSProperties;
     textGradient?: boolean;
+    /** テキストグラデーションの色（未指定時は紫） */
+    textGradientFrom?: string;
+    textGradientTo?: string;
+    /** 枠線の色（未指定時は紫系） */
+    borderColor?: string;
     textColor?: string;
     iconFixed?: boolean; // 矢印を右端から22pxに固定するかどうか
   }
@@ -77,6 +82,9 @@ interface CTAButtonProps {
     className = '',
     style = {},
     textGradient = true,
+    textGradientFrom = '#6017FF',
+    textGradientTo = '#8249FF',
+    borderColor = '#EF96FF',
     textColor,
     iconFixed = false
   }: CTAButtonProps) {
@@ -92,7 +100,7 @@ interface CTAButtonProps {
           alignItems: 'center',
           gap: '8px',
           borderRadius: '300px',
-          border: '1px solid #EF96FF',
+          border: `1px solid ${borderColor}`,
           background: backgroundColor,
           cursor: 'pointer',
           boxSizing: 'border-box',
@@ -120,7 +128,7 @@ interface CTAButtonProps {
             fontWeight: 700,
             lineHeight: 'normal',
             ...(textGradient ? {
-              background: 'linear-gradient(310deg, #6017FF 44.35%, #8249FF 86.86%)',
+              background: `linear-gradient(310deg, ${textGradientFrom} 44.35%, ${textGradientTo} 86.86%)`,
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'

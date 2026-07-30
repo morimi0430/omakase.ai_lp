@@ -6,9 +6,22 @@ import CTAButton from './CTAButton';
 interface CTAProps {
   /** true のとき背景・見出しなしでボタンのみ表示（記事内CTA用） */
   buttonsOnly?: boolean;
+  /** アクセント色（電話LPなど）。未指定時は紫 */
+  accentColor?: string;
 }
 
-function CTAButtons({ isMobile }: { isMobile: boolean }) {
+function CTAButtons({
+  isMobile,
+  accentColor,
+}: {
+  isMobile: boolean;
+  accentColor?: string;
+}) {
+  const isTeal = Boolean(accentColor);
+  const from = accentColor ?? "#6017FF";
+  const to = accentColor ? "#0D9488" : "#8249FF";
+  const border = accentColor ? "#5EEAD4" : "#EF96FF";
+
   return (
     <>
       <Link
@@ -25,7 +38,13 @@ function CTAButtons({ isMobile }: { isMobile: boolean }) {
         <CTAButton
           text="お問い合わせ"
           backgroundColor="#FFF"
-          iconSrc="/images/pc/arrow_white.png"
+          textGradientFrom={from}
+          textGradientTo={to}
+          borderColor={border}
+          iconTriangle={isTeal}
+          iconCircleColor={isTeal ? accentColor : undefined}
+          iconStyle={isTeal ? { color: "#FFF" } : undefined}
+          iconSrc={isTeal ? undefined : "/images/pc/arrow_white.png"}
           iconFixed={isMobile}
           style={isMobile ? { width: "100%" } : undefined}
         />
@@ -55,15 +74,15 @@ function CTAButtons({ isMobile }: { isMobile: boolean }) {
   );
 }
 
-export default function CTA({ buttonsOnly = false }: CTAProps) {
+export default function CTA({ buttonsOnly = false, accentColor }: CTAProps) {
   if (buttonsOnly) {
     return (
       <>
         <div className="w-full flex flex-col gap-6 md:hidden" style={{ maxWidth: '343px', margin: '0 auto' }}>
-          <CTAButtons isMobile={true} />
+          <CTAButtons isMobile={true} accentColor={accentColor} />
         </div>
         <div className="w-full hidden md:flex justify-center gap-6 flex-wrap">
-          <CTAButtons isMobile={false} />
+          <CTAButtons isMobile={false} accentColor={accentColor} />
         </div>
       </>
     );
