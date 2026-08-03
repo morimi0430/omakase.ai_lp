@@ -19,21 +19,20 @@ export default function PhoneInterviewArticle({
   const [tocOpen, setTocOpen] = useState(false);
   const accent = phoneDesign.primary;
 
+  const afterTocImage = interview.leadImage;
+  const showHeroBeforeToc = !interview.leadImage && !!interview.image;
+
   return (
     <div className="phone-interview">
       <div className="phone-interview__pad">
         <h1 className="phone-interview__title">{interview.title}</h1>
       </div>
 
-      <figure className="phone-interview__main-img">
-        {interview.image ? (
+      {showHeroBeforeToc && (
+        <figure className="phone-interview__main-img">
           <img src={interview.image} alt={interview.companyName} />
-        ) : (
-          <div className="phone-interview__main-img-placeholder" aria-hidden>
-            Image
-          </div>
-        )}
-      </figure>
+        </figure>
+      )}
 
       <div className="phone-interview__pad">
         {/* Contents ナビ（ZEALS #toc） */}
@@ -54,6 +53,12 @@ export default function PhoneInterviewArticle({
             ))}
           </ol>
         </nav>
+
+        {afterTocImage && (
+          <figure className="phone-interview__inline-img">
+            <img src={afterTocImage} alt={interview.companyName} />
+          </figure>
+        )}
 
         <div className="phone-interview__content">
           {/* Contents 下は副題のみ（タイトルは上部 H1 で表示済み） */}
@@ -76,6 +81,14 @@ export default function PhoneInterviewArticle({
           {interview.sections.map((section, sectionIndex) => (
             <section key={section.id}>
               <h2 id={section.id}>{section.heading}</h2>
+              {section.imageAfterHeading && (
+                <figure className="phone-interview__inline-img">
+                  <img
+                    src={section.imageAfterHeading}
+                    alt=""
+                  />
+                </figure>
+              )}
               {section.blocks.map((block, bi) => {
                 if (block.type === "question") {
                   return (

@@ -95,6 +95,37 @@
   font-weight: 500;
 }
 
+/* Contents 直下・見出し直下のインライン画像 */
+.phone-interview__inline-img {
+  margin: 0 0 40px;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__inline-img {
+    margin-bottom: 10.66667vw;
+  }
+}
+
+.phone-interview__inline-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
+.phone-interview__content .phone-interview__inline-img {
+  margin: 0 0 24px;
+}
+
+@media screen and (max-width: 767px) {
+  .phone-interview__content .phone-interview__inline-img {
+    margin-bottom: 6.4vw;
+  }
+}
+
 /* Contents TOC — ZEALS #toc 準拠 */
 .phone-interview__toc {
   background-color: var(--pi-toc-bg);

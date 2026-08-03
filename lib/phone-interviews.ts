@@ -12,6 +12,8 @@ export type PhoneInterviewBlock =
 export type PhoneInterviewSection = {
   id: string;
   heading: string;
+  /** 見出し（h2）の直下に表示する画像（任意） */
+  imageAfterHeading?: string;
   blocks: PhoneInterviewBlock[];
 };
 
@@ -22,7 +24,10 @@ export type PhoneInterviewDetail = {
   subtitle: string;
   attribution: string;
   lead: string[];
+  /** 一覧カード・OGP用。記事内メイン画像としても使用（leadImage 未指定時） */
   image?: string;
+  /** Contents 直下・リード文の前に表示する画像（任意） */
+  leadImage?: string;
   sections: PhoneInterviewSection[];
   cta: { label: string; href: string };
 };
@@ -41,7 +46,8 @@ function sid(n: number) {
 const INTERVIEW_OXXX: PhoneInterviewDetail = {
   slug: "oxxx",
   companyName: "株式会社Oxxx",
-  image: "/images/common/interview/oxxx/image-1.png",
+  image: "/images/common/interview/oxxx/image-1.jpg?v=3",
+  leadImage: "/images/common/interview/oxxx/image-1.jpg?v=3",
   title:
     "電話対応の約60%を自動化──株式会社OxxxがOmakase AI電話で実現した「安心して任せられる顧客対応」",
   subtitle:
@@ -100,6 +106,7 @@ const INTERVIEW_OXXX: PhoneInterviewDetail = {
     {
       id: sid(2),
       heading: "他社AI電話からのリプレイスを検討した理由",
+      imageAfterHeading: "/images/common/interview/oxxx/image-2.jpg?v=3",
       blocks: [
         {
           type: "question",
@@ -182,6 +189,7 @@ const INTERVIEW_OXXX: PhoneInterviewDetail = {
     {
       id: sid(4),
       heading: "導入後、最も大きかったのは「処理ミスがなくなったこと」",
+      imageAfterHeading: "/images/common/interview/oxxx/image-4.jpg?v=3",
       blocks: [
         {
           type: "question",
@@ -251,6 +259,7 @@ const INTERVIEW_OXXX: PhoneInterviewDetail = {
     {
       id: sid(6),
       heading: "電話からメール、チャットへ。目指すのは一貫した顧客対応",
+      imageAfterHeading: "/images/common/interview/oxxx/image-3.jpg?v=3",
       blocks: [
         {
           type: "question",
