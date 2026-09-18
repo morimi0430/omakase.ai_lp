@@ -73,4 +73,4 @@ HUBSPOT_MEETING_SLUG=marino-kozaka
 
 ## 4. Zapier の URL を変えたい場合
 
-Zapier の Webhook URL を変更した場合は、`app/api/demo-request/route.ts` の `ZAPIER_WEBHOOK_URL` を書き換えてください。
+Zapier の Webhook URL を変更した場合は、環境変数 `ZAPIER_DOCUMENT_WEBHOOK_URL`（資料請求）または `ZAPIER_INQUIRY_WEBHOOK_URL`（お問い合わせ）を書き換えてください。

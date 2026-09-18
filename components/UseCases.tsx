@@ -3,7 +3,7 @@
 import UseCaseCard from "./UseCaseCard";
 import Image from "next/image";
 
-export type UseCaseItem = {
+type UseCaseItem = {
   icon?: React.ReactNode;
   title: string;
   description: string;

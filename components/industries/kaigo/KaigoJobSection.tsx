@@ -8,8 +8,6 @@ import { KAIGO_JOB_LISTINGS } from "@/lib/kaigo-jobs";
 import type { JobListingItem } from "@/lib/kaigo-jobs";
 import { KAIGO_COLORS } from "./constants";
 
-export type { JobListingItem } from "@/lib/kaigo-jobs";
-
 function JobCard({ job, primaryColor }: { job: JobListingItem; primaryColor: string }) {
   const [imgError, setImgError] = useState(false);
   const jobUrl = `/job/${job.jobId}`;

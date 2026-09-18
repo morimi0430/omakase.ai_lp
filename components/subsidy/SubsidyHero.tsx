@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { subsidyDesign as D } from './subsidy/designTokens';
+import { subsidyDesign as D } from './designTokens';
 
 const bullets = [
   'Omakase AIはデジタル化・AI導入補助金の対象サービスです',

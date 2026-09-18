@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Container } from "@/components/Container";
 import { getIndustryBySlug, getAllIndustrySlugs } from "@/lib/industries";
-import { getIndustryLP } from "@/components/industries";
+import { KaigoLP, TobLP } from "@/components/industries";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -29,10 +29,8 @@ export default async function IndustryPage({ params }: Props) {
   const industry = getIndustryBySlug(slug);
   if (!industry) notFound();
 
-  const IndustryLP = getIndustryLP(slug);
-  if (IndustryLP) {
-    return <IndustryLP industry={industry} />;
-  }
+  if (slug === "kaigo") return <KaigoLP industry={industry} />;
+  if (slug === "tob") return <TobLP industry={industry} />;
 
   return (
     <main className="overflow-x-hidden">

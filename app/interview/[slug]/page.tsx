@@ -215,12 +215,10 @@ export default async function InterviewPage({ params }: Props) {
             {/* セクション群：画像→質問(h3)→本文 */}
             {(() => {
               const firstImageSectionIndex = interview.sections.findIndex((s) => s.image);
-              const firstImageAfterHeadingSectionIndex = interview.sections.findIndex((s) => s.imageAfterHeading);
               return (
             <div className="w-full flex flex-col" style={{ gap: "20px" }}>
               {interview.sections.map((section, idx) => {
                 const isFirstImageSection = firstImageSectionIndex >= 0 && idx === firstImageSectionIndex;
-                const isFirstImageAfterHeadingSection = firstImageAfterHeadingSectionIndex >= 0 && idx === firstImageAfterHeadingSectionIndex;
                 const questionText = section.question
                   ? (section.question.startsWith("ー") ? section.question : `ー ${section.question}`)
                   : (() => {

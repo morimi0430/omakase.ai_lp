@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer';
-import DocumentRequestForm from '@/components/DocumentRequestForm';
-import DocumentRequestHeader from '@/components/DocumentRequestHeader';
+import { DocumentRequestForm, DocumentRequestHeader } from '@/components/document-request';
 
 export default function DocumentRequestPage() {
   return (

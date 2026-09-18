@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Container } from './Container';
+import { Container } from '@/components/Container';
 
 const purple = '#4900EE';
 const yellowBg = '#F6FF51';

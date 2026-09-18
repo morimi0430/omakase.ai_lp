@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Container } from "@/components/Container";
 import LogoSlider from "@/components/LogoSlider";
 import { TOB_COLORS, TOB_INQUIRY_URL } from "./constants";
 
@@ -28,11 +27,11 @@ function CheckIcon() {
   );
 }
 
-/** 矢印アイコン */
+/** 矢印アイコン（紫ボタン上は白円＋紫三角） */
 function ArrowIcon({ onPurple }: { onPurple?: boolean }) {
   return (
     <img
-      src={onPurple ? "/images/pc/arrow_white.png" : "/images/pc/arrow_purple.png"}
+      src={onPurple ? "/images/pc/arrow_purple.png" : "/images/pc/arrow_white.png"}
       alt=""
       style={{ width: 20, height: 20, flexShrink: 0 }}
     />

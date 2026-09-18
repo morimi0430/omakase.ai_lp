@@ -1,10 +1,1 @@
 export { default as TobLP } from "./TobLP";
-export { TobFirstView } from "./TobFirstView";
-export { TobProblemSection } from "./TobProblemSection";
-export { TobAboutSection } from "./TobAboutSection";
-export { TobFeaturesSection } from "./TobFeaturesSection";
-export { TobOnboardingSection } from "./TobOnboardingSection";
-export { TobCaseStudiesSection } from "./TobCaseStudiesSection";
-export { TobFaqSection } from "./TobFaqSection";
-export { TobLastCTASection } from "./TobLastCTASection";
-export { TOB_COLORS, TOB_INQUIRY_URL } from "./constants";

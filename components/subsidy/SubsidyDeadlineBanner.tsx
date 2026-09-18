@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { Container } from './Container';
-import { subsidyDesign as D } from './subsidy/designTokens';
+import { subsidyDesign as D } from './designTokens';
 
 function InquiryPlayIcon() {
   return (
@@ -104,18 +103,6 @@ export default function SubsidyDeadlineBanner() {
         補助金申請の相談をする
         <InquiryPlayIcon />
       </Link>
-    </div>
-  );
-}
-
-export function SubsidyDeadlineBannerSection() {
-  return (
-    <div className="w-full" style={{ background: D.bgWhite }}>
-      <Container>
-        <div style={{ paddingTop: 40, paddingBottom: 40 }}>
-          <SubsidyDeadlineBanner />
-        </div>
-      </Container>
     </div>
   );
 }

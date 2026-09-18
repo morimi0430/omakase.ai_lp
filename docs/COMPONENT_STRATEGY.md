@@ -21,7 +21,6 @@ lib/
 components/
   Container.tsx                 # 共通（メインLPでも使用）。横パディング 16/120
   industries/                   # ★ 業界事例まわりはここ以下に集約
-    IndustrySection.tsx         # 共有：セクション骨組み（縦余白 + Container）
     index.ts                    # 共有の export と、slug → LP コンポーネントのマップ
     kaigo/                      # 介護業界：介護に関するものはすべてこの中
       KaigoLP.tsx               # 介護LP のメインコンポーネント
@@ -38,7 +37,7 @@ app/
 ```
 
 - **「介護のことを触る」** → `components/industries/kaigo/` を見る。
-- **「業界共通の骨組みを触る」** → `components/industries/IndustrySection.tsx` と `docs/LP_CREATION_RULES.md`。
+- **「業界共通の骨組みを触る」** → `components/Container.tsx` と `docs/LP_CREATION_RULES.md`。
 - **「業界の追加・一覧」** → `lib/industries.ts` と `components/industries/index.ts` のマップ。
 
 ---
@@ -49,7 +48,7 @@ app/
 |------|----------|----------|--------------|
 | 介護 | `kaigo` | `components/industries/kaigo/` | `KaigoLP.tsx`, `index.ts` |
 | 人材 | `jinzai` | `components/industries/jinzai/` | `JinzaiLP.tsx`, `index.ts`（追加時） |
-| （共通） | — | `components/industries/`（直下） | `IndustrySection.tsx`, `index.ts` |
+| （共通） | — | `components/industries/`（直下） | `index.ts` |
 | （マスタ） | — | `lib/industries.ts` | スラッグ一覧・メタ・getIndustryBySlug |
 
 - 業界ごとの **データ**（文言・求人リストなど）を分離したい場合は、同じ業界フォルダに `kaigo/data.ts` のように置く。
@@ -62,7 +61,7 @@ app/
 1. **`lib/industries.ts`**  
    - `IndustrySlug` に `"jinzai"` を追加し、`INDUSTRIES` にメタ（name, title, description）を追加。
 2. **`components/industries/jinzai/`**  
-   - `JinzaiLP.tsx` を作成（`IndustrySection` と `Container` を利用）。  
+   - `JinzaiLP.tsx` を作成（`Container` を利用）。  
    - `index.ts` で `export { JinzaiLP }`。
 3. **`components/industries/index.ts`**  
    - `INDUSTRY_LP_MAP`（または同等）に `jinzai: JinzaiLP` を追加。
@@ -76,11 +75,9 @@ app/
 
 ## 5. 共有コンポーネントの使い方
 
-- **`IndustrySection`**  
-  - 余白スケール（48 / 60 / 80）に合わせた縦パディングと `Container` でラップする。  
-  - 使用例: `<IndustrySection paddingVertical={60}>{中身}</IndustrySection>`
 - **`Container`**  
   - 横パディングは業界LP内でもこれのみ使う（LP_CREATION_RULES §2.4）。
+  - 縦余白は `docs/LP_CREATION_RULES.md` の 48 / 60 / 80 に合わせる。
 
 ---
 
@@ -91,7 +88,7 @@ app/
 | 業界一覧・スラッグ・メタ | `lib/industries.ts` |
 | 介護LPの見た目・文言 | `components/industries/kaigo/` |
 | 人材LP（将来） | `components/industries/jinzai/` |
-| 業界共通のセクション骨組み | `components/industries/IndustrySection.tsx` |
+| 業界共通の横余白 | `components/Container.tsx` |
 | どの slug がどの LP に対応するか | `components/industries/index.ts` のマップ |
 
 この戦略に従うことで、**拡張性** と **業界ごとの所在の分かりやすさ** の両方を満たす。

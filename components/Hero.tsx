@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import ThreeBadges, { Badge } from "@/components/ThreeBadges";
 import LogoSlider from "@/components/LogoSlider";
 

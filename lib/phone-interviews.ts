@@ -4,12 +4,12 @@
  * @see https://zeals.ai/jp/case/blog/omakase-story-nova/
  */
 
-export type PhoneInterviewBlock =
+type PhoneInterviewBlock =
   | { type: "question"; text: string }
   | { type: "answer"; speaker?: string; paragraphs: string[] }
   | { type: "closing"; paragraphs: string[] };
 
-export type PhoneInterviewSection = {
+type PhoneInterviewSection = {
   id: string;
   heading: string;
   /** 見出し（h2）の直下に表示する画像（任意） */

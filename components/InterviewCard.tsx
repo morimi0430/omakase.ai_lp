@@ -3,13 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export type InterviewCardItem = {
-  slug?: string;
-  image?: string;
-  title: string;
-  companyName: string;
-};
-
 interface InterviewCardProps {
   slug?: string;
   image?: string;

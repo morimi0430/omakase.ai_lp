@@ -5,9 +5,13 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
+  {
+    rules: {
+      // マーケLP。public 配下の固定画像をそのまま置くことが多く、next/image 強制はレイアウトを壊しやすい。
+      "@next/next/no-img-element": "off",
+    },
+  },
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",

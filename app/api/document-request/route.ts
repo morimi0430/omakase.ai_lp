@@ -4,10 +4,9 @@ import { NextResponse } from 'next/server';
  * 資料請求フォーム送信を受け、以下を行う:
  * 1. Zapier: 全項目を転送（Slack 通知など）
  * 2. HubSpot Contact Upsert: 会社名・部署など追加情報をコンタクトに保存
- * 環境変数: HUBSPOT_ACCESS_TOKEN（必須）
+ * 環境変数: HUBSPOT_ACCESS_TOKEN, ZAPIER_DOCUMENT_WEBHOOK_URL（必須）
  */
 const HUBSPOT_API_BASE = 'https://api.hubapi.com';
-const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/10197272/uq94g1m/';
 
 type DocumentRequestBody = {
   lastName: string;
@@ -21,8 +20,11 @@ type DocumentRequestBody = {
 
 export async function POST(request: Request) {
   const token = process.env.HUBSPOT_ACCESS_TOKEN;
-  if (!token) {
-    console.error('HUBSPOT_ACCESS_TOKEN is not set');
+  const zapierUrl = process.env.ZAPIER_DOCUMENT_WEBHOOK_URL;
+  if (!token || !zapierUrl) {
+    console.error(
+      !token ? 'HUBSPOT_ACCESS_TOKEN is not set' : 'ZAPIER_DOCUMENT_WEBHOOK_URL is not set'
+    );
     return NextResponse.json(
       { error: 'Server configuration error' },
       { status: 500 }
@@ -43,7 +45,7 @@ export async function POST(request: Request) {
       phone: body.phone,
       form_type: 'document_request',
     };
-    const zapierRes = await fetch(ZAPIER_WEBHOOK_URL, {
+    const zapierRes = await fetch(zapierUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(zapierPayload),

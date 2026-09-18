@@ -3,12 +3,14 @@ import type { Metadata } from 'next';
 import { SUBSIDY_LP_ENABLED } from '@/lib/featureFlags';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import SubsidyHero from '@/components/SubsidyHero';
-import SubsidyCTASection from '@/components/SubsidyCTASection';
-import SubsidyOverview from '@/components/SubsidyOverview';
-import SubsidyPriceTable from '@/components/SubsidyPriceTable';
-import SubsidyChecklist from '@/components/SubsidyChecklist';
-import SubsidySteps from '@/components/SubsidySteps';
+import {
+  SubsidyHero,
+  SubsidyCTASection,
+  SubsidyOverview,
+  SubsidyPriceTable,
+  SubsidyChecklist,
+  SubsidySteps,
+} from '@/components/subsidy';
 import FAQ from '@/components/FAQ';
 import type { FAQEntry } from '@/components/FAQ';
 

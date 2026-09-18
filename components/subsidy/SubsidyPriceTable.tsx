@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 import Image from 'next/image';
-import { Container } from './Container';
-import { subsidyDesign as D } from './subsidy/designTokens';
+import { Container } from '@/components/Container';
+import { subsidyDesign as D } from './designTokens';
 import SubsidyDeadlineBanner from './SubsidyDeadlineBanner';
-import SubsidyOfficialSiteLink from './subsidy/SubsidyOfficialSiteLink';
-import SubsidySectionHeading from './subsidy/SubsidySectionHeading';
-import SubsidySectionLead from './subsidy/SubsidySectionLead';
-import { SUBSIDY_PACKAGE_CALCULATION_NOTE } from './subsidy/subsidyPackageCalcNote';
+import SubsidyOfficialSiteLink from './SubsidyOfficialSiteLink';
+import SubsidySectionHeading from './SubsidySectionHeading';
+import SubsidySectionLead from './SubsidySectionLead';
+import { SUBSIDY_PACKAGE_CALCULATION_NOTE } from './subsidyPackageCalcNote';
 
 /** グラフカードの最大幅（同セクション内のパッケージカード等と 1000px で揃える） */
 const subsidyGraphFrameW = 1000;

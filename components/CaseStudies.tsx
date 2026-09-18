@@ -337,6 +337,8 @@ export default function CaseStudies(props?: CaseStudiesProps) {
         mobileSlider.removeEventListener('scroll', handleMobileScroll);
       }
     };
+    // スライダー初期化はマウント時のみ。handler は refs 経由で最新値を読む。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // PC自動スクロール開始（初期化完了後に開始）

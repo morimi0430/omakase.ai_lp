@@ -20,7 +20,7 @@ LP のフォームから送信されるデータには、次のフィールド�
 **必要な操作: なし**
 
 - フォーム・API・送信ペイロードの実装は済んでいます。
-- Webhook 先: `/api/webhook/document` → Zapier にそのまま転送。
+- Webhook 先: `/api/document-request` → Zapier（`ZAPIER_DOCUMENT_WEBHOOK_URL`）と HubSpot。
 
 ---
 

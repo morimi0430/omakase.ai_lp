@@ -63,7 +63,7 @@ export function PhoneSectionHeading({ children }: { children: ReactNode }) {
   );
 }
 
-export function PhoneSectionLead({
+function PhoneSectionLead({
   children,
   className = '',
 }: {

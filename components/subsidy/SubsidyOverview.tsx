@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import { Container } from './Container';
-import { subsidyDesign as D } from './subsidy/designTokens';
-import SubsidyOfficialSiteLink from './subsidy/SubsidyOfficialSiteLink';
-import SubsidySectionHeading from './subsidy/SubsidySectionHeading';
-import SubsidySectionLead from './subsidy/SubsidySectionLead';
-import { SUBSIDY_PACKAGE_CALCULATION_NOTE } from './subsidy/subsidyPackageCalcNote';
+import { Container } from '@/components/Container';
+import { subsidyDesign as D } from './designTokens';
+import SubsidyOfficialSiteLink from './SubsidyOfficialSiteLink';
+import SubsidySectionHeading from './SubsidySectionHeading';
+import SubsidySectionLead from './SubsidySectionLead';
+import { SUBSIDY_PACKAGE_CALCULATION_NOTE } from './subsidyPackageCalcNote';
 
 type InfoCard = {
   heading: string;

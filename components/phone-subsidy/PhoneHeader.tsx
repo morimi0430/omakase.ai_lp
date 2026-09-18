@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { PhoneCtaButton, phoneCtaPrimaryClassName } from './layout';
 
-export const phoneNavLinks = [
+const phoneNavLinks = [
   { href: '#features', label: '機能' },
   { href: '#logos', label: '実績' },
   { href: '#use-cases', label: '活用シーン' },

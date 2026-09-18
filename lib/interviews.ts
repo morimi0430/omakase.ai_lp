@@ -2,7 +2,7 @@
  * 導入インタビュー一覧・詳細データ
  */
 
-export type InterviewSection = {
+type InterviewSection = {
   heading: string;
   /** 質問（h3）の直上に表示するリード文（任意） */
   introBeforeQuestion?: string;

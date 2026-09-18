@@ -52,7 +52,6 @@ export function PhoneScreenshot({
         <div className="phone-hero-screenshot-outer">
           <div className="phone-hero-screenshot-inner">
             <div className="phone-hero-screenshot-media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={src}
                 alt={alt}
@@ -92,7 +91,6 @@ export function PhoneScreenshot({
     : standardFrameStyle;
 
   const img = (
-    /* eslint-disable-next-line @next/next/no-img-element */
     <img
       src={src}
       alt={alt}

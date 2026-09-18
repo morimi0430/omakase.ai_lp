@@ -3,11 +3,8 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-const MAIN_WIDGET_LOADER =
-  "https://cdn.Omakase AI/loader.min.js?apiKey=oma_live_-LH8h-LAMmQrbZC02FkjeBkFlVXMSMbfz2xXGAbQewylhLITikHOxV4AcpYd9vNB&_=1769417340779";
-
-const KAIGO_WIDGET_LOADER =
-  "https://cdn.Omakase AI/loader.min.js?apiKey=oma_live_f33BaAwatfyqcQhBXabRXmr3DbMSlp5ho6nUFIwCjPN7U1kL0C_SYl2QcO5iOKU5&apiRegion=us";
+const MAIN_WIDGET_LOADER = process.env.NEXT_PUBLIC_OMAKASE_WIDGET_LOADER_MAIN ?? "";
+const KAIGO_WIDGET_LOADER = process.env.NEXT_PUBLIC_OMAKASE_WIDGET_LOADER_KAIGO ?? "";
 
 const LOADER_SCRIPT_ID = "omakase-widget-loader-script";
 const OMAKASE_SCRIPT_ID = "OmakaseAI";
@@ -53,6 +50,7 @@ export function OmakaseWidgetLoader() {
     const path = window.location.pathname || pathname || "";
     const useKaigo = isKaigoPath(path);
     const loaderUrl = useKaigo ? KAIGO_WIDGET_LOADER : MAIN_WIDGET_LOADER;
+    if (!loaderUrl) return;
 
     if (injectedRef.current === loaderUrl) {
       return;

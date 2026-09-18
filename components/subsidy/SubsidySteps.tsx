@@ -1,13 +1,25 @@
 import Image from 'next/image';
-import { Container } from './Container';
-import { subsidyDesign as D } from './subsidy/designTokens';
+import { Container } from '@/components/Container';
+import { subsidyDesign as D } from './designTokens';
 import SubsidyDeadlineBanner from './SubsidyDeadlineBanner';
-import SubsidyOfficialSiteLink from './subsidy/SubsidyOfficialSiteLink';
-import SubsidySectionHeading from './subsidy/SubsidySectionHeading';
+import SubsidyOfficialSiteLink from './SubsidyOfficialSiteLink';
+import SubsidySectionHeading from './SubsidySectionHeading';
 
 /** PC「申請から入金までの流れ」基本文字（またぎ紫・見出し等）／説明・箇条は 12 */
 const PC_FLOW_BODY_PX = 14;
 const PC_FLOW_CAPTION_PX = 12;
+
+const SCHEDULE_LABEL_COLOR = '#9C9C9C';
+
+function ClockIcon({ muted }: { muted?: boolean }) {
+  const stroke = muted ? SCHEDULE_LABEL_COLOR : D.purple;
+  return (
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
+      <circle cx="7" cy="7" r="6" stroke={stroke} strokeWidth="1.5" />
+      <path d="M7 4v3l2 1.5" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 function CheckCircle() {
   return (
@@ -147,7 +159,6 @@ function PcFlow() {
   const pcFlowPullTowardDividerPx = 10;
   const pcFlowPullTowardDivider: React.CSSProperties = { marginTop: -pcFlowPullTowardDividerPx };
   /** 上段スケジュール（時計と文言は横並び・改行で分離しない） */
-  const scheduleLabelColor = '#9C9C9C';
   const scheduleHeaderRow: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'row',
@@ -167,7 +178,7 @@ function PcFlow() {
     flex: '0 1 auto',
     fontSize: PC_FLOW_CAPTION_PX,
     fontWeight: 700,
-    color: scheduleLabelColor,
+    color: SCHEDULE_LABEL_COLOR,
     fontFamily: D.fontNoto,
     lineHeight: '140%',
     whiteSpace: 'nowrap',
@@ -205,16 +216,6 @@ function PcFlow() {
     overflow: 'hidden',
     textAlign: 'left',
   };
-
-  function ClockIcon({ muted }: { muted?: boolean }) {
-    const stroke = muted ? scheduleLabelColor : D.purple;
-    return (
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-        <circle cx="7" cy="7" r="6" stroke={stroke} strokeWidth="1.5" />
-        <path d="M7 4v3l2 1.5" stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    );
-  }
 
   /** 薄紫の親：固定高さ。内側グリッドは残り高さを 2 行で等分 */
   const pcFlowShell: React.CSSProperties = {

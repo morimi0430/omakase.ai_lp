@@ -104,7 +104,7 @@ app/
 **詳細は `docs/COMPONENT_STRATEGY.md` を参照。**
 
 - **業界ごと**: `components/industries/{業界スラッグ}/` にその業界のLP・UIを集約（例: `kaigo/KaigoLP.tsx`）。業界ごとに「どこに何があるか」が分かる構成。
-- **共有**: `components/industries/IndustrySection.tsx`、`components/industries/index.ts`（slug → LP マップ）。横余白は `Container` のみ使用。
+- **共有**: `components/industries/index.ts`（slug → LP マップ）。横余白は `Container` のみ使用。
 - **マスタ**: `lib/industries.ts` でスラッグ一覧・メタ・`getIndustryBySlug`。
 
 ### 3.3 静的アセット（業界別画像など）

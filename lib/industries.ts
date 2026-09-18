@@ -30,7 +30,7 @@ export interface IndustryMeta {
   headerButtonTheme?: "default" | "green";
 }
 
-export const INDUSTRIES: IndustryMeta[] = [
+const INDUSTRIES: IndustryMeta[] = [
   {
     slug: "kaigo",
     name: "人材エージェント",
@@ -52,7 +52,7 @@ export const INDUSTRIES: IndustryMeta[] = [
   },
 ];
 
-export function isIndustryVisible(slug: IndustrySlug): boolean {
+function isIndustryVisible(slug: IndustrySlug): boolean {
   if (slug === "kaigo") return KAIGO_LP_ENABLED;
   return true;
 }
