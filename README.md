@@ -2,6 +2,9 @@
 
 [Omakase AI](https://omakase-voice-ai.com) のマーケティング用ランディングページ群。Next.js（App Router）で、本番ドメインは `https://omakase-voice-ai.com`。
 
+Git・Vercel・ディレクトリの説明は [docs/ONBOARDING.md](docs/ONBOARDING.md) です。  
+権限はもりみさんのプロジェクトに追加してもらいます。
+
 ## ページ
 
 | URL | 役割 | 入口 | 公開 |
@@ -44,7 +47,7 @@ components/          共通 UI
   document-request/  資料請求フォーム
 lib/                 マスタデータ・featureFlags
 public/              画像・PDF・動画
-docs/                設計メモ（迷ったらコードを正とする）
+docs/                設計・運用メモ
 ```
 
 新規業界LPは `lib/industries.ts` にスラッグを足し、`components/industries/{slug}/` を作り、`app/industries/[slug]/page.tsx` の分岐に1行足す。詳細は `docs/COMPONENT_STRATEGY.md` と `docs/LP_CREATION_RULES.md`。
@@ -85,4 +88,3 @@ docs/                設計メモ（迷ったらコードを正とする）
 - メインLP（`/`）は Figma 準拠。サブLPは `docs/LP_CREATION_RULES.md`（ブレークポイントは 768px のみ、横余白は `Container`）。
 - 介護求人は架空データ。公開時は差し替えが必要。
 - プライバシーポリシー / 利用規約は `omakase.ai` 側。このリポジトリでは管理しない。
-- `docs/` の一部は過去案（候補日フロー等）。現行の正はコード。

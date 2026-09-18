@@ -1,6 +1,17 @@
-# ウィジェット表示：メインページと介護ページの差分・原因整理
+# ウィジェット表示：メインと介護の切り替え
 
-修正は行わず、現状の動きと想定原因だけ整理する。
+`OmakaseWidgetLoader` がパスで loader URL を切り替える。URL は環境変数。
+
+| パス | 環境変数 |
+|---|---|
+| `/industries/kaigo` | `NEXT_PUBLIC_OMAKASE_WIDGET_LOADER_KAIGO` |
+| それ以外 | `NEXT_PUBLIC_OMAKASE_WIDGET_LOADER_MAIN` |
+
+localhost / 127.0.0.1 では読まない。介護LP自体は `KAIGO_LP_ENABLED === false` のため本番では 404。
+
+以下は、介護LPを出していた当時の調査メモ。
+
+---
 
 ---
 

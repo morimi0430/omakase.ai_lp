@@ -1,94 +1,72 @@
 # 業界事例のコンポーネント戦略
 
-拡張しやすく、**業界ごとにどのファイルがどこにあるか**を迷わないための方針とファイル配置ルール。
+業界ごとにファイルの場所が分かるようにするための配置。
 
 ---
 
 ## 1. 方針
 
-- **業界ごとにフォルダを分ける**: ある業界のUI・データは **その業界名のフォルダにだけ** 置く。
-- **共有は「業界共通」だけ**: 複数業界で使う骨組みやユーティリティは `components/industries/` 直下または `lib/industries.ts` に置く。業界名のフォルダには入れない。
-- **ルーティングは動的のまま**: `app/industries/[slug]/page.tsx` は1本とし、slug に応じて「どの業界LPを表示するか」を **業界マップ** で解決する。
+- 業界の UI・データはその業界名のフォルダにだけ置く
+- 複数業界で使うものは `components/industries/` 直下または `lib/industries.ts`
+- ルートは `app/industries/[slug]/page.tsx` の1本。slug でどの LP を出すか分岐する
 
 ---
 
-## 2. ディレクトリ構成と役割
+## 2. いまある構成
 
 ```
 lib/
-  industries.ts                 # 業界マスタ（スラッグ・表示名・メタ）。全業界の一覧と getIndustryBySlug
+  industries.ts                 # スラッグ・表示名・メタ、公開判定
+  featureFlags.ts               # KAIGO_LP_ENABLED など
 
 components/
-  Container.tsx                 # 共通（メインLPでも使用）。横パディング 16/120
-  industries/                   # ★ 業界事例まわりはここ以下に集約
-    index.ts                    # 共有の export と、slug → LP コンポーネントのマップ
-    kaigo/                      # 介護業界：介護に関するものはすべてこの中
-      KaigoLP.tsx               # 介護LP のメインコンポーネント
-      index.ts                  # export { KaigoLP }
-    jinzai/                     # （将来）人材業界
-      JinzaiLP.tsx
-      index.ts
+  Container.tsx
+  industries/
+    index.ts                    # KaigoLP / TobLP を export
+    kaigo/                      # 人材エージェントLP（フラグ off なら 404）
+    tob/                        # 法人・BtoB LP（公開中）
 
 app/
   industries/
-    page.tsx                    # 業界一覧ページ（/industries）
     [slug]/
-      page.tsx                  # 動的：slug に応じて上記マップから LP を描画
+      page.tsx                  # kaigo / tob を分岐。一覧ページ（/industries）は無い
 ```
 
-- **「介護のことを触る」** → `components/industries/kaigo/` を見る。
-- **「業界共通の骨組みを触る」** → `components/Container.tsx` と `docs/LP_CREATION_RULES.md`。
-- **「業界の追加・一覧」** → `lib/industries.ts` と `components/industries/index.ts` のマップ。
+- 介護（kaigo）を触る → `components/industries/kaigo/`
+- BtoB（tob）を触る → `components/industries/tob/`
+- 公開のオンオフ → `lib/featureFlags.ts` と `lib/industries.ts`
+- 横余白 → `components/Container.tsx` と `docs/LP_CREATION_RULES.md`
 
 ---
 
-## 3. 業界ごとのファイル配置（どこに何があるか）
+## 3. 業界ごとのファイル
 
-| 業界 | スラッグ | 配置場所 | 主なファイル |
-|------|----------|----------|--------------|
-| 介護 | `kaigo` | `components/industries/kaigo/` | `KaigoLP.tsx`, `index.ts` |
-| 人材 | `jinzai` | `components/industries/jinzai/` | `JinzaiLP.tsx`, `index.ts`（追加時） |
-| （共通） | — | `components/industries/`（直下） | `index.ts` |
-| （マスタ） | — | `lib/industries.ts` | スラッグ一覧・メタ・getIndustryBySlug |
+| 業界 | スラッグ | 配置 | 公開 |
+|---|---|---|---|
+| 人材エージェント | `kaigo` | `components/industries/kaigo/` | `KAIGO_LP_ENABLED`（現在 false） |
+| 法人・BtoB | `tob` | `components/industries/tob/` | 常時 |
+| マスタ | — | `lib/industries.ts` | — |
 
-- 業界ごとの **データ**（文言・求人リストなど）を分離したい場合は、同じ業界フォルダに `kaigo/data.ts` のように置く。
-- 画像は `public/images/industries/kaigo/` のように業界ごとフォルダを分ける（INDUSTRY_CASE_STUDIES_STRATEGY に記載）。
+画像は `public/images/industries/{slug}/`（`docs/IMAGE_DIRECTORY_STRATEGY.md`）。
 
 ---
 
-## 4. 新規業界の追加手順
+## 4. 新規業界の追加
 
-1. **`lib/industries.ts`**  
-   - `IndustrySlug` に `"jinzai"` を追加し、`INDUSTRIES` にメタ（name, title, description）を追加。
-2. **`components/industries/jinzai/`**  
-   - `JinzaiLP.tsx` を作成（`Container` を利用）。  
-   - `index.ts` で `export { JinzaiLP }`。
-3. **`components/industries/index.ts`**  
-   - `INDUSTRY_LP_MAP`（または同等）に `jinzai: JinzaiLP` を追加。
-4. **`app/industries/[slug]/page.tsx`**  
-   - マップから LP を取得する実装になっていれば、**ここは変更しない**。
-5. （必要なら）フッターなどに「人材」リンクを追加。
-
-これで「どこに何を足せばよいか」が業界ごとに明確になる。
+1. `lib/industries.ts` の `IndustrySlug` と一覧にメタを追加する
+2. `components/industries/{slug}/` に LP を作り、`index.ts` で export する
+3. `components/industries/index.ts` から export する
+4. `app/industries/[slug]/page.tsx` に `if (slug === "...") return <XxxLP ... />` を1行足す
+5. 必要ならフッター（`components/Footer.tsx`）にリンクを出す
 
 ---
 
-## 5. 共有コンポーネントの使い方
+## 5. まとめ
 
-- **`Container`**  
-  - 横パディングは業界LP内でもこれのみ使う（LP_CREATION_RULES §2.4）。
-  - 縦余白は `docs/LP_CREATION_RULES.md` の 48 / 60 / 80 に合わせる。
-
----
-
-## 6. まとめ
-
-| 目的 | 参照する場所 |
-|------|----------------|
-| 業界一覧・スラッグ・メタ | `lib/industries.ts` |
-| 介護LPの見た目・文言 | `components/industries/kaigo/` |
-| 人材LP（将来） | `components/industries/jinzai/` |
-| 業界共通の横余白 | `components/Container.tsx` |
-| どの slug がどの LP に対応するか | `components/industries/index.ts` のマップ |
-
-この戦略に従うことで、**拡張性** と **業界ごとの所在の分かりやすさ** の両方を満たす。
+| 目的 | 場所 |
+|---|---|
+| スラッグ・メタ・公開判定 | `lib/industries.ts` |
+| 介護LP | `components/industries/kaigo/` |
+| BtoB LP | `components/industries/tob/` |
+| 横余白 | `components/Container.tsx` |
+| slug の分岐 | `app/industries/[slug]/page.tsx` |

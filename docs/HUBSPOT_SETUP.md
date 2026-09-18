@@ -1,76 +1,65 @@
-# デモリクエスト送信の仕組み
+# 資料請求の送信（HubSpot / Zapier）
 
-フォーム送信は **1本の API（`/api/demo-request`）** で次の2つを同時に実行します。
+フォーム（`/document-request`）は **`POST /api/document-request`** 1本で次を同時に実行する。
 
-- **Zapier** … 全項目をそのまま転送（既存の Slack 通知など）
-- **HubSpot** … 予約ページの**空き時間を API で取得**し、フォームに候補として表示。ユーザーが選んだ希望日時だけをコンタクトに保存。カレンダー埋め込みは使わず、すべて自前 UI です。
+- **Zapier** … 全項目を転送（Slack 通知など）
+- **HubSpot** … 同じメールのコンタクトを upsert（作成または更新）
+
+希望日時・ミーティング予約 API は使っていない。
 
 ---
 
-## 1. HubSpot でやること
+## 1. HubSpot
 
-### 1-1. Private App（アクセストークン）を作成
+### 1-1. Private App（アクセストークン）
 
-1. HubSpot の **設定（歯車）** → **インテグレーション** → **Private Apps**
-2. **Create a private app** で名前を付けて作成
-3. **Scopes** で以下にチェック:
-   - **crm.objects.contacts.write**（コンタクトの作成・更新）
+1. HubSpot の **設定** → **インテグレーション** → **Private Apps**
+2. アプリを作成し、Scopes で次を付ける
+   - **crm.objects.contacts.write**
    - **crm.objects.contacts.read**（あればデバッグしやすい）
-   - **scheduler.meetings.meeting-link.read**（予約ページの空き時間取得に必須）
-4. **Create app** 後、**Show token** で **Access token** をコピー
+3. Access token をコピーし、`HUBSPOT_ACCESS_TOKEN` に入れる（`.env` と Vercel）
 
-### 1-2. コンタクトのカスタムプロパティを作成（希望日時一択用）
+ミーティング用スコープ（`scheduler.meetings...`）は不要。
 
-HubSpot には **希望日時（日付+時間）1つだけ** 送るため、次の1つだけ作成すれば十分です。
+### 1-2. コンタクトに送る項目
 
-1. **設定** → **プロパティ** → **Contact properties**
-2. **Create property** で以下を追加:
+標準プロパティだけ使う。希望日時用のカスタムプロパティは作っていない。
 
-| ラベル（表示名） | 内部名（Internal name） | タイプ   |
-|------------------|-------------------------|----------|
-| 希望日時         | `first_preferred_date`  | DateTime |
+| HubSpot プロパティ | フォームの値 |
+|---|---|
+| `email`（upsert のキー） | メール |
+| `firstname` | 名 |
+| `lastname` | 姓 |
+| `company` | 会社名 |
+| `jobtitle` | 役職 |
+| `phone` | 電話 |
 
-※ 氏名・会社・部署などは Zapier → Slack 用に送っているだけで、HubSpot には送りません。
+同じメールで再送信すると、上記プロパティが更新される。
 
 ---
 
-## 2. このリポジトリでやること
+## 2. このリポジトリ
 
-### 2-1. 環境変数を設定
-
-`.env` または `.env.local` に次を追加:
+`.env` / Vercel に次を入れる（値はチャットや Git に書かない）。
 
 ```env
-# Private App の Access token（必須）
-HUBSPOT_ACCESS_TOKEN=pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-
-# 予約ページの URL の slug（必須・空き時間表示用）
-# 例: https://meetings-na2.hubspot.com/marino-kozaka なら marino-kozaka
-HUBSPOT_MEETING_SLUG=marino-kozaka
+HUBSPOT_ACCESS_TOKEN=
+ZAPIER_DOCUMENT_WEBHOOK_URL=
 ```
 
-- **HUBSPOT_ACCESS_TOKEN**: Private App のトークン
-- **HUBSPOT_MEETING_SLUG**: HubSpot の「ミーティング」で作った予約ページの URL の最後の部分（スラッグ）。空き時間取得 API でこのページの空き枠を取得します。
+確認:
 
-### 2-2. 動作確認
-
-1. `npm run dev` で起動
-2. `/document-request` のフォームから送信
-3. HubSpot の **コンタクト** に、同じメールのコンタクトが作成 or 更新され、候補日・部署などが入っているか確認
+1. `npm run dev`
+2. `/document-request` から送信
+3. HubSpot のコンタクトと、Zapier 先（Slack 等）に届くこと
 
 ---
 
-## 3. API の役割分担
+## 3. 役割分担
 
-| 送り先   | 送る内容 |
-|----------|----------|
-| **Zapier** | 全項目（氏名・会社・部署・役職・メール・電話・希望日）→ Slack 通知などに利用。**候補日一択でも Slack に通知したいなら Zapier は必要。** 通知不要なら Zap をオフにすればよい。 |
-| **HubSpot** | **希望日時（一択）のみ**: `email`（upsert キー）、`first_preferred_date`（YYYY-MM-DDTHH:mm）。カレンダー埋め込みは使わない。 |
+| 送り先 | 内容 |
+|---|---|
+| **Zapier** | `lastName`, `firstName`, `company`, `department`, `position`, `email`, `phone`, `form_type: document_request` |
+| **HubSpot** | 上表の標準プロパティ（部署は送っていない） |
 
-同じメールで再度送信すると、HubSpot のそのコンタクトは **希望日だけ更新**（upsert）されます。
-
----
-
-## 4. Zapier の URL を変えたい場合
-
-Zapier の Webhook URL を変更した場合は、環境変数 `ZAPIER_DOCUMENT_WEBHOOK_URL`（資料請求）または `ZAPIER_INQUIRY_WEBHOOK_URL`（お問い合わせ）を書き換えてください。
+Zapier の URL を変えるときは `ZAPIER_DOCUMENT_WEBHOOK_URL` を更新する（Vercel も同様。入れたあと再デプロイ）。
